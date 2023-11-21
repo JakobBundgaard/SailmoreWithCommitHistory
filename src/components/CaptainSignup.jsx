@@ -2,7 +2,7 @@ import "../css/captainSignup.css";
 import captainImage from "../assets/images/captain.jpg";
 
 function CaptainSignup() {
-   return (
+    return (
       <div className="capLoginPage">
          <h1>Captain Signup</h1>
          <img src={captainImage} alt="Captain Signup" />
@@ -27,19 +27,23 @@ function CaptainSignup() {
                <label className="flexItem" htmlFor="bio">
                   Bio
                </label>
-               <input className="flexItem" type="text" name="bio" />
+               <textarea className="flexItem" type="text" name="bio" />
                <div className="flexRow">
                   <div className="flexCol">
                      <label className="flexItem slim" htmlFor="gender">
                         Gender
                      </label>
-                     <input className="flexItem slim" type="text" name="gender" />
+                     <select className="flexItem" id="gender" name="gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                     </select>
                   </div>
                   <div className="flexCol">
                      <label className="flexItem slim" htmlFor="age">
                         Age
                      </label>
-                     <input className="flexItem slim" type="text" name="age" />
+                     <input className="flexItem slim" type="number" name="age" />
                   </div>
                </div>
                <div className="flexRow">

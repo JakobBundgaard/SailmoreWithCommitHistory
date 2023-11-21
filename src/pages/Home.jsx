@@ -1,5 +1,12 @@
+import PreviewTrip from "../components/PreviewTrip";
+
 const Home = () => {
-    return <h1>Home</h1>;
-  };
+    return (
+        <div>
+            <h1>Recommend trips</h1>
+            <PreviewTrip />
+        </div>
+    );
+};
   
-  export default Home;
+export default Home;

@@ -12,8 +12,7 @@ const CrewSignup = () => {
     crewGender: '',
     crewNationality: '',
     crewDescription: '',
-    crewExperience: '',
-    crewSkill: '',
+    crewSkill: [''], 
     imageId: '',
   });
 
@@ -21,6 +20,18 @@ const CrewSignup = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  // Handle skill change
+  const handleSkillChange = (index, value) => {
+    const newSkills = [...formData.crewSkill];
+    newSkills[index] = value;
+    setFormData({ ...formData, crewSkill: newSkills });
+  };
+
+  // Handle adding a new skill
+  const addSkill = () => {
+    setFormData({ ...formData, crewSkill: [...formData.crewSkill, ''] });
   };
 
   // Handle form submission
@@ -49,67 +60,84 @@ const CrewSignup = () => {
     }
   };
 
-    return (
-        <div>
-            <h2>Crew Signup</h2>
-            <img src={crewImage} alt="Beautiful Image" className='crewImage' />
-            <form onSubmit={handleSubmit}>
-        
-                <label>
-                    Name:
-                    <input type="text" name="crewName" value={formData.crewName} onChange={handleChange} required />
-                </label>
+  return (
+    <div>
+      <h2>Crew Signup</h2>
+      <img src={crewImage} alt="Beautiful Image" className='crewImage' />
+      <form onSubmit={handleSubmit}>
 
-                <label>
-                    Email:
-                    <input type="email" name="crewEmail" value={formData.crewEmail} onChange={handleChange} required />
-                </label>
+        {/* Input fields for user details */}
+        <label className='label'>
+          Name:
+          <input type="text" name="crewName" value={formData.crewName} onChange={handleChange} required />
+        </label>
 
-                <label>
-                    Password:
-                    <input type="password" name="crewPassword" value={formData.crewPassword} onChange={handleChange} required />
-                </label>
+        <label className='label'>
+          Email:
+          <input type="email" name="crewEmail" value={formData.crewEmail} onChange={handleChange} required />
+        </label>
 
-                <label>
-                    Nationality:
-                    <input type="text" name="crewNationality" value={formData.crewNationality} onChange={handleChange} />
-                </label>
+        <label className='label'>
+          Password:
+          <input type="password" name="crewPassword" value={formData.crewPassword} onChange={handleChange} required />
+        </label>
 
-                <label>
-                    Skill:
-                    <select name="crewSkill" value={formData.crewSkill} onChange={handleChange}>
+        <label className='label'>
+          Nationality:
+          <input type="text" name="crewNationality" value={formData.crewNationality} onChange={handleChange} />
+        </label>
+
+        {formData.crewSkill.map((skill, index) => (
+            <div key={index} className='skillContainer'>
+                <label className='label'>
+                Skill {index + 1}:
+                <div className="skillSelectContainer">
+                    <select
+                    name={`crewSkill${index}`}
+                    className='skillSelect'
+                    value={skill}
+                    onChange={(e) => handleSkillChange(index, e.target.value)}
+                    >
                     <option value="">Select Skill</option>
-                    <option value="option1">Guitar</option>
-                    <option value="option2">Cooking</option>
+                    <option value="Guitar">Guitar</option>
+                    <option value="Cooking">Cooking</option>
                     </select>
-                </label>
-
-                <label>
-                    Experience:
-                    <input type="text" name="crewExperience" value={formData.crewExperience} onChange={handleChange} />
-                </label>
-
-                <label>
-                    Description:
-                    <textarea name="crewDescription" value={formData.crewDescription} onChange={handleChange}></textarea>
-                </label>
-
-                <div className="gender-age-container">
-                    <label>
-                    Gender:
-                    <input type="text" name="crewGender" value={formData.crewGender} onChange={handleChange} />
-                    </label>
-
-                    <label>
-                    Age:
-                    <input type="number" name="crewAge" value={formData.crewAge} onChange={handleChange} />
-                    </label>
                 </div>
+                </label>
 
-                    <button type="submit">Sign Up</button>
-            </form>
-      </div>
-    
+                {/* "Plus" button */}
+                {index === formData.crewSkill.length - 1 && (
+                <button type="button" onClick={addSkill} className='skillButton'>
+                    +
+                </button>
+                )}
+            </div>
+        ))}
+        
+        <label className='label'>
+          Description:
+          <textarea name="crewDescription" value={formData.crewDescription} onChange={handleChange}></textarea>
+        </label>
+
+        <div className="gender-age-container">
+          <label className='label'>
+            Gender:
+            <input type="text" name="crewGender" value={formData.crewGender} onChange={handleChange} />
+          </label>
+
+          <label className='label'>
+            Age:
+            <input type="number" name="crewAge" value={formData.crewAge} onChange={handleChange} />
+          </label>
+        </div>
+
+        <div>
+            <button type="submit">Sign Up</button>
+            <button type="submit">Cancel</button>   
+        </div>
+       
+      </form>
+    </div>
   );
 };
 

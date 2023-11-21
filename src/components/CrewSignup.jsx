@@ -122,16 +122,21 @@ const CrewSignup = () => {
         <div className="gender-age-container">
           <label className='label'>
             Gender:
-            <input type="text" name="crewGender" value={formData.crewGender} onChange={handleChange} />
+            <select name="crewGender" value={formData.crewGender} onChange={handleChange} className='genderSelect'>
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+  </select>
           </label>
 
           <label className='label'>
             Age:
-            <input type="number" name="crewAge" value={formData.crewAge} onChange={handleChange} />
+            <input type="number" name="crewAge" value={formData.crewAge} onChange={handleChange} className='crewAge'/>
           </label>
         </div>
 
-        <div>
+        <div className='buttonDiv'>
             <button type="submit">Sign Up</button>
             <button type="submit">Cancel</button>   
         </div>

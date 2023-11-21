@@ -9,9 +9,11 @@ nav {
     justify-content: space-around;
 }
 ul {
-    padding: 16px;
+    padding: 1.4em 0.2em;
     display: flex;
     justify-content: space-around;
+    align-self: center;
+    margin: 0;
 }
 li {
     float: left;

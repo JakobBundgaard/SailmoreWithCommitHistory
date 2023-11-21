@@ -1,4 +1,8 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
+import sailboat from "../assets/images/sailboat.svg";
+import info from "../assets/images/info.svg";
+import inbox from "../assets/images/speech-bubble.svg";
+import profile from "../assets/images/profile.svg";
 
 const Layout = () => {
   return (
@@ -6,16 +10,16 @@ const Layout = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <NavLink to="/"><img src={sailboat} alt="Sailboat Icon" /></NavLink>
           </li>
           <li>
-            <Link to="/info">Info</Link>
+            <NavLink to="/info"><img src={info} alt="Info Icon" /></NavLink>
           </li>
           <li>
-            <Link to="/inbox">Inbox</Link>
+            <NavLink to="/inbox"><img src={inbox} alt="Messages and Notifications Icon" /></NavLink>
           </li>
           <li>
-            <Link to="/profile">Profile</Link>
+            <NavLink to="/profile"><img src={profile} alt="Profile Icon" /></NavLink>
           </li>
         </ul>
       </nav>

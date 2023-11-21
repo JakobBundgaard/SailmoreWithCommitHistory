@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import "../css/crewsignup.css"
+import "../css/crewSignup.css";
+import crewImage from "../assets/images/Asian_sunset.jpg";
 
 const CrewSignup = () => {
   // State to hold user input
@@ -51,6 +52,7 @@ const CrewSignup = () => {
     return (
         <div>
             <h2>Crew Signup</h2>
+            <img src={crewImage} alt="Beautiful Image" className='crewImage' />
             <form onSubmit={handleSubmit}>
         
                 <label>
@@ -75,7 +77,7 @@ const CrewSignup = () => {
 
                 <label>
                     Skill:
-                    <select name="crewSkill" value={formData.crewSkill} onChange={handleChange} required>
+                    <select name="crewSkill" value={formData.crewSkill} onChange={handleChange}>
                     <option value="">Select Skill</option>
                     <option value="option1">Guitar</option>
                     <option value="option2">Cooking</option>

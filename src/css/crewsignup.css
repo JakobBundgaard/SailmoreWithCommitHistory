@@ -1,7 +1,13 @@
 
-/* body {
+body {
   overflow: auto;
-} */
+}
+
+.crewImage {
+  width: 330px;
+  height: 244px;
+  border-radius: 25px;
+}
 
 
 form {

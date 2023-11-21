@@ -1,8 +1,29 @@
-.preview-wrapper {
-
-    padding: 1em;
-}
 img {
-    border-radius: 30%;
-
+    border-radius: 10%;
+    width: 100%;
+}
+h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+.description-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.preview-trip-price{
+    background-color: lightgray;
+    border-radius: 6.25rem;
+    width: fit-content;
+    padding: 0.5em 1.25em;
+    line-height: 0.78125rem;
+    margin-top: 0.3em;
+}
+.preview-trip-price p {
+    margin: 0;
+    padding: 0;
+}
+.preview-trip-price span {
+    font-size: 0.625rem;
 }

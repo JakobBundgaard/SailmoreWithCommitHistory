@@ -60,6 +60,7 @@ textarea {
   color: #333;
   padding: 8px;
   margin-top: 15px;
+  margin-right: 5px;
   cursor: pointer;
   border: none;
   border-radius: 4px;
@@ -71,6 +72,10 @@ textarea {
   padding: 8px;
   box-sizing: border-box;
   border-radius: 4px;
+}
+
+.bioField {
+  height: 33px;
 }
 
 .gender-age-container {

@@ -115,8 +115,8 @@ const CrewSignup = () => {
         ))}
         
         <label className='label'>
-          Description:
-          <textarea name="crewDescription" value={formData.crewDescription} onChange={handleChange}></textarea>
+          Bio:
+          <textarea name="crewDescription" value={formData.crewDescription} onChange={handleChange} className='bioField'></textarea>
         </label>
 
         <div className="gender-age-container">

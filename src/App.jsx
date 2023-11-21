@@ -1,9 +1,10 @@
 import "./App.css";
+import CaptainSignup from "./components/CaptainSignup";
 
 function App() {
    return (
       <>
-         <h1>React App</h1>
+         <CaptainSignup />
       </>
    );
 }

@@ -1,4 +1,4 @@
-import "./App.css";
+// import "./App.css";
 import "./css/Navbar.css"
 //import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -9,9 +9,12 @@ import Inbox from "./pages/Inbox";
 import Profile from "./pages/Profile";
 import NoPage from "./pages/NoPage";
 
+
+
 function App() {
    return (
       <>
+        
          <BrowserRouter>
             <Routes>
             <Route path="/" element={<Layout />}>

@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import "../css/crewLogin.css";
+// import { Link } from 'react-router-dom';
 import crewImage from "../assets/images/Asian_sunset.jpg";
+// import CrewSignup from './CrewSignup';
+import "../css/crewLogin.css";
 
 const CrewLogin = () => {
   // State to hold user input
@@ -55,8 +57,10 @@ const CrewLogin = () => {
             <label className='label'>
             Password:
             <input type="password" name="crewPassword" value={formData.crewPassword} onChange={handleChange} required />
-            </label>  
+              </label>  
+              
             <h4>Not a member yet! Sign up here...</h4>
+            {/* <h4>Not a member yet! <Link to="/CrewSignup">Sign up here...</Link></h4> */}
             <div className='buttonDiv'>
                 <button type="submit">Sign Up</button>
                 <button type="submit">Cancel</button>   

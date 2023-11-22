@@ -1,5 +1,5 @@
 // import "./App.css";
-// import "./css/Navbar.css"
+import "./css/Navbar.css"
 //import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
@@ -8,8 +8,7 @@ import Home from "./pages/Home";
 import Inbox from "./pages/Inbox";
 import Profile from "./pages/Profile";
 import NoPage from "./pages/NoPage";
-// import CrewLogin from "../src/components/CrewLogin";
-// import CrewSignup from "../src/components/CrewSignup";
+
 
 
 function App() {
@@ -27,8 +26,6 @@ function App() {
             </Route>
             </Routes>
          </BrowserRouter>
-         {/* <CrewLogin /> */}
-         {/* <CrewSignup /> */}
       </>
    );
 }

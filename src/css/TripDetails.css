@@ -1,0 +1,14 @@
+.pfp {
+    border-radius: 100%;
+    width: 15vw;
+    height: 15vw;
+}
+.pfp-wrapper {
+    display: flex;
+}
+.pfp-wrapper div {
+    margin-left: 2.5vw;
+}
+.pfp-wrapper div h4 {
+    margin: 0;
+}

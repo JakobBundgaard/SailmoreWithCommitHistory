@@ -15,7 +15,6 @@ h3 {
 .description-wrapper {
     display: flex;
     justify-content: space-between;
-    box-shadow: 1px;
 }
 .preview-trip-bubble{
     background-color: lightgray;

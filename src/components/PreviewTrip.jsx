@@ -15,8 +15,7 @@ const PreviewTrip = () => {
                 <div className="description-wrapper">
                     <div>
                         <h3>Den grimme perle</h3>
-                        <span>15 nov - 1 dec </span>
-                        <span>· 0 stops</span>
+                        <p>15 nov - 1 dec · 0 stops</p>
                         <div className="hashtag-container">
                             <div className="preview-trip-bubble hashtag">
                                 <p>smoke-free</p>

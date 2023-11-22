@@ -40,6 +40,8 @@ function CaptainSignup() {
       }
    };
 
+   //Add a submit handler here
+
    return (
       <div className="capLoginPage">
          <h1>Captain Signup</h1>

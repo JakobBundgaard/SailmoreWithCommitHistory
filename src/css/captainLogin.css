@@ -1,0 +1,77 @@
+
+body {
+    overflow: auto;
+    font-family: "Roboto";
+  }
+  
+  .crewImage {
+    width: 330px;
+    height: 244px;
+    border-radius: 28px;
+    margin-bottom: 16px;
+    object-fit: cover;
+    display: block; 
+    margin: 15px auto; 
+  }
+
+  h2 {
+    text-align: center;
+  }
+  
+  h4 {
+    margin: 15px 0;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px; 
+    margin: 0 auto;
+  }
+  
+  label {
+    margin-bottom: 8px;
+    /* display: block; */
+  }
+  
+  .label {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  input,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid #49454f;
+  }
+  
+  
+  
+ 
+
+  
+  .buttonDiv {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    align-self: center;
+    /* just */
+  }
+  
+    

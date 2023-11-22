@@ -61,7 +61,7 @@ const CrewSignup = () => {
   };
 
   return (
-    <div>
+    <div className="page-wrapper">
       <h2>Crew Signup</h2>
       <img src={crewImage} alt="Beautiful Image" className='crewImage' />
       <form onSubmit={handleSubmit}>

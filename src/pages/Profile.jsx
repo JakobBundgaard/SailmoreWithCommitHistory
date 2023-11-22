@@ -1,5 +1,5 @@
 const Profile = () => {
-    return <div style={{padding: '1em', marginBottom: '80px'}}>
+    return <div className="page-wrapper">
         <h1>This is my profile</h1>
       </div>;
   };

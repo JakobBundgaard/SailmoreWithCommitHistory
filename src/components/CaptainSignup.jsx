@@ -43,7 +43,7 @@ function CaptainSignup() {
    //Add a submit handler here
 
    return (
-      <div className="capLoginPage">
+      <div className="capLoginPage page-wrapper">
          <h1>Captain Signup</h1>
          <img src={captainImage} alt="Captain Signup" />
          <div className="flexGrid">

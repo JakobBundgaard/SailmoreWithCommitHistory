@@ -2,3 +2,7 @@
   max-width: 100vw;
   font-family: "Roboto", 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+.page-wrapper {
+  padding: 1em;
+  margin-bottom: 80px;
+}

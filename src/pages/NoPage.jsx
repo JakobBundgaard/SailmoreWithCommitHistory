@@ -1,5 +1,5 @@
 const NoPage = () => {
-    return <div style={{padding: '1em', marginBottom: '80px'}}>
+    return <div className="page-wrapper">
         <h1>404</h1>
       </div>;
   };

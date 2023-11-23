@@ -1,3 +1,4 @@
+import { Outlet, NavLink } from "react-router-dom";
 import placeholder from "../assets/images/boat.jpg";
 import pfp from "../assets/images/captain.jpg";
 import certified from "../assets/images/certified-badge.svg";
@@ -13,7 +14,7 @@ const TripDetails = () => {
             </div>
             <div className="preview-image-container">
                 <img src={placeholder} alt="Preview Image" />
-                <div className="preview-trip-bubble preview-location">
+                <div className="text-bubble preview-location">
                     <p>Lolland - Bornholm</p>
                 </div>
             </div>
@@ -24,7 +25,7 @@ const TripDetails = () => {
                     <p>2 / 4 gaster</p>
                 </div>
                 <div>
-                    <div className="preview-trip-bubble">
+                    <div className="text-bubble">
                         <p>$40</p>
                         <span>per day</span>
                     </div>
@@ -33,13 +34,16 @@ const TripDetails = () => {
             <div>
                 <p>Join Den Grimme Perle and captain Haddock on a 2 week trip in the Denmark</p>
                 <p>insert location stops component here</p>
-                <article className="pfp-wrapper">
-                    <img src={pfp} alt="Profile picture of {username}" className="pfp" />
-                    <div>
-                        <img src={certified} alt="Certified Badge" />
-                        <h4>Skipper Skræk</h4>
-                    </div>
-                </article>
+                <NavLink to="/skipper/:id">
+                    <article className="pfp-wrapper">
+                        <img src={pfp} alt="Profile picture of {username}" className="pfp" />
+                        <div>
+                            <img src={certified} alt="Certified Badge" />
+                            <h4>Skipper Skræk</h4>
+                        </div>
+                    </article>
+                </NavLink>
+                <Outlet />
                 <p>Den grimme perle is a 53 foot Grand Soleil from 1998. It has an engine, a mast and 6 crew spaces.</p>
                 <article>
                 <h4>Equipment on board</h4>
@@ -59,8 +63,9 @@ const TripDetails = () => {
                 </article>
             </div>
         </div>
+        
     </div>
-      
+
   };
   
   export default TripDetails;

@@ -1,4 +1,4 @@
-// import "./App.css";
+import "./App.css";
 import "./css/Navbar.css"
 //import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -9,6 +9,7 @@ import Inbox from "./pages/Inbox";
 import Profile from "./pages/Profile";
 import NoPage from "./pages/NoPage";
 import TripDetails from "./pages/TripDetails";
+import SkipperProfile from "./pages/SkipperProfile";
 
 
 
@@ -25,6 +26,7 @@ function App() {
                <Route path="profile" element={<Profile />} />
                <Route path="*" element={<NoPage />} />
                <Route path="trip/:id" element={<TripDetails />} />
+               <Route path="skipper/:id" element={<SkipperProfile />} />
             </Route>
             </Routes>
          </BrowserRouter>

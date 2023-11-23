@@ -14,11 +14,11 @@
 }
 .top-panel {
     position: relative;
-    z-index: -1;
 }
 .top-panel h1 {
     text-align: center;
 }
 .top-panel p {
     position: absolute;
+    background-color: white;
 }

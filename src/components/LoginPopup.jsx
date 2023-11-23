@@ -1,11 +1,10 @@
 import "../css/loginPopup.css";
 
-const LoginPopup = ({ onClose }) => {
+const LoginPopup = () => {
   return (
     <div className="popup-overlay">
         <div className="popup-content">
-            <button onClick={() => onClose('button1')}>Button 1</button>
-            <button onClick={() => onClose('button2')}>Button 2</button>
+           <h2>Log in or Sign up</h2>
         </div>
   </div>
   )

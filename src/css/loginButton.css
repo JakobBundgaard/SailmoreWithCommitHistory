@@ -1,4 +1,6 @@
 .loginButton {
+   width: 233px;
+   height: auto;
    display: flex;
    flex-direction: column;
    justify-content: center;
@@ -6,7 +8,6 @@
    border-radius: 100px;
    border: none;
    padding: 10px 24px;
-   height: 40px;
    gap: 8px;
    background: var(--m-3-sys-light-primary, #d9d9d9);
 

@@ -1,16 +1,16 @@
 import PropTypes from "prop-types";
 import "../css/loginButton.css";
 
-function LoginButton({ props }) {
+function LoginCaptainButton({ props }) {
    return (
       <button className="loginButton" onClick={props}>
-         Login as crew
+         Login as captain
       </button>
    );
 }
 
-LoginButton.propTypes = {
+LoginCaptainButton.propTypes = {
    props: PropTypes.func.isRequired,
 };
 
-export default LoginButton;
+export default LoginCaptainButton;

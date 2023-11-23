@@ -9,8 +9,11 @@ import Inbox from "./pages/Inbox";
 import Profile from "./pages/Profile";
 import NoPage from "./pages/NoPage";
 import TripDetails from "./pages/TripDetails";
-
-
+import UserBridge from "./components/UserBridge";
+import CrewLogin from "./components/CrewLogin";
+import CaptainLogin from "./components/CaptainLogin";
+import CrewSignup from "./components/CrewSignup";
+import CaptainSignup from "./components/CaptainSignup";
 
 function App() {
    return (
@@ -18,16 +21,23 @@ function App() {
         
          <BrowserRouter>
             <Routes>
-            <Route path="/" element={<Layout />}>
-               <Route index element={<Home />} />
-               <Route path="info" element={<Info />} />
-               <Route path="inbox" element={<Inbox />} />
-               <Route path="profile" element={<Profile />} />
-               <Route path="*" element={<NoPage />} />
-               <Route path="trip/:id" element={<TripDetails />} />
-            </Route>
+               <Route path="/" element={<Layout />}>
+                  <Route index element={<Home />} />
+                  <Route path="info" element={<Info />} />
+                  <Route path="inbox" element={<Inbox />} />
+                  <Route path="crewProfile" element={<Profile />} />
+                  {/* <Route path="captainProfile" element={<SkipperProfile />} /> */}
+                  <Route path="profile" element={<UserBridge />} />
+                  <Route path="CrewLogin" element={<CrewLogin />} />
+                  <Route path="CaptainLogin" element={<CaptainLogin />} />
+                  <Route path="CrewSignup" element={<CrewSignup />} />
+                  <Route path="CaptainSignup" element={<CaptainSignup />} />
+                  <Route path="*" element={<NoPage />} />
+                  <Route path="trip/:id" element={<TripDetails />} />
+               </Route>
             </Routes>
          </BrowserRouter>
+         {/* <UserBridge /> */}
       </>
    );
 }

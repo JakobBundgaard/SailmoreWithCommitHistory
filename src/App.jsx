@@ -1,4 +1,4 @@
-// import "./App.css";
+import "./App.css";
 import "./css/Navbar.css"
 //import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -9,6 +9,7 @@ import Inbox from "./pages/Inbox";
 import Profile from "./pages/Profile";
 import NoPage from "./pages/NoPage";
 import TripDetails from "./pages/TripDetails";
+import SkipperProfile from "./pages/SkipperProfile";
 import UserBridge from "./components/UserBridge";
 import CrewLogin from "./components/CrewLogin";
 import CaptainLogin from "./components/CaptainLogin";
@@ -34,7 +35,8 @@ function App() {
                   <Route path="CaptainSignup" element={<CaptainSignup />} />
                   <Route path="*" element={<NoPage />} />
                   <Route path="trip/:id" element={<TripDetails />} />
-               </Route>
+                  <Route path="skipper/:id" element={<SkipperProfile />} />
+            </Route>
             </Routes>
          </BrowserRouter>
          {/* <UserBridge /> */}

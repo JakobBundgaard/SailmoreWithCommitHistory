@@ -16,7 +16,7 @@ h3 {
     display: flex;
     justify-content: space-between;
 }
-.preview-trip-bubble{
+.text-bubble{
     background-color: lightgray;
     border-radius: 6.25rem;
     width: fit-content;
@@ -24,11 +24,11 @@ h3 {
     line-height: 0.78125rem;
     margin-top: 0.3em;
 }
-.preview-trip-bubble p {
+.text-bubble p {
     margin: 0;
     padding: 0;
 }
-.preview-trip-bubble span {
+.text-bubble span {
     font-size: 0.625rem;
 }
 .preview-image-container {

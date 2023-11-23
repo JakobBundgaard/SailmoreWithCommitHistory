@@ -7,6 +7,10 @@ import "../css/TripDetails.css";
 const TripDetails = () => {
     return <div style={{padding: '1em', marginBottom: '80px'}}>
         <div className="preview-wrapper">
+            <div className="top-panel">
+                <p>backbutton component</p>
+                <h1>Lolland - Bornholm</h1>
+            </div>
             <div className="preview-image-container">
                 <img src={placeholder} alt="Preview Image" />
                 <div className="preview-trip-bubble preview-location">
@@ -49,7 +53,7 @@ const TripDetails = () => {
                 <article>
                     <h4>Rules on board</h4>
                     <ul>
-                        <li>No smoking below deck</li>
+                        <li>No smoking crack below deck</li>
                         <li>Captains word is law</li>
                     </ul>
                 </article>

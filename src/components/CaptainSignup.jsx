@@ -1,6 +1,8 @@
 import "../css/captainSignup.css";
 import captainImage from "../assets/images/captain.jpg";
 import { useState } from "react";
+import SaveButton from "./SaveButton";
+import CancelButton from "./CancelButton";
 
 function CaptainSignup() {
    const [name, setName] = useState("");
@@ -44,55 +46,51 @@ function CaptainSignup() {
 
    return (
       <div className="capLoginPage page-wrapper">
-         <h1>Captain Signup</h1>
-         <img src={captainImage} alt="Captain Signup" className='captainImage'/>
+         <h1 className="h1Item">Captain Signup</h1>
+         <img className="imgItem" src={captainImage} alt="Captain Signup" />
          <div className="flexGrid">
             <form>
-               <label className="flexItem" htmlFor="name">
+               <label className="flexItem labelItem" htmlFor="name">
                   Name
                </label>
-               <input className="flexItem" type="text" name="name" value={name} onChange={handleInputChange} />
-               <label className="flexItem" htmlFor="email">
+               <input className="flexItem inputItem" type="text" name="name" value={name} onChange={handleInputChange} />
+               <label className="flexItem labelItem" htmlFor="email">
                   Email
                </label>
-               <input className="flexItem" type="text" name="email" value={email} onChange={handleInputChange} />
-               <label className="flexItem" htmlFor="password">
+               <input className="flexItem inputItem" type="text" name="email" value={email} onChange={handleInputChange} />
+               <label className="flexItem labelItem" htmlFor="password">
                   Password
                </label>
-               <input className="flexItem" type="password" name="password" value={password} onChange={handleInputChange} />
-               <label className="flexItem" htmlFor="nationality">
+               <input className="flexItem inputItem" type="password" name="password" value={password} onChange={handleInputChange} />
+               <label className="flexItem labelItem" htmlFor="nationality">
                   Nationality
                </label>
-               <input className="flexItem" type="text" name="nationality" value={nationality} onChange={handleInputChange} />
-               <label className="flexItem" htmlFor="bio">
+               <input className="flexItem inputItem" type="text" name="nationality" value={nationality} onChange={handleInputChange} />
+               <label className="flexItem labelItem" htmlFor="bio">
                   Bio
                </label>
-               <textarea className="flexItem" type="text" name="bio" value={bio} onChange={handleInputChange} />
+               <textarea className="flexItem textareaItem" type="text" name="bio" value={bio} onChange={handleInputChange} />
                <div className="flexRow">
                   <div className="flexCol">
-                     <label className="flexItem slim" htmlFor="gender">
+                     <label className="flexItem slim labelItem" htmlFor="gender">
                         Gender
                      </label>
-                     <select className="flexItem" id="gender" name="gender" value={gender} onChange={handleInputChange}>
+                     <select className="flexItem selectItem" id="gender" name="gender" value={gender} onChange={handleInputChange}>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
                      </select>
                   </div>
                   <div className="flexCol">
-                     <label className="flexItem slim" htmlFor="age">
+                     <label className="flexItem slim labelItem" htmlFor="age">
                         Age
                      </label>
-                     <input className="flexItem slim" type="number" name="age" value={age} onChange={handleInputChange} />
+                     <input className="flexItem slim inputItem" type="number" name="age" value={age} onChange={handleInputChange} />
                   </div>
                </div>
                <div className="flexRow">
-                  <button className="slim" type="submit">
-                     Save
-                  </button>
-                  <button className="slim" type="reset">
-                     Cancel
-                  </button>
+                  <SaveButton />
+                  <CancelButton />
                </div>
             </form>
          </div>

@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Inbox from "./pages/Inbox";
 import Profile from "./pages/Profile";
 import NoPage from "./pages/NoPage";
+import TripDetails from "./pages/TripDetails";
 
 
 
@@ -23,6 +24,7 @@ function App() {
                <Route path="inbox" element={<Inbox />} />
                <Route path="profile" element={<Profile />} />
                <Route path="*" element={<NoPage />} />
+               <Route path="trip/:id" element={<TripDetails />} />
             </Route>
             </Routes>
          </BrowserRouter>

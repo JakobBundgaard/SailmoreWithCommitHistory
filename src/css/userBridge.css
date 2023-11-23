@@ -1,0 +1,47 @@
+.userBridge-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent grey overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .userBridge-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  button {
+    width: 233px;
+    margin: 5px;
+    padding: 10px;
+  }
+
+  .profileBtn {
+    display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   border-radius: 100px;
+   border: none;
+   padding: 10px 24px;
+   height: 40px;
+   gap: 8px;
+   background: var(--m-3-sys-light-primary, #d9d9d9);
+
+   color: var(--m-3-sys-light-on-primary, #090909);
+   text-align: center;
+   font-family: Roboto;
+   font-size: 14px;
+   font-style: normal;
+   font-weight: 600;
+   line-height: 20px; /* 142.857% */
+   letter-spacing: 1px;
+  }

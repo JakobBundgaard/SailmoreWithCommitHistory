@@ -9,7 +9,7 @@ import Inbox from "./pages/Inbox";
 import Profile from "./pages/Profile";
 import NoPage from "./pages/NoPage";
 import TripDetails from "./pages/TripDetails";
-
+import UserBridge from "./components/UserBridge";
 
 
 function App() {
@@ -28,6 +28,7 @@ function App() {
             </Route>
             </Routes>
          </BrowserRouter>
+         <UserBridge />
       </>
    );
 }

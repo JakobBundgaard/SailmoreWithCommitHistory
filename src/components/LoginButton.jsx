@@ -4,7 +4,7 @@ import "../css/loginButton.css";
 function LoginButton({ props }) {
    return (
       <button className="loginButton" onClick={props}>
-         Login
+         Login as crew
       </button>
    );
 }

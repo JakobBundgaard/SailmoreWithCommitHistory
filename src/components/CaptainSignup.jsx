@@ -45,7 +45,7 @@ function CaptainSignup() {
    return (
       <div className="capLoginPage page-wrapper">
          <h1>Captain Signup</h1>
-         <img src={captainImage} alt="Captain Signup" />
+         <img src={captainImage} alt="Captain Signup" className='captainImage'/>
          <div className="flexGrid">
             <form>
                <label className="flexItem" htmlFor="name">

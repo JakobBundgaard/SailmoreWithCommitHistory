@@ -36,7 +36,7 @@ function App() {
                   <Route path="*" element={<NoPage />} />
                   <Route path="trip/:id" element={<TripDetails />} />
                   <Route path="skipper/:id" element={<SkipperProfile />} />
-            </Route>
+               </Route>
             </Routes>
          </BrowserRouter>
          {/* <UserBridge /> */}

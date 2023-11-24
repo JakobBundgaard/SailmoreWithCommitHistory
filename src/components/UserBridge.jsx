@@ -5,7 +5,7 @@ import LoginCaptainButton from "./LoginCaptainButton";
 
 const UserBridge = () => {
   return (
-    <div className="userBridge-overlay page-wrapper">
+    <div className="userBridge-overlay">
         <div className="userBridge-content">
           <h2>Log in or Sign up</h2>
           <NavLink to="/CrewLogin">

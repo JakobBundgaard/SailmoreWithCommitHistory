@@ -1,8 +1,8 @@
-import pfp from '../assets/images/captain.jpg';
+import pfp from '../assets/images/crew-pfp.jpg';
 import '../css/SkipperProfile.css';
 import PreviewTrip from "../components/PreviewTrip";
 
-const SkipperProfile = () => {
+const CrewProfile = () => {
     return (
         <div >
             <div className="top-panel">
@@ -15,16 +15,16 @@ const SkipperProfile = () => {
             <div className='profile-top'>
                 <div>
                     <div className='name-and-age'>
-                        <h1>Skræk</h1>
-                        <h3>48</h3>
+                        <h1>Crew</h1>
+                        <h3>7</h3>
                     </div>
-                    <h4>Jeg kan godt lide spinat</h4>
+                    <h4>Vov vov!! vovovov!!</h4>
                     <div className='profile-hashtags'>
                         <div className="text-bubble profile-hashtag">
                             <p>Male</p>
                         </div>
                         <div className="text-bubble profile-hashtag">
-                            <p>Danish</p>
+                            <p>Svensk-Fransk</p>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@ const SkipperProfile = () => {
             
             <hr />
             <h2>About Me</h2>
-            <p>Ahoy! Im Skræk, a sea-loving adventurer with a passion for boat vacations. Whether its a sailboat or a yacht, Im all about making waves and unforgettable memories. Join me as I navigate life with a compass in hand and a splash of personality. Ready for some nautical fun? #SailorLife</p>
+            <p>Ahoy! Im Crew, a sea-loving adventurer with a passion for boat vacations. Whether its a sailboat or a yacht, Im all about making waves and unforgettable memories. Join me as I navigate life with a compass in hand and a splash of personality. Ready for some nautical fun? #SailorLife</p>
             <hr />
             <h2>My Skills</h2>
             <div className="text-bubble">
@@ -45,7 +45,7 @@ const SkipperProfile = () => {
             <h2>My Trips</h2>
             <details className='drop-down'>
                 <summary>
-                    Active Trips
+                    Booked Trips
                 </summary>
                 <br />
                 <PreviewTrip/>
@@ -53,7 +53,7 @@ const SkipperProfile = () => {
             <hr />
             <details className='drop-down'>
                 <summary>
-                    Future Trips
+                    Requested Trips
                 </summary>
                 <br />
                 <PreviewTrip/>
@@ -67,9 +67,6 @@ const SkipperProfile = () => {
                 <PreviewTrip/>
             </details>
             <hr />
-            <h2>My Boats</h2>
-            <p>boat preview component</p>
-            <hr />
             <p>log out component</p>
         </div>
         </div>
@@ -77,4 +74,4 @@ const SkipperProfile = () => {
 
   };
   
-  export default SkipperProfile;
+  export default CrewProfile;

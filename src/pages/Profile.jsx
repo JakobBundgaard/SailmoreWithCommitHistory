@@ -1,6 +1,7 @@
+import CrewProfile from "./CrewProfile";
 const Profile = () => {
-    return <div className="page-wrapper">
-        <h1>This is my profile</h1>
+    return <div>
+        <CrewProfile />
       </div>;
   };
   

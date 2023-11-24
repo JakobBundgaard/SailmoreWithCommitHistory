@@ -27,7 +27,7 @@ function App() {
                   <Route path="info" element={<Info />} />
                   <Route path="inbox" element={<Inbox />} />
                   <Route path="crewProfile" element={<Profile />} />
-                  {/* <Route path="captainProfile" element={<SkipperProfile />} /> */}
+                  <Route path="captainProfile" element={<SkipperProfile />} />
                   <Route path="profile" element={<UserBridge />} />
                   <Route path="CrewLogin" element={<CrewLogin />} />
                   <Route path="CaptainLogin" element={<CaptainLogin />} />

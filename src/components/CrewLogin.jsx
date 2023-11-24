@@ -45,7 +45,7 @@ const CrewLogin = () => {
   };
 
   return (
-    <div>
+    <div className="page-wrapper">
         <h2>Crew Login</h2>
         <img src={crewImage} alt="Beautiful Image" className='crewImage' />
         <form onSubmit={handleSubmit}>

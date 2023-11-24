@@ -19,12 +19,6 @@
     text-align: center;
   }
   
-  button {
-    width: 233px;
-    margin: 5px;
-    padding: 10px;
-  }
-
   .profileBtn {
     display: flex;
    flex-direction: column;

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import "../css/crewSignup.css";
 import crewImage from "../assets/images/Asian_sunset.jpg";
+import SaveButton from "./SaveButton";
+import CancelButton from "./CancelButton";
 
 const CrewSignup = () => {
   // State to hold user input
@@ -62,14 +64,14 @@ const CrewSignup = () => {
 
   return (
     <div className="page-wrapper">
-      <h2>Crew Signup</h2>
+      <h2 className='signupTitle'>Crew Signup</h2>
       <img src={crewImage} alt="Beautiful Image" className='crewImage' />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='signupform'>
 
         {/* Input fields for user details */}
         <label className='label'>
           Name:
-          <input type="text" name="crewName" value={formData.crewName} onChange={handleChange} required />
+          <input type="text" name="crewName" value={formData.crewName} onChange={handleChange} className='signupInput' required />
         </label>
 
         <label className='label'>
@@ -136,11 +138,11 @@ const CrewSignup = () => {
           </label>
         </div>
 
-        <div className='buttonDiv'>
-            <button type="submit">Sign Up</button>
-            <button type="submit">Cancel</button>   
+        <div className="flexRow">
+              <SaveButton />
+              <CancelButton />
         </div>
-       
+ 
       </form>
     </div>
   );

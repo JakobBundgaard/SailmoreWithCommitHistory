@@ -3,6 +3,8 @@ import { useState } from 'react';
 import crewImage from "../assets/images/Asian_sunset.jpg";
 // import CrewSignup from './CrewSignup';
 import "../css/captainLogin.css";
+import SaveButton from "./SaveButton";
+import CancelButton from "./CancelButton";
 
 const CrewLogin = () => {
   // State to hold user input
@@ -46,24 +48,22 @@ const CrewLogin = () => {
 
   return (
     <div className="page-wrapper">
-        <h2>Captain Login</h2>
+        <h2 className='loginTitle'>Captain Login</h2>
         <img src={crewImage} alt="Beautiful Image" className='crewImage' />
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='loginForm'>
             <label className='label'>
             Email:
-            <input type="email" name="crewEmail" value={formData.crewEmail} onChange={handleChange} required />
+            <input type="email" name="crewEmail" value={formData.crewEmail} onChange={handleChange} className='loginInput' required />
             </label>
 
             <label className='label'>
             Password:
-            <input type="password" name="crewPassword" value={formData.crewPassword} onChange={handleChange} required />
+            <input type="password" name="crewPassword" value={formData.crewPassword} onChange={handleChange} className='loginInput' required />
               </label>  
               
-            <h4>Not a member yet! Sign up here...</h4>
-            {/* <h4>Not a member yet! <Link to="/CrewSignup">Sign up here...</Link></h4> */}
-            <div className='buttonDiv'>
-                <button type="submit">Sign Up</button>
-                <button type="submit">Cancel</button>   
+              <div className="flexRow">
+                  <SaveButton />
+                  <CancelButton />
             </div>
         </form>  
     </div>

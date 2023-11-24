@@ -16,7 +16,7 @@ details>summary {
   }
 .name-and-age {
     display: flex;
-    margin-top: 3vh;
+
 }
 .name-and-age h3 {
     align-self: center;
@@ -33,13 +33,19 @@ details>summary {
 .profile-top h4 {
     margin: 2vh 0;
 }
+.profile-images {
+    width: 100vw;
+}
 .profile-images img {
     width: 100%;
+    height: 40vh;
+    object-fit: cover;
 }
 .profile-top {
     display: flex;
     justify-content: space-between;
     position: relative;
+    z-index: -1;
 }
 .edit-profile {
     position: absolute;
@@ -47,4 +53,7 @@ details>summary {
 }
 .profile-hashtag {
     margin-right: 2vw;
+}
+hr {
+    margin: 2vh 0;
 }

@@ -76,17 +76,17 @@ const CrewSignup = () => {
 
         <label className='label'>
           Email:
-          <input type="email" name="crewEmail" value={formData.crewEmail} onChange={handleChange} required />
+          <input type="email" name="crewEmail" value={formData.crewEmail} onChange={handleChange} className='signupInput'required />
         </label>
 
         <label className='label'>
           Password:
-          <input type="password" name="crewPassword" value={formData.crewPassword} onChange={handleChange} required />
+          <input type="password" name="crewPassword" value={formData.crewPassword} onChange={handleChange} className='signupInput' required />
         </label>
 
         <label className='label'>
           Nationality:
-          <input type="text" name="crewNationality" value={formData.crewNationality} onChange={handleChange} />
+          <input type="text" name="crewNationality" value={formData.crewNationality} onChange={handleChange} className='signupInput' />
         </label>
 
         {formData.crewSkill.map((skill, index) => (

@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+include_once "./dbConfig.php";
     
     $mySQL = new mysqli($server, $user, $password, $database);
 

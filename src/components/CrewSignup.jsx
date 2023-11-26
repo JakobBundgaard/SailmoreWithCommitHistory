@@ -42,7 +42,7 @@ const CrewSignup = () => {
 
     try {
       // Send the form data to your server for insertion into the database
-      const response = await fetch('/api/signup', {
+      const response = await fetch('/api/crew/crewSignup.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

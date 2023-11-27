@@ -11,7 +11,7 @@ const Layout = () => {
       <nav>
         <ul>
           <li>
-            <NavLink to="/"><img src={sailboat} alt="Sailboat Icon" /></NavLink>
+            <NavLink to="/trip"><img src={sailboat} alt="Sailboat Icon" /></NavLink>
           </li>
           <li>
             <NavLink to="/info"><img src={info} alt="Info Icon" /></NavLink>

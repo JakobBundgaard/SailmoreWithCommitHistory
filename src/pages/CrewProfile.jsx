@@ -1,12 +1,14 @@
 import pfp from '../assets/images/crew-pfp.jpg';
 import '../css/SkipperProfile.css';
 import PreviewTrip from "../components/PreviewTrip";
+import EditButton from '../components/EditButton';
+import BackArrow from "../components/BackArrow";
 
 const CrewProfile = () => {
     return (
         <div >
             <div className="top-panel">
-                <p>backbutton component</p>
+                <BackArrow />
             </div>
             <div className='profile-images'>
                 <img src={pfp} alt="Profile Image" />
@@ -29,7 +31,7 @@ const CrewProfile = () => {
                     </div>
                 </div>
                 <div className='edit-profile'>
-                    <p>Rediger profil component</p>
+                    <EditButton />
                 </div>
             </div>
             

@@ -1,5 +1,5 @@
-import { Outlet, NavLink } from "react-router-dom";
-import placeholder from "../assets/images/boat2.jpg";
+import { NavLink } from "react-router-dom";
+// import placeholder from "../assets/images/boat2.jpg";
 import pfboat from "../assets/images/boat2.jpg";
 import pfp from "../assets/images/captain.jpg";
 import certified from "../assets/images/certified-badge.svg";
@@ -35,7 +35,7 @@ const BoatDetails = () => {
                 </div>
             <hr />
             <h2 className="about-me-boat">About Me</h2>
-            <p className="boat-description">🚤 Ahoy there! I'm Den grimme perle, a vintage vessel with stories etched in every plank. Seeking a mate to appreciate sunsets, sea breezes, and the timeless charm of well-aged wood. If you're ready for a journey with a touch of history and a lot of heart, let's set sail together. ⚓️🌅 #VintageVoyager #SeaStories</p>
+            <p className="boat-description">🚤 Ahoy there! Im Den grimme perle, a vintage vessel with stories etched in every plank. Seeking a mate to appreciate sunsets, sea breezes, and the timeless charm of well-aged wood. If youre ready for a journey with a touch of history and a lot of heart, lets set sail together. ⚓️🌅 #VintageVoyager #SeaStories</p>
             <hr />
             <NavLink to="/skipper/:id">
                     <article className="pfp-wrapper">

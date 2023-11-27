@@ -4,12 +4,14 @@ import pfp from "../assets/images/captain.jpg";
 import certified from "../assets/images/certified-badge.svg";
 import "../css/PreviewTrip.css";
 import "../css/TripDetails.css";
+import EditButton from '../components/EditButton';
+import BackArrow from "../components/BackArrow";
 
 const TripDetails = () => {
     return <div style={{padding: '1em', marginBottom: '80px'}}>
         <div className="preview-wrapper">
             <div className="top-panel">
-                <p>backbutton component</p>
+                <BackArrow />
                 <h1>Lolland - Bornholm</h1>
             </div>
             <div className="preview-image-container">

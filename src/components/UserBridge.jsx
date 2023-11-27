@@ -11,15 +11,15 @@ const UserBridge = () => {
           <NavLink to="/profile/CrewLogin">
             <LoginCrewButton />
           </NavLink>
-          <h4>Not a member yet! <NavLink to="/CrewSignup">Sign up here..</NavLink></h4>
-          <NavLink to="/CaptainLogin">
+          <h4>Not a member yet! <NavLink to="/profile/CrewSignup">Sign up here..</NavLink></h4>
+          <NavLink to="/profile/CaptainLogin">
             <LoginCaptainButton />
           </NavLink>
-          <h4>Not a member yet! <NavLink to="/CaptainSignup">Sign up here..</NavLink></h4>
-          <NavLink to="/crewProfile" className="profileBtn">
+          <h4>Not a member yet! <NavLink to="/profile/CaptainSignup">Sign up here..</NavLink></h4>
+          <NavLink to="/profile/crewProfile" className="profileBtn">
             Crew profile
           </NavLink>
-          <NavLink to="/captainProfile" className="profileBtn">
+          <NavLink to="/profile/captainProfile" className="profileBtn">
             Captain profile
           </NavLink>
         </div>

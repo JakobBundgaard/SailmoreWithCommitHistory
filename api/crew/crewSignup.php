@@ -7,6 +7,6 @@ header('Content-Type: application/json');
 
 include_once "../utils/connection.php";
 
-echo "From crewSignup";
+echo " From crewSignup";
 
 ?>

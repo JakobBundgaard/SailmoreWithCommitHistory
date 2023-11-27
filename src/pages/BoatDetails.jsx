@@ -7,6 +7,7 @@ import "../css/BoatDetails.css";
 import "../css/PreviewTrip.css";
 import "../css/SkipperProfile.css";
 import BackArrow from "../components/BackArrow";
+import EditButton from "../components/EditButton";
 
 const BoatDetails = () => {
     return (
@@ -29,9 +30,9 @@ const BoatDetails = () => {
                             <h4 className="BoatCrew">Space for 5 crewmates</h4>
                         </div>
                     </div>
-                    {/* <div className='edit-profile'>
-                        <p>Rediger profil component</p>
-                    </div> */}
+                    <div className='edit-profile'>
+                        <EditButton />
+                    </div>
                 </div>
             <hr />
             <h2 className="about-me-boat">About Me</h2>

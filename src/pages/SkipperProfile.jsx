@@ -3,12 +3,14 @@ import '../css/SkipperProfile.css';
 import PreviewTrip from "../components/PreviewTrip";
 import BoatPreview from '../components/BoatPreview';
 import { Outlet, NavLink } from "react-router-dom";
+import EditButton from '../components/EditButton';
+import BackArrow from "../components/BackArrow";
 
 const SkipperProfile = () => {
     return (
         <div >
             <div className="top-panel">
-                <p>backbutton component</p>
+                <BackArrow />
             </div>
             <div className='profile-images'>
                 <img src={pfp} alt="Profile Image" />
@@ -31,7 +33,7 @@ const SkipperProfile = () => {
                     </div>
                 </div>
                 <div className='edit-profile'>
-                    <p>Rediger profil component</p>
+                    <EditButton />
                 </div>
             </div>
             

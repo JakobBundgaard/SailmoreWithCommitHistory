@@ -16,10 +16,10 @@ const UserBridge = () => {
             <LoginCaptainButton />
           </NavLink>
           <h4>Not a member yet! <NavLink to="/profile/CaptainSignup">Sign up here..</NavLink></h4>
-          <NavLink to="/profile/crewProfile" className="profileBtn">
+          <NavLink to="/crewProfile" className="profileBtn">
             Crew profile
           </NavLink>
-          <NavLink to="/profile/captainProfile" className="profileBtn">
+          <NavLink to="/captainProfile" className="profileBtn">
             Captain profile
           </NavLink>
         </div>

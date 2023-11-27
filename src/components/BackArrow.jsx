@@ -1,18 +1,18 @@
 import "../css/BackArrow.css";
-import { useHistory } from "react-router-dom"; // Assuming you are using React Router
+import backArrow from "../assets/images/BackArrow.svg";
+import { useNavigate } from "react-router-dom"; // Assuming you are using React Router
 
-const BackArrow = () => {
-   const history = useHistory();
+function BackArrow() {
+   const navigate = useNavigate();
 
    const goBack = () => {
-      history.goBack();
+      navigate(-1);
    };
 
    return (
-      <button onClick={goBack}>
-         {/* You can customize the arrow icon or text here */}
-         Go Back
-      </button>
+      <div className="backArrow" onClick={goBack}>
+         <img src={backArrow} alt="Back Arrow" />
+      </div>
    );
-};
+}
 export default BackArrow;

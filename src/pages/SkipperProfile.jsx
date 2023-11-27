@@ -1,6 +1,7 @@
 import pfp from '../assets/images/captain.jpg';
 import '../css/SkipperProfile.css';
 import PreviewTrip from "../components/PreviewTrip";
+import { Outlet, NavLink } from "react-router-dom";
 
 const SkipperProfile = () => {
     return (
@@ -68,7 +69,8 @@ const SkipperProfile = () => {
             </details>
             <hr />
             <h2>My Boats</h2>
-            <p>boat preview component</p>
+            <NavLink to="/boat/:id"> <p>boat preview component</p></NavLink>
+            <Outlet />
             <hr />
             <p>log out component</p>
         </div>

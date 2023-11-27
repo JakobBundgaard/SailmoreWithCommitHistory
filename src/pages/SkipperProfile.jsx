@@ -1,12 +1,16 @@
 import pfp from '../assets/images/captain.jpg';
 import '../css/SkipperProfile.css';
 import PreviewTrip from "../components/PreviewTrip";
+import BoatPreview from '../components/BoatPreview';
+import { Outlet, NavLink } from "react-router-dom";
+import EditButton from '../components/EditButton';
+import BackArrow from "../components/BackArrow";
 
 const SkipperProfile = () => {
     return (
         <div >
             <div className="top-panel">
-                <p>backbutton component</p>
+                <BackArrow />
             </div>
             <div className='profile-images'>
                 <img src={pfp} alt="Profile Image" />
@@ -29,7 +33,7 @@ const SkipperProfile = () => {
                     </div>
                 </div>
                 <div className='edit-profile'>
-                    <p>Rediger profil component</p>
+                    <EditButton />
                 </div>
             </div>
             
@@ -68,7 +72,10 @@ const SkipperProfile = () => {
             </details>
             <hr />
             <h2>My Boats</h2>
-            <p>boat preview component</p>
+            <NavLink to="/boat/:id">
+                <BoatPreview />
+            </NavLink>
+            <Outlet />
             <hr />
             <p>log out component</p>
         </div>

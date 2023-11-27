@@ -15,6 +15,7 @@ import CrewLogin from "./components/CrewLogin";
 import CaptainLogin from "./components/CaptainLogin";
 import CrewSignup from "./components/CrewSignup";
 import CaptainSignup from "./components/CaptainSignup";
+import AddTrip from "./pages/AddTrip";
 
 function App() {
    return (
@@ -36,7 +37,8 @@ function App() {
                   <Route path="*" element={<NoPage />} />
                   <Route path="trip/:id" element={<TripDetails />} />
                   <Route path="skipper/:id" element={<SkipperProfile />} />
-               </Route>
+                  <Route path="addtrip" element={<AddTrip />} />
+            </Route>
             </Routes>
          </BrowserRouter>
          {/* <UserBridge /> */}

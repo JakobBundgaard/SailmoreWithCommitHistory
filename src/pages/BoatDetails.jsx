@@ -1,70 +1,41 @@
 import { Outlet, NavLink } from "react-router-dom";
-import placeholder from "../assets/images/boat.jpg";
-import pfp from "../assets/images/captain.jpg";
+import placeholder from "../assets/images/boat2.jpg";
+import pfp from "../assets/images/boat2.jpg";
 import certified from "../assets/images/certified-badge.svg";
 import "../css/PreviewTrip.css";
-import "../css/TripDetails.css";
+import "../css/SkipperProfile.css";
 
 const BoatDetails = () => {
-    return <div style={{padding: '1em', marginBottom: '80px'}}>
-        <div className="preview-wrapper">
+    return (
+        <div >
             <div className="top-panel">
                 <p>backbutton component</p>
-                <h1>Lolland - Bornholm</h1>
             </div>
-            <div className="preview-image-container">
-                <img src={placeholder} alt="Preview Image" />
-                <div className="text-bubble preview-location">
-                    <p>Lolland - Bornholm</p>
-                </div>
+            <div className='profile-images'>
+                <img src={pfp} alt="Profile Image" />
             </div>
-            <div className="description-wrapper">
-                <div>
-                    <h3>Den grimme perle</h3>
-                    <p>15 nov - 1 dec · 0 stops</p>
-                    <p>2 / 4 gaster</p>
-                </div>
-                <div>
-                    <div className="text-bubble">
-                        <p>$40</p>
-                        <span>per day</span>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <p>Join Den Grimme Perle and captain Haddock on a 2 week trip in the Denmark</p>
-                <p>insert location stops component here</p>
-                <NavLink to="/skipper/:id">
-                    <article className="pfp-wrapper">
-                        <img src={pfp} alt="Profile picture of {username}" className="pfp" />
-                        <div>
-                            <img src={certified} alt="Certified Badge" />
-                            <h4>Skipper Skræk</h4>
+            <div className="page-wrapper">
+                <div className='profile-top'>
+                    <div>
+                        <div className='name-and-age'>
+                                <h1 className="BoatName">Den grimme perle</h1>
+                                <h3 className="BoatYear">2003</h3>
                         </div>
-                    </article>
-                </NavLink>
-                <Outlet />
-                <p>Den grimme perle is a 53 foot Grand Soleil from 1998. It has an engine, a mast and 6 crew spaces.</p>
-                <article>
-                <h4>Equipment on board</h4>
-                <ul>
-                    <li>Radio</li>
-                    <li>Scuba Equipment</li>
-                    <li>Spear Fishing Equipment</li>
-                </ul>
-                </article>
-
-                <article>
-                    <h4>Rules on board</h4>
-                    <ul>
-                        <li>No smoking crack below deck</li>
-                        <li>Captains word is law</li>
-                    </ul>
-                </article>
+                        <div className="model-and-crew">
+                            <h4 className="BoatModel">Peugot 2003 X274</h4>
+                            <h4 className="BoatCrew">Space for 5 crewmates</h4>
+                        </div>
+                    </div>
+                    {/* <div className='edit-profile'>
+                        <p>Rediger profil component</p>
+                    </div> */}
+                </div>
+            <hr />
+            <h2>About Me</h2>
+            <p>Ahoy! Im Skræk, a sea-loving adventurer with a passion for boat vacations. Whether its a sailboat or a yacht, Im all about making waves and unforgettable memories. Join me as I navigate life with a compass in hand and a splash of personality. Ready for some nautical fun? #SailorLife</p>
             </div>
         </div>
-        
-    </div>
+        )
 
   };
   

@@ -16,6 +16,7 @@ import CaptainLogin from "./components/CaptainLogin";
 import CrewSignup from "./components/CrewSignup";
 import CaptainSignup from "./components/CaptainSignup";
 import AddTrip from "./pages/AddTrip";
+import BoatDetails from "./pages/BoatDetails";
 
 function App() {
    return (
@@ -37,6 +38,7 @@ function App() {
                   <Route path="trip/:id" element={<TripDetails />} />
                   <Route path="skipper/:id" element={<SkipperProfile />} />
                   <Route path="addtrip" element={<AddTrip />} />
+                  <Route path="boat/:id" element={<BoatDetails />} />
                   <Route path="*" element={<NoPage />} />
             </Route>
             </Routes>

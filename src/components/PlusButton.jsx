@@ -8,7 +8,7 @@ const PlusButton = () => {
         return (
             <>
                 <li>
-                    <NavLink to="/addship"><img src={plus} alt="Add trip or boat" /></NavLink>
+                    <NavLink to="/addtrip"><img src={plus} alt="Add trip" /></NavLink>
                 </li>
             </>
         )

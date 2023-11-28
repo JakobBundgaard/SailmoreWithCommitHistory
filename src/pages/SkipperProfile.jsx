@@ -5,6 +5,7 @@ import BoatPreview from '../components/BoatPreview';
 import { Outlet, NavLink } from "react-router-dom";
 import EditButton from '../components/EditButton';
 import BackArrow from "../components/BackArrow";
+import { Link } from "react-router-dom";
 
 function handleClick() {
     console.log("Clicked");
@@ -78,6 +79,7 @@ const SkipperProfile = () => {
             <h2>My Boats</h2>
             <NavLink to="/boat/:id">
                 <BoatPreview />
+                <Link to="/AddShip" style={{ color: 'pink' }}>ADD BOAT(link)</Link>
             </NavLink>
             <Outlet />
             <hr />

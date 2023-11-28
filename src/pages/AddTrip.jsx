@@ -6,12 +6,13 @@ import CancelButton from "../components/CancelButton.jsx";
 
 const AddTrip = () => {
    const [formData, setFormData] = useState({
-      fromLocation: '',
-      toLocation: '',
+      startLocation: '',
+      endLocation: '',
       startDate: '',
       endDate: '',
       tripDescription: '',
-      imageId: '',
+      shipId: '',
+      totalCrewSpaces: ''
     });
   
     // Handle input changes
@@ -20,31 +21,26 @@ const AddTrip = () => {
       setFormData({ ...formData, [name]: value });
     };
   
-    // Handle form submission
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-  
-      try {
-        // Send the form data to your server for insertion into the database
-        const response = await fetch('/api/trip/addTrip.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-  
-        if (response.ok) {
-          // Handle success, e.g., redirect or show a success message
-          console.log('Added trip successfully!');
-        } else {
-          // Handle errors, e.g., show an error message
-          console.error('Error adding trip');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
+// Handle form submission
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const data = new FormData();
+  for (const key in formData) {
+    data.append(key, formData[key]);
+  }
+
+  fetch('/api/trip/addTrip.php', {
+      method: 'POST',
+      body: data
+  })
+  .then(response => response.text())
+  .then(data => {
+      console.log(data); // Optional: Log the response data
+  })
+  .catch(error => console.log(error));
+  console.log(formData);
+};
   
     return (
       <div className="page-wrapper">
@@ -53,39 +49,45 @@ const AddTrip = () => {
         <form onSubmit={handleSubmit} className='signupform'>
   
           {/* Input fields for user details */}
-          <label className='label'>
-            Upload Image:
-            <input type="file" name="uploadImage" value={formData.uploadImage} onChange={handleChange} className='signupInput' required />
-          </label>
 
           <label className='label'>
             From:
-            <input type="text" name="fromLocation" value={formData.fromLocation} onChange={handleChange} className='signupInput' required />
+            <input type="text" name="startLocation" value={formData.startLocation} onChange={handleChange} className='signupInput startLocation' required />
           </label>
   
           <label className='label'>
             To:
-            <input type="text" name="toLocation" value={formData.toLocation} onChange={handleChange} className='signupInput'required />
+            <input type="text" name="endLocation" value={formData.endLocation} onChange={handleChange} className='signupInput endLocation'required />
           </label>
   
           <label className='label'>
             Start Date:
-            <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} className='signupInput' required />
+            <input type="datetime-local" name="startDate" value={formData.startDate} onChange={handleChange} className='signupInput startDate' required />
           </label>
   
           <label className='label'>
             End Date:
-            <input type="date" name="endDate" value={formData.endDate} onChange={handleChange} className='signupInput' />
+            <input type="datetime-local" name="endDate" value={formData.endDate} onChange={handleChange} className='signupInput endDate' />
           </label>
 
           
           <label className='label'>
             Description:
-            <textarea name="tripDescription" value={formData.tripDescription} onChange={handleChange} className='bioField'></textarea>
+            <textarea name="tripDescription" value={formData.tripDescription} onChange={handleChange} className='bioField tripDescription'></textarea>
+          </label>
+
+          <label className='label'>
+            ShipId:
+            <input type="number" name="shipId" value={formData.shipId} onChange={handleChange} className='signupInput shipId' required />
+          </label>
+
+          <label className='label'>
+            totalCrewSpaces:
+            <input type="number" name="totalCrewSpaces" value={formData.totalCrewSpaces} onChange={handleChange} className='signupInput totalCrewSpaces' required />
           </label>
   
           <div className="flexRow">
-                <SaveButton />
+                <SaveButton props={handleSubmit}/>
                 <CancelButton />
           </div>
    

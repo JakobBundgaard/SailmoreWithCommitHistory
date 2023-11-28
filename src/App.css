@@ -30,3 +30,13 @@ h2 {
     font-weight: 400;
     line-height: 30px; /* 125% */
 }
+
+input:invalid + span::after {
+  content: "✖";
+  padding-left: 5px;
+}
+
+input:valid + span::after {
+  content: "✓";
+  padding-left: 5px;
+}

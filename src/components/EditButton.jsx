@@ -3,7 +3,7 @@ import "../css/SaveButton.css";
 import editButton from "../assets/images/editButton.svg";
 import "../css/EditButton.css";
 
-function EditButton({ props: onClick }) {
+function EditButton({ onClick }) {
    return (
       <button className="editButton" onClick={onClick}>
          <img src={editButton} alt="Edit button" />

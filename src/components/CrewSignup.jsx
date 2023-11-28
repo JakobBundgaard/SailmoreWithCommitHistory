@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import "../css/crewSignup.css";
 import crewImage from "../assets/images/Asian_sunset.jpg";
 import SaveButton from "./SaveButton";
@@ -8,15 +8,59 @@ const CrewSignup = () => {
   // State to hold user input
   const [formData, setFormData] = useState({
     crewName: '',
-    crewAge: '',
+    crewAge: 0,
     crewPassword: '',
     crewEmail: '',
     crewGender: '',
     crewNationality: '',
+    crewExperience: '',
     crewDescription: '',
     crewSkill: [''], 
-    imageId: '',
   });
+
+   // State to hold gender options
+  const [genderOptions, setGenderOptions] = useState([]);
+  const [nationalityOptions, setNationalityOptions] = useState([]);
+    // State to hold skill options
+    const [skillOptions, setSkillOptions] = useState([]);
+
+    // Fetch skill options from the server on component mount
+    useEffect(() => {
+      const fetchSkillOptions = async () => {
+        try {
+          const response = await fetch('/api/crew/getSkillOptions.php');
+          if (response.ok) {
+            const data = await response.json();
+            setSkillOptions(data);
+          } else {
+            console.error('Error fetching skill options');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+  
+      fetchSkillOptions();
+    }, []); // Run this effect only once on component mount
+
+  // Fetch nationality options from the server on component mount
+  useEffect(() => {
+    const fetchNationalityOptions = async () => {
+      try {
+        const response = await fetch('/api/crew/getNationalityOptions.php');
+        if (response.ok) {
+          const data = await response.json();
+          setNationalityOptions(data);
+        } else {
+          console.error('Error fetching nationality options');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchNationalityOptions();
+  }, []); // Run this effect only once on component mount
 
   // Handle input changes
   const handleChange = (e) => {
@@ -36,22 +80,52 @@ const CrewSignup = () => {
     setFormData({ ...formData, crewSkill: [...formData.crewSkill, ''] });
   };
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    // Fetch gender options from the server on component mount
+    useEffect(() => {
+      const fetchGenderOptions = async () => {
+        try {
+          const response = await fetch('/api/crew/getGenderOptions.php');
+          if (response.ok) {
+            const data = await response.json();
+            setGenderOptions(data);
+          } else {
+            console.error('Error fetching gender options');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+  
+      fetchGenderOptions();
+    }, []); // Run this effect only once on component mount
+  
 
+  const handleSave = async (e) => {
+    e.preventDefault();
     try {
-      // Send the form data to your server for insertion into the database
+      console.log('Save button clicked!');
+  
       const response = await fetch('/api/crew/crewSignup.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          crewName: formData.crewName,
+          crewAge: formData.crewAge,
+          crewPassword: formData.crewPassword,
+          crewEmail: formData.crewEmail,
+          crewGender: formData.crewGender,
+          crewNationality: formData.crewNationality,
+          crewExperience: formData.crewExperience,
+          crewDescription: formData.crewDescription,
+          crewSkill: formData.crewSkill,
+        }),
       });
-
+  
       if (response.ok) {
         // Handle success, e.g., redirect or show a success message
+        console.log("Response ", response);
         console.log('User signed up successfully!');
       } else {
         // Handle errors, e.g., show an error message
@@ -62,11 +136,16 @@ const CrewSignup = () => {
     }
   };
 
+  const handleCancel = () => {
+    // Add logic to handle cancellation
+    console.log('Cancel button clicked!');
+  };
+
   return (
     <div className="page-wrapper">
       <h2 className='signupTitle'>Crew Signup</h2>
       <img src={crewImage} alt="Beautiful Image" className='crewImage' />
-      <form onSubmit={handleSubmit} className='signupform'>
+      <form onSubmit={handleSave} className='signupform'>
 
         {/* Input fields for user details */}
         <label className='label'>
@@ -85,36 +164,56 @@ const CrewSignup = () => {
         </label>
 
         <label className='label'>
-          Nationality:
-          <input type="text" name="crewNationality" value={formData.crewNationality} onChange={handleChange} className='signupInput' />
+          Password Repeat:
+          <input type="password" name="crewPasswordRepeat" value={formData.repeatPassword} onChange={handleChange} className='signupInput' required />
+        </label>
+
+        <label className='label'>
+        Nationality:
+        <select name="crewNationality" value={formData.crewNationality} onChange={handleChange} className='genderSelect'>
+          <option value="">Select Nationality</option>
+          {nationalityOptions.map((nationality) => (
+            <option key={nationality} value={nationality}>
+              {nationality}
+            </option>
+          ))}
+        </select>
+      </label>
+
+        <label className='label'>
+          Experience:
+          <input type="text" name="crewExperience" value={formData.crewExperience} onChange={handleChange} className='signupInput' />
         </label>
 
         {formData.crewSkill.map((skill, index) => (
-            <div key={index} className='skillContainer'>
-                <label className='label'>
-                Skill {index + 1}:
-                <div className="skillSelectContainer">
-                    <select
-                    name={`crewSkill${index}`}
-                    className='skillSelect'
-                    value={skill}
-                    onChange={(e) => handleSkillChange(index, e.target.value)}
-                    >
-                    <option value="">Select Skill</option>
-                    <option value="Guitar">Guitar</option>
-                    <option value="Cooking">Cooking</option>
-                    </select>
-                </div>
-                </label>
-
-                {/* "Plus" button */}
-                {index === formData.crewSkill.length - 1 && (
-                <button type="button" onClick={addSkill} className='skillButton'>
-                    +
-                </button>
-                )}
+        <div key={index} className='skillContainer'>
+          <label className='label'>
+            Skill {index + 1}:
+            <div className="skillSelectContainer">
+              <select
+                name={`crewSkill${index}`}
+                className='skillSelect'
+                value={skill}
+                onChange={(e) => handleSkillChange(index, e.target.value)}
+              >
+                <option value="">Select Skill</option>
+                {skillOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
             </div>
-        ))}
+          </label>
+
+          {/* "Plus" button */}
+          {index === formData.crewSkill.length - 1 && (
+            <button type="button" onClick={addSkill} className='skillButton'>
+              +
+            </button>
+          )}
+        </div>
+      ))}
         
         <label className='label'>
           Bio:
@@ -122,15 +221,19 @@ const CrewSignup = () => {
         </label>
 
         <div className="gender-age-container">
-          <label className='label'>
-            Gender:
-            <select name="crewGender" value={formData.crewGender} onChange={handleChange} className='genderSelect'>
+
+        <label className='label'>
+          Gender:
+          <select name="crewGender" value={formData.crewGender} onChange={handleChange} className='genderSelect'>
             <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-  </select>
-          </label>
+            {/* Map over genderOptions to generate options */}
+            {genderOptions.map((gender) => (
+            <option key={gender} value={gender.toLowerCase()}>
+                     {gender}
+            </option>
+            ))}
+          </select>
+        </label>
 
           <label className='label'>
             Age:
@@ -139,8 +242,8 @@ const CrewSignup = () => {
         </div>
 
         <div className="flexRow">
-              <SaveButton />
-              <CancelButton />
+              <SaveButton onClick={handleSave} />
+              <CancelButton onClick={handleCancel}/>
         </div>
  
       </form>

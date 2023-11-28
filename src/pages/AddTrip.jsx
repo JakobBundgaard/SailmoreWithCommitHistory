@@ -26,7 +26,7 @@ const AddTrip = () => {
   
       try {
         // Send the form data to your server for insertion into the database
-        const response = await fetch('/api/addtrip', {
+        const response = await fetch('/api/trip/addTrip.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

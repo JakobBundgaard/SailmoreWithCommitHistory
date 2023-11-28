@@ -18,6 +18,7 @@ import CaptainSignup from "./components/CaptainSignup";
 import AddTrip from "./pages/AddTrip";
 import BoatDetails from "./pages/BoatDetails";
 import ScrollToTopOnRender from "./components/ScrollToTopOnRender";
+import AddShip from "./pages/AddShip";
 
 function App() {
    return (
@@ -41,6 +42,7 @@ function App() {
                   <Route path="trip/:id" element={<TripDetails />} />
                   <Route path="skipper/:id" element={<SkipperProfile />} />
                   <Route path="addtrip" element={<AddTrip />} />
+                  <Route path="addship" element={<AddShip />} />
                   <Route path="boat/:id" element={<BoatDetails />} />
                   <Route path="*" element={<NoPage />} />
             </Route>

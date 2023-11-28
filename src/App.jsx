@@ -17,12 +17,14 @@ import CrewSignup from "./components/CrewSignup";
 import CaptainSignup from "./components/CaptainSignup";
 import AddTrip from "./pages/AddTrip";
 import BoatDetails from "./pages/BoatDetails";
+import ScrollToTopOnRender from "./components/ScrollToTopOnRender";
 
 function App() {
    return (
       <>
         
          <BrowserRouter>
+         <ScrollToTopOnRender />
             <Routes>
                <Route path="/" element={<Layout />}>
                   <Route path="" element={<Home />} />

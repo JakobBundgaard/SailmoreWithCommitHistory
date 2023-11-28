@@ -9,6 +9,10 @@ import "../css/SkipperProfile.css";
 import BackArrow from "../components/BackArrow";
 import EditButton from "../components/EditButton";
 
+function handleClick() {
+    console.log("Clicked");
+ }
+
 const BoatDetails = () => {
     return (
         <div >
@@ -31,7 +35,7 @@ const BoatDetails = () => {
                         </div>
                     </div>
                     <div className='edit-profile'>
-                        <EditButton />
+                        <EditButton onClick={handleClick} />
                     </div>
                 </div>
             <hr />

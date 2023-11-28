@@ -3,16 +3,16 @@ import "../css/SaveButton.css";
 import editButton from "../assets/images/editButton.svg";
 import "../css/EditButton.css";
 
-function EditButton({ props }) {
+function EditButton({ props: onClick }) {
    return (
-      <button className="editButton" onClick={props}>
+      <button className="editButton" onClick={onClick}>
          <img src={editButton} alt="Edit button" />
       </button>
    );
 }
 
 EditButton.propTypes = {
-   props: PropTypes.func.isRequired,
+   onClick: PropTypes.func.isRequired,
 };
 
 export default EditButton;

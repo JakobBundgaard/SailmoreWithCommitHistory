@@ -6,6 +6,10 @@ import { Outlet, NavLink } from "react-router-dom";
 import EditButton from '../components/EditButton';
 import BackArrow from "../components/BackArrow";
 
+function handleClick() {
+    console.log("Clicked");
+ }
+
 const SkipperProfile = () => {
     return (
         <div >
@@ -33,7 +37,7 @@ const SkipperProfile = () => {
                     </div>
                 </div>
                 <div className='edit-profile'>
-                    <EditButton />
+                    <EditButton onClick={handleClick} />
                 </div>
             </div>
             

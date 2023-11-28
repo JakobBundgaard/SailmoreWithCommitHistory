@@ -45,7 +45,6 @@ details>summary {
     display: flex;
     justify-content: space-between;
     position: relative;
-    z-index: -1;
 }
 .edit-profile {
     position: absolute;

@@ -8,7 +8,7 @@ function signUpCrew($conn, $name, $email, $password, $passwordRepeat, $nationali
     // Fetch gender options from the database
     $genderOptions = getGenderOptions($conn);
 
-    // Validate the input
+    //Validate the input
     if (empty($name) || empty($email) || empty($password) || empty($passwordRepeat) || empty($nationality) || empty($skill) || empty($bio) || empty($gender) || empty($age)) {
         $response['error'] = "All fields are required.";
         return $response;
@@ -29,7 +29,7 @@ function signUpCrew($conn, $name, $email, $password, $passwordRepeat, $nationali
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sissiississ", $name, $age, $hashedPassword, $email, $gender, $nationality, $bio, $experience, $skill);
+    $stmt->bind_param("sissiissi", $name, $age, $hashedPassword, $email, $gender, $nationality, $bio, $experience, $skill);
 
     if ($stmt->execute()) {
         $response['success'] = "User signed up successfully.";

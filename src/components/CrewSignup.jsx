@@ -5,7 +5,8 @@ import SaveButton from "./SaveButton";
 import CancelButton from "./CancelButton";
 
 const CrewSignup = () => {
-  // State to hold user input
+  console.log('CrewSignup rendered');
+
   const [formData, setFormData] = useState({
     crewName: '',
     crewAge: 0,
@@ -15,96 +16,89 @@ const CrewSignup = () => {
     crewNationality: '',
     crewExperience: '',
     crewDescription: '',
-    crewSkill: [''], 
+    crewSkill: [''],
   });
 
-   // State to hold gender options
   const [genderOptions, setGenderOptions] = useState([]);
   const [nationalityOptions, setNationalityOptions] = useState([]);
-    // State to hold skill options
-    const [skillOptions, setSkillOptions] = useState([]);
+  const [skillOptions, setSkillOptions] = useState([]);
 
-    // Fetch skill options from the server on component mount
-    useEffect(() => {
-      const fetchSkillOptions = async () => {
-        try {
-          const response = await fetch('/api/crew/getSkillOptions.php');
-          if (response.ok) {
-            const data = await response.json();
-            setSkillOptions(data);
-          } else {
-            console.error('Error fetching skill options');
-          }
-        } catch (error) {
-          console.error('Error:', error);
-        }
-      };
-  
-      fetchSkillOptions();
-    }, []); // Run this effect only once on component mount
-
-  // Fetch nationality options from the server on component mount
   useEffect(() => {
-    const fetchNationalityOptions = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch('/api/crew/getNationalityOptions.php');
-        if (response.ok) {
-          const data = await response.json();
-          setNationalityOptions(data);
+        const [skillResponse, nationalityResponse, genderResponse] = await Promise.all([
+          fetch('/api/crew/getSkillOptions.php'),
+          fetch('/api/crew/getNationalityOptions.php'),
+          fetch('/api/crew/getGenderOptions.php'),
+        ]);
+
+        if (skillResponse.ok) {
+          const skillData = await skillResponse.json();
+          setSkillOptions(skillData);
+        } else {
+          console.error('Error fetching skill options');
+        }
+
+        if (nationalityResponse.ok) {
+          const nationalityData = await nationalityResponse.json();
+          console.log('Nationality Options:', nationalityData);
+          setNationalityOptions(nationalityData);
         } else {
           console.error('Error fetching nationality options');
+        }
+
+        if (genderResponse.ok) {
+          const genderData = await genderResponse.json();
+          console.log('Gender Options:', genderData);
+          setGenderOptions(genderData);
+        } else {
+          console.error('Error fetching gender options');
         }
       } catch (error) {
         console.error('Error:', error);
       }
     };
 
-    fetchNationalityOptions();
+    fetchData();
   }, []); // Run this effect only once on component mount
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+    if (name === 'crewNationality') {
+      const selectedNationality = nationalityOptions.find((option) => option === value);
+      const selectedNationalityId = selectedNationality ? nationalityOptions.indexOf(selectedNationality) + 1 : '';
+      setFormData({ ...formData, [name]: selectedNationalityId });
+    } else if (name === 'crewGender') {
+      const selectedGenderId = genderOptions.indexOf(value) +1;
+      console.log('Gender Options:', genderOptions);
+      console.log('Selected Value:', value);
+      console.log('Selected Gender ID:', selectedGenderId);
+      setFormData({ ...formData, [name]: selectedGenderId });
+    } else if (name.startsWith('crewSkill')) {
+      const index = parseInt(name.replace('crewSkill', ''), 10);
+      const newSkills = [...formData.crewSkill];
+      newSkills[index] = value;
+      setFormData({ ...formData, crewSkill: newSkills });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
-  // Handle skill change
   const handleSkillChange = (index, value) => {
     const newSkills = [...formData.crewSkill];
     newSkills[index] = value;
     setFormData({ ...formData, crewSkill: newSkills });
   };
 
-  // Handle adding a new skill
   const addSkill = () => {
     setFormData({ ...formData, crewSkill: [...formData.crewSkill, ''] });
   };
-
-    // Fetch gender options from the server on component mount
-    useEffect(() => {
-      const fetchGenderOptions = async () => {
-        try {
-          const response = await fetch('/api/crew/getGenderOptions.php');
-          if (response.ok) {
-            const data = await response.json();
-            setGenderOptions(data);
-          } else {
-            console.error('Error fetching gender options');
-          }
-        } catch (error) {
-          console.error('Error:', error);
-        }
-      };
-  
-      fetchGenderOptions();
-    }, []); // Run this effect only once on component mount
-  
 
   const handleSave = async (e) => {
     e.preventDefault();
     try {
       console.log('Save button clicked!');
-  
       const response = await fetch('/api/crew/crewSignup.php', {
         method: 'POST',
         headers: {
@@ -122,13 +116,11 @@ const CrewSignup = () => {
           crewSkill: formData.crewSkill,
         }),
       });
-  
+
       if (response.ok) {
-        // Handle success, e.g., redirect or show a success message
         console.log("Response ", response);
         console.log('User signed up successfully!');
       } else {
-        // Handle errors, e.g., show an error message
         console.error('Error signing up user');
       }
     } catch (error) {
@@ -137,7 +129,6 @@ const CrewSignup = () => {
   };
 
   const handleCancel = () => {
-    // Add logic to handle cancellation
     console.log('Cancel button clicked!');
   };
 
@@ -170,14 +161,15 @@ const CrewSignup = () => {
 
         <label className='label'>
         Nationality:
-        <select name="crewNationality" value={formData.crewNationality} onChange={handleChange} className='genderSelect'>
+        <select name="crewNationality"  onChange={handleChange} className='genderSelect'>
           <option value="">Select Nationality</option>
-          {nationalityOptions.map((nationality) => (
-            <option key={nationality} value={nationality}>
-              {nationality}
-            </option>
-          ))}
+              {nationalityOptions.map((nationality) => (
+                <option key={nationality} value={nationality}>
+                  {nationality}
+          </option>
+              ))}
         </select>
+        
       </label>
 
         <label className='label'>
@@ -224,11 +216,11 @@ const CrewSignup = () => {
 
         <label className='label'>
           Gender:
-          <select name="crewGender" value={formData.crewGender} onChange={handleChange} className='genderSelect'>
+          <select name="crewGender" onChange={handleChange} className='genderSelect'>
             <option value="">Select Gender</option>
             {/* Map over genderOptions to generate options */}
             {genderOptions.map((gender) => (
-            <option key={gender} value={gender.toLowerCase()}>
+            <option key={gender} value={gender}>
                      {gender}
             </option>
             ))}

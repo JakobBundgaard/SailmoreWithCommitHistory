@@ -3,7 +3,7 @@ import "../css/SaveButton.css";
 
 function SaveButton({ props }) {
    return (
-      <button className="saveButton" onClick={props}>
+      <button type="submit" className="saveButton" onClick={props}>
          Save
       </button>
    );
@@ -12,5 +12,7 @@ function SaveButton({ props }) {
 SaveButton.propTypes = {
    props: PropTypes.func.isRequired,
 };
+
+
 
 export default SaveButton;

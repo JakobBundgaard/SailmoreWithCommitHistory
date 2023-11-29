@@ -12,7 +12,6 @@ const AddShip = () => {
     shipDescription: "",
     crewSpaces: "",
     shipAge: "",
-    imageId: "",
   });
 
   // Handle input changes
@@ -27,7 +26,7 @@ const AddShip = () => {
 
     try {
       // Send the form data to your server for insertion into the database
-      const response = await fetch("/api/addShip", {
+      const response = await fetch("../api/ship/addShip.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,6 +46,10 @@ const AddShip = () => {
     }
   };
 
+  function handleClick() {
+    console.log("Clicked");
+ }
+ 
   return (
     <div className="page-wrapper">
     <BackArrow />
@@ -54,7 +57,7 @@ const AddShip = () => {
       <img src={crewImage} alt="Beautiful Image" className="crewImage" />
       <form onSubmit={handleSubmit} className="signupform">
         {/* Input fields for user details */}
-        <label className="label">
+        {/* <label className="label">
           Upload image of your ship:
           <input
             type="file"
@@ -64,7 +67,7 @@ const AddShip = () => {
             className="signupInput"
             required
           />
-        </label>
+        </label> */}
 
         <label className="label">
           Ship name:
@@ -125,7 +128,7 @@ const AddShip = () => {
         </div>
 
         <div className="flexRow">
-          <SaveButton />
+          <SaveButton onClick={handleClick} />
           <CancelButton />
         </div>
       </form>

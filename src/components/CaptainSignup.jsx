@@ -1,6 +1,6 @@
 import "../css/captainSignup.css";
 import captainImage from "../assets/images/captain.jpg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SaveButton from "./SaveButton";
 import CancelButton from "./CancelButton";
 import BackArrow from "./BackArrow";
@@ -14,6 +14,8 @@ function CaptainSignup() {
    const [gender, setGender] = useState("");
    const [age, setAge] = useState("");
    const [passwordRepeat, setPasswordRepeat] = useState("");
+   const [genderOptions, setGenderOptions] = useState([]);
+   const [nationalityOptions, setNationalityOptions] = useState([]);
 
    const handleInputChange = event => {
       switch (event.target.name) {
@@ -47,29 +49,37 @@ function CaptainSignup() {
       }
    };
 
-   //Add a submit handler here
-   const handleSubmit = async event => {
+   //Get all genders from the server
+   useEffect(() => {
+      // Fetch gender options from your API here
+      fetch("/api/captain/getGenders.php")
+         .then(response => {
+            if (!response.ok) {
+               throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+         })
+         .then(data => setGenderOptions(data))
+         .catch(error => console.log("Fetch or parsing error: ", error));
+   }, []);
+
+   //Get all nationalities from the server
+   useEffect(() => {
+      fetch("/api/captain/getNationality.php")
+         .then(response => {
+            if (!response.ok) {
+               throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+         })
+         .then(data => setNationalityOptions(data))
+         .catch(error => console.log("Fetch or parsing error: ", error));
+   }, []);
+
+   //handle cancel button
+   const handleCancel = event => {
       event.preventDefault();
-      console.log("Form submitted");
-
-      //Send the form data to your server here
-      const response = await fetch("/api/captain/captainSignup.php", {
-         method: "POST",
-         headers: {
-            "Content-Type": "application/json",
-         },
-         body: JSON.stringify({
-            name: name,
-            email: email,
-            password: password,
-            nationality: nationality,
-            bio: bio,
-            gender: gender,
-            age: age,
-         }),
-      });
-
-      //Clear the form here
+      console.log("Form cancelled");
       setName("");
       setEmail("");
       setPassword("");
@@ -78,6 +88,45 @@ function CaptainSignup() {
       setBio("");
       setGender("");
       setAge("");
+   };
+
+   //Submit handler here
+   const handleSubmit = async event => {
+      event.preventDefault();
+      console.log("Form submitted");
+
+      // Prepare the data
+      const data = {
+         name: name,
+         email: email,
+         password: password,
+         nationality: nationality,
+         bio: bio,
+         gender: gender,
+         age: age,
+      };
+
+      // Log the data
+      console.log(JSON.stringify(data));
+
+      // Send the form data to your server here
+      const response = await fetch("/api/captain/captainSignup.php", {
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json",
+         },
+         body: JSON.stringify(data),
+      });
+
+      //Clear the form here
+      // setName("");
+      // setEmail("");
+      // setPassword("");
+      // setPasswordRepeat("");
+      // setNationality("");
+      // setBio("");
+      // setGender("");
+      // setAge("");
 
       if (response.ok) {
          //Handle success, e.g., redirect or show a success message
@@ -110,11 +159,25 @@ function CaptainSignup() {
                <label className="flexItem labelItem" htmlFor="passwordRepeat">
                   Repeat password
                </label>
-               <input className="flexItem inputItem" type="password" name="passwordRepeat" value={passwordRepeat} onChange={handleInputChange} required />
+               <input
+                  className="flexItem inputItem"
+                  type="password"
+                  name="passwordRepeat"
+                  value={passwordRepeat}
+                  onChange={handleInputChange}
+                  required
+               />
                <label className="flexItem labelItem" htmlFor="nationality">
                   Nationality
                </label>
-               <input className="flexItem inputItem" type="text" name="nationality" value={nationality} onChange={handleInputChange} />
+               <select className="flexItem inputItem" type="text" name="nationality" value={nationality} onChange={handleInputChange}>
+                  {nationalityOptions.map((option, index) => (
+                     <option key={index} value={option.nationalityId}>
+                        {option.nationality}
+                     </option>
+                  ))}
+               </select>
+
                <label className="flexItem labelItem" htmlFor="bio">
                   Bio
                </label>
@@ -125,9 +188,11 @@ function CaptainSignup() {
                         Gender
                      </label>
                      <select className="flexItem selectItem" id="gender" name="gender" value={gender} onChange={handleInputChange}>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
+                        {genderOptions.map((option, index) => (
+                           <option key={index} value={option.genderId}>
+                              {option.genderName}
+                           </option>
+                        ))}
                      </select>
                   </div>
                   <div className="flexCol">
@@ -139,7 +204,7 @@ function CaptainSignup() {
                </div>
                <div className="flexRow">
                   <SaveButton props={handleSubmit} />
-                  <CancelButton />
+                  <CancelButton props={handleCancel} />
                </div>
             </form>
          </div>

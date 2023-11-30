@@ -48,6 +48,43 @@ function signUpCrew($conn, $name, $email, $password, $passwordRepeat, $nationali
     return $response;
 }
 
+function loginCrew($conn, $email, $password) {
+    $response = array();
+
+    // Check if the email exists in the database
+    if (!isEmailExists($conn, $email)) {
+        $response['error'] = "Email does not exist.";
+        return $response;
+    }
+
+    // Fetch crew data based on the email
+    $crewData = getCrewDataByEmail($conn, $email);
+
+    // Verify the password
+    if (password_verify($password, $crewData['crewPassword'])) {
+        $response['success'] = "User logged in successfully.";
+        // You can include crew data in the response if needed
+        $response['crewData'] = $crewData;
+    } else {
+        $response['error'] = "Incorrect password.";
+    }
+
+    return $response;
+}
+
+function getCrewDataByEmail($conn, $email) {
+    $sql = "SELECT * FROM crew WHERE crewEmail = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $crewData = $result->fetch_assoc();
+    $stmt->close();
+
+    return $crewData;
+}
+
+
 function getGenderOptions($conn) {
     $sql = "SELECT * FROM gender";
     $result = $conn->query($sql);

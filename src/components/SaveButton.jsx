@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import "../css/SaveButton.css";
 
-function SaveButton({ props: onClick }) {
+function SaveButton({ onClick }) {
    return (
       <button className="saveButton" onClick={onClick}>
          Save

@@ -21,36 +21,47 @@ const CrewLogin = () => {
 
  
   // Handle form submission
-  const handleSubmit = async (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
 
     try {
-      // Send the form data to your server for insertion into the database
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+        // Send the form data to your server for crew login
+        const response = await fetch('/api/crew/crewLogin.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        });
 
-      if (response.ok) {
-        // Handle success, e.g., redirect or show a success message
-        console.log('User logged in successfully!');
-      } else {
-        // Handle errors, e.g., show an error message
-        console.error('Error loggin in');
-      }
+        if (response.ok) {
+            const responseData = await response.json();
+            if (responseData.success) {
+                console.log('User logged in successfully!');
+              // Redirect or handle success as needed
+              window.location.href = "/crewProfile";
+            } else {
+                console.error('Error logging in:', responseData.error);
+                // Handle login error, e.g., show an error message
+            }
+        } else {
+            console.error('Error logging in');
+        }
     } catch (error) {
-      console.error('Error:', error);
+        console.error('Error:', error);
     }
+};
+
+
+  const handleCancel = () => {
+    console.log('Cancel button clicked!');
   };
 
   return (
     <div className="page-wrapper">
         <h2 className='loginTitle'>Crew Login</h2>
         <img src={crewImage} alt="Beautiful Image" className='crewImage' />
-        <form onSubmit={handleSubmit} className='loginForm'>
+        <form onSubmit={handleSave} className='loginForm'>
             <label className='label'>
             Email:
             <input type="email" name="crewEmail" value={formData.crewEmail} onChange={handleChange} className='loginInput' required />
@@ -63,8 +74,8 @@ const CrewLogin = () => {
               
             
             <div className="flexRow">
-                  <SaveButton />
-                  <CancelButton />
+            <SaveButton onClick={handleSave} />
+              <CancelButton onClick={handleCancel}/>
             </div>
         </form>  
     </div>

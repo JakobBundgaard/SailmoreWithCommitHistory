@@ -62,50 +62,7 @@ const CrewSignup = () => {
     }
   }, [nationalityOptions, genderOptions, skillOptions]); // Run only when these dependencies change
   
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
   
-  //   if (name === 'crewNationality') {
-  //     const selectedNationality = nationalityOptions.find((option) => option === value);
-  //     const selectedNationalityId = selectedNationality ? nationalityOptions.indexOf(selectedNationality) + 1 : '';
-  //     setFormData({ ...formData, [name]: selectedNationalityId });
-  //   } else if (name === 'crewGender') {
-  //     const selectedGenderId = genderOptions.indexOf(value) + 1;
-  //     setFormData({ ...formData, [name]: selectedGenderId });
-  //   } else if (name.startsWith('crewSkill')) {
-  //     const index = parseInt(name.replace('crewSkill', ''), 10);
-  //     const newSkills = [...formData.crewSkill];
-  //     newSkills[index] = value;
-  //     setFormData({ ...formData, crewSkill: newSkills });
-  //   } else {
-  //     setFormData({ ...formData, [name]: value });
-  //   }
-  // };
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  
-  //   if (name === 'crewNationality') {
-  //     const selectedNationality = nationalityOptions.find((option) => option === value);
-  //     const selectedNationalityId = selectedNationality ? nationalityOptions.indexOf(selectedNationality) + 1 : '';
-  //     setFormData({ ...formData, [name]: selectedNationalityId });
-  //   } else if (name === 'crewGender') {
-  //     const selectedGenderId = genderOptions.indexOf(value) + 1;
-  //     setFormData({ ...formData, [name]: selectedGenderId });
-  //   } else if (name.startsWith('crewSkill')) {
-  //     const index = parseInt(name.replace('crewSkill', ''), 10);
-  //     const newSkills = [...formData.crewSkill];
-  //     newSkills[index] = value;
-  //     setFormData({ ...formData, crewSkill: newSkills });
-  //   } else {
-  //     setFormData((prevData) => ({
-  //       ...prevData,
-  //       [name]: value,
-  //       crewPasswordRepeat: name === 'crewPassword' ? prevData.crewPasswordRepeat : prevData.crewPasswordRepeat,
-  //     }));
-  //   }
-  // };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 

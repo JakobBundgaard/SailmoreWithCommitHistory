@@ -50,7 +50,7 @@ const CrewProfile = () => {
                     Booked Trips
                 </summary>
                 <br />
-                <PreviewTrip/>
+                {/* <PreviewTrip/> */}
             </details>
             <hr />
             <details className='drop-down'>
@@ -58,7 +58,7 @@ const CrewProfile = () => {
                     Requested Trips
                 </summary>
                 <br />
-                <PreviewTrip/>
+                {/* <PreviewTrip/> */}
             </details>
             <hr />
             <details className='drop-down'>
@@ -66,7 +66,7 @@ const CrewProfile = () => {
                     Past Trips
                 </summary>
                 <br />
-                <PreviewTrip/>
+                {/* <PreviewTrip/> */}
             </details>
             <hr />
             <p>log out component</p>

@@ -57,7 +57,7 @@ const SkipperProfile = () => {
                     Active Trips
                 </summary>
                 <br />
-                <PreviewTrip/>
+                {/* <PreviewTrip/> */}
             </details>
             <hr />
             <details className='drop-down'>
@@ -65,7 +65,7 @@ const SkipperProfile = () => {
                     Future Trips
                 </summary>
                 <br />
-                <PreviewTrip/>
+                {/* <PreviewTrip/> */}
             </details>
             <hr />
             <details className='drop-down'>
@@ -73,7 +73,7 @@ const SkipperProfile = () => {
                     Past Trips
                 </summary>
                 <br />
-                <PreviewTrip/>
+                {/* <PreviewTrip/> */}
             </details>
             <hr />
             <h2>My Boats</h2>

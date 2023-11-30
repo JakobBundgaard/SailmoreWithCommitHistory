@@ -15,29 +15,40 @@ const TripDetails = () => {
         fetch('/api/trip/readTrip.php')
             .then(response => response.json())
             .then(data => {
-                setTripData(data);
+                setTripData(data[0]);
                 console.log(data)
             })
             .catch(error => console.error('Error:', error));
     }, []);
+// Destructure tripData to individual variables
+const { tripId, startLocation, endLocation, shipId, shipName, captainId, imagePath, totalCrewSpaces, tripDescription, shipCrew, captainName } = tripData || {};
+
+// Convert startDate and endDate to Date objects
+const startDateObj = new Date(tripData?.startDate);
+const endDateObj = new Date(tripData?.endDate);
+
+// Format startDate and endDate
+const options = { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' };
+const startDateFormatted = startDateObj.toLocaleDateString('en-GB', options);
+const endDateFormatted = endDateObj.toLocaleDateString('en-GB', options);
 
     return <div style={{padding: '1em', marginBottom: '80px'}}>
         <div className="preview-wrapper">
             <div className="top-panel">
                 <BackArrow />
-                <h1>Lolland - Bornholm</h1>
+                <h1>{startLocation} - {endLocation}</h1>
             </div>
             <div className="preview-image-container">
                 <img src={placeholder} alt="Preview Image" />
                 <div className="text-bubble preview-location">
-                    <p>Lolland - Bornholm</p>
+                    <p>{startLocation} - {endLocation}</p>
                 </div>
             </div>
             <div className="description-wrapper">
                 <div>
-                    <h3>Den grimme perle</h3>
-                    <p>15 nov - 1 dec · 0 stops</p>
-                    <p>2 / 4 gaster</p>
+                    <h3>{shipName}</h3>
+                    <p>{startDateFormatted} - {endDateFormatted} · 0 stops</p>
+                    <p>{totalCrewSpaces} / {shipCrew} gaster</p>
                 </div>
                 <div>
                     <div className="text-bubble">
@@ -47,14 +58,15 @@ const TripDetails = () => {
                 </div>
             </div>
             <div>
-                <p>Join Den Grimme Perle and captain Haddock on a 2 week trip in the Denmark</p>
+                <p>{tripDescription}</p>
+                <p>{startLocation} - {endLocation}</p>
                 <p>insert location stops component here</p>
                 <NavLink to="/skipper/:id">
                     <article className="pfp-wrapper">
-                        <img src={pfp} alt="Profile picture of {username}" className="pfp" />
+                        <img src={pfp} alt="Profile picture of {captainName}" className="pfp" />
                         <div>
                             <img src={certified} alt="Certified Badge" />
-                            <h4>Skipper Skræk</h4>
+                            <h4>{captainName}</h4>
                         </div>
                     </article>
                 </NavLink>

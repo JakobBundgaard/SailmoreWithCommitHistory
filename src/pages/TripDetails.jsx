@@ -6,8 +6,21 @@ import "../css/PreviewTrip.css";
 import "../css/TripDetails.css";
 import EditButton from '../components/EditButton';
 import BackArrow from "../components/BackArrow";
+import { useEffect, useState } from 'react';
 
 const TripDetails = () => {
+    const [tripData, setTripData] = useState(null);
+
+    useEffect(() => {
+        fetch('/api/trip/readTrip.php')
+            .then(response => response.text())
+            .then(data => {
+                setTripData(data);
+                console.log(data)
+            })
+            .catch(error => console.error('Error:', error));
+    }, []);
+
     return <div style={{padding: '1em', marginBottom: '80px'}}>
         <div className="preview-wrapper">
             <div className="top-panel">

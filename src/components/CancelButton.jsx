@@ -1,16 +1,16 @@
 import PropTypes from "prop-types";
 import "../css/cancelButton.css";
 
-function CancelButton({props}) {
+function CancelButton({ onClick }) {
    return (
-      <button className="cancelButton" onClick={props}>
+      <button className="cancelButton" onClick={onClick}>
          Cancel
       </button>
    );
 }
 
 CancelButton.propTypes = {
-   props: PropTypes.func.isRequired,
+   onClick: PropTypes.func.isRequired,
 };
 
 export default CancelButton;

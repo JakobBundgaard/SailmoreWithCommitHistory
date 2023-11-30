@@ -1,5 +1,5 @@
-import { Outlet, NavLink } from "react-router-dom";
-import placeholder from "../assets/images/boat2.jpg";
+import { NavLink } from "react-router-dom";
+// import placeholder from "../assets/images/boat2.jpg";
 import pfboat from "../assets/images/boat2.jpg";
 import pfp from "../assets/images/captain.jpg";
 import certified from "../assets/images/certified-badge.svg";

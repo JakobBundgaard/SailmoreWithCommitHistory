@@ -62,8 +62,15 @@ function loginCrew($conn, $email, $password) {
 
     // Verify the password
     if (password_verify($password, $crewData['crewPassword'])) {
+        // Start a new session or resume the existing session
+        session_start();
+
+        // Set the user-related information in session variables
+        $_SESSION['crewId'] = $crewData['crewId'];
+        $_SESSION['crewName'] = $crewData['crewName'];
+        // Add more session variables as needed
+
         $response['success'] = "User logged in successfully.";
-        // You can include crew data in the response if needed
         $response['crewData'] = $crewData;
     } else {
         $response['error'] = "Incorrect password.";
@@ -71,6 +78,7 @@ function loginCrew($conn, $email, $password) {
 
     return $response;
 }
+
 
 function getCrewDataByEmail($conn, $email) {
     $sql = "SELECT * FROM crew WHERE crewEmail = ?";
@@ -82,6 +90,32 @@ function getCrewDataByEmail($conn, $email) {
     $stmt->close();
 
     return $crewData;
+}
+
+function getLoggedInCrewInfo($conn, $crewId) {
+    $response = array();
+
+    $sql = "SELECT * FROM crew WHERE crewId = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $crewId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $response['crewId'] = $row['crewId'];
+        $response['crewName'] = $row['crewName'];
+        $response['crewAge'] = $row['crewAge'];
+        $response['crewGender'] = $row['crewGender'];
+        $response['crewNationality'] = $row['crewNationality'];
+        $response['crewDescription'] = $row['crewDescription'];
+        $response['crewExperience'] = $row['crewExperience'];
+        $response['crewSkill'] = $row['crewSkill'];
+    }
+
+    $stmt->close();
+
+    return $response;
 }
 
 

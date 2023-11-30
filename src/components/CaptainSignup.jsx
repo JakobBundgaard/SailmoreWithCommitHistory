@@ -213,8 +213,8 @@ function CaptainSignup() {
                   </div>
                </div>
                <div className="flexRow">
-                  <SaveButton props={handleSubmit} />
-                  <CancelButton props={handleCancel} />
+                  <SaveButton onClick={handleSubmit} />
+                  <CancelButton onClick={handleCancel} />
                </div>
             </form>
          </div>

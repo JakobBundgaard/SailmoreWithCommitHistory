@@ -13,7 +13,7 @@ const TripDetails = () => {
 
     useEffect(() => {
         fetch('/api/trip/readTrip.php')
-            .then(response => response.text())
+            .then(response => response.json())
             .then(data => {
                 setTripData(data);
                 console.log(data)

@@ -1,24 +1,29 @@
 <?php 
 include_once "../utils/connection.php";
 
-    $sql = "SELECT * FROM TripsView;";
-    $result = $conn->query($sql);
+$sql = "SELECT * FROM TripsView;";
+$result = $conn->query($sql);
 
-    while($row = $result->fetch_object()) {
-        echo $row->tripId . "<br>";
-        echo $row->startDate . "<br>";
-        echo $row->endDate . "<br>";
-        echo $row->startLocation . "<br>";
-        echo $row->endLocation . "<br>";
-        echo $row->totalCrewSpaces . "<br>";
-        echo $row->tripDescription . "<br>";
-        echo $row->shipId . "<br>";
-        echo $row->shipName . "<br>";
-        echo $row->shipCrew . "<br>";
-        echo $row->captainId . "<br>";
-        echo $row->captainName . "<br>";
-        echo $row->imagePath . "<br>";
-        echo "<br>";
-    }
+$data = array();
 
+while($row = $result->fetch_object()) {
+    $trip = array(
+        "tripId" => $row->tripId,
+        "startDate" => $row->startDate,
+        "endDate" => $row->endDate,
+        "startLocation" => $row->startLocation,
+        "endLocation" => $row->endLocation,
+        "totalCrewSpaces" => $row->totalCrewSpaces,
+        "tripDescription" => $row->tripDescription,
+        "shipId" => $row->shipId,
+        "shipName" => $row->shipName,
+        "shipCrew" => $row->shipCrew,
+        "captainId" => $row->captainId,
+        "captainName" => $row->captainName,
+        "imagePath" => $row->imagePath
+    );
+    array_push($data, $trip);
+}
+
+echo json_encode($data);
 ?>

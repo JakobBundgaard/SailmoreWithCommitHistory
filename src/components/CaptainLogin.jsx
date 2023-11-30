@@ -5,6 +5,7 @@ import crewImage from "../assets/images/Asian_sunset.jpg";
 import "../css/captainLogin.css";
 import SaveButton from "./SaveButton";
 import CancelButton from "./CancelButton";
+import BackArrow from "./BackArrow";
 
 const CrewLogin = () => {
    // State to hold user input
@@ -48,6 +49,7 @@ const CrewLogin = () => {
 
    return (
       <div className="page-wrapper">
+         <BackArrow />
          <h2 className='loginTitle'>Captain Login</h2>
          <img src={crewImage} alt="Beautiful Image" className='crewImage' />
          <form onSubmit={handleSubmit} className='loginForm'>

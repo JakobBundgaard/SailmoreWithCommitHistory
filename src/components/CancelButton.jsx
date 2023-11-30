@@ -1,16 +1,16 @@
-import PropTypes from "prop-types";
+import { useNavigate } from "react-router";
 import "../css/cancelButton.css";
 
-function CancelButton({ onClick }) {
+function CancelButton() {
+   const navigate = useNavigate();
+   const onClick = () => {
+      navigate(-1);
+   };
    return (
       <button className="cancelButton" onClick={onClick}>
          Cancel
       </button>
    );
 }
-
-CancelButton.propTypes = {
-   onClick: PropTypes.func.isRequired,
-};
 
 export default CancelButton;

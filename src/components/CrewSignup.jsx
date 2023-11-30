@@ -62,6 +62,49 @@ const CrewSignup = () => {
     }
   }, [nationalityOptions, genderOptions, skillOptions]); // Run only when these dependencies change
   
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  
+  //   if (name === 'crewNationality') {
+  //     const selectedNationality = nationalityOptions.find((option) => option === value);
+  //     const selectedNationalityId = selectedNationality ? nationalityOptions.indexOf(selectedNationality) + 1 : '';
+  //     setFormData({ ...formData, [name]: selectedNationalityId });
+  //   } else if (name === 'crewGender') {
+  //     const selectedGenderId = genderOptions.indexOf(value) + 1;
+  //     setFormData({ ...formData, [name]: selectedGenderId });
+  //   } else if (name.startsWith('crewSkill')) {
+  //     const index = parseInt(name.replace('crewSkill', ''), 10);
+  //     const newSkills = [...formData.crewSkill];
+  //     newSkills[index] = value;
+  //     setFormData({ ...formData, crewSkill: newSkills });
+  //   } else {
+  //     setFormData({ ...formData, [name]: value });
+  //   }
+  // };
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  
+  //   if (name === 'crewNationality') {
+  //     const selectedNationality = nationalityOptions.find((option) => option === value);
+  //     const selectedNationalityId = selectedNationality ? nationalityOptions.indexOf(selectedNationality) + 1 : '';
+  //     setFormData({ ...formData, [name]: selectedNationalityId });
+  //   } else if (name === 'crewGender') {
+  //     const selectedGenderId = genderOptions.indexOf(value) + 1;
+  //     setFormData({ ...formData, [name]: selectedGenderId });
+  //   } else if (name.startsWith('crewSkill')) {
+  //     const index = parseInt(name.replace('crewSkill', ''), 10);
+  //     const newSkills = [...formData.crewSkill];
+  //     newSkills[index] = value;
+  //     setFormData({ ...formData, crewSkill: newSkills });
+  //   } else {
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       [name]: value,
+  //       crewPasswordRepeat: name === 'crewPassword' ? prevData.crewPasswordRepeat : prevData.crewPasswordRepeat,
+  //     }));
+  //   }
+  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -97,6 +140,14 @@ const CrewSignup = () => {
 
   const handleSave = async (e) => {
     e.preventDefault();
+
+    // Add password validation
+  if (formData.crewPassword !== formData.crewPasswordRepeat) {
+    console.error('Passwords do not match.');
+    // You can also set an error state to display a message to the user
+    return;
+  }
+
     try {
       console.log('Save button clicked!');
       const response = await fetch('/api/crew/crewSignup.php', {
@@ -107,8 +158,7 @@ const CrewSignup = () => {
         body: JSON.stringify({
           crewName: formData.crewName,
           crewAge: formData.crewAge,
-          crewPassword: formData.crewPassword,
-          crewPasswordRepeat: formData.crewPasswordRepeat, 
+          crewPassword: formData.crewPassword, 
           crewEmail: formData.crewEmail,
           crewGender: formData.crewGender,
           crewNationality: formData.crewNationality,

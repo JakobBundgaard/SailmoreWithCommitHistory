@@ -100,14 +100,12 @@ function CaptainSignup() {
          name: name,
          email: email,
          password: password,
+         passwordRepeat: passwordRepeat,
          nationality: nationality,
          bio: bio,
          gender: gender,
          age: age,
       };
-
-      // Log the data
-      console.log(JSON.stringify(data));
 
       // Send the form data to your server here
       const response = await fetch("/api/captain/captainSignup.php", {
@@ -118,19 +116,29 @@ function CaptainSignup() {
          body: JSON.stringify(data),
       });
 
-      //Clear the form here
-      // setName("");
-      // setEmail("");
-      // setPassword("");
-      // setPasswordRepeat("");
-      // setNationality("");
-      // setBio("");
-      // setGender("");
-      // setAge("");
-
       if (response.ok) {
+         const jsonResponse = await response.json();
+         if (jsonResponse["error"]) {
+            console.log(jsonResponse["error"]);
+         } else if (jsonResponse["success"]) {
+            //Clear the form here
+            setName("");
+            setEmail("");
+            setPassword("");
+            setPasswordRepeat("");
+            setNationality("");
+            setBio("");
+            setGender("");
+            setAge("");
+
+            console.log("Captain signed up successfully!");
+            console.log(jsonResponse["success"]);
+
+            //navigate to login page
+            window.location.href = "/profile/CaptainLogin";
+         }
+
          //Handle success, e.g., redirect or show a success message
-         console.log("Captain signed up successfully!");
       } else {
          //Handle errors, e.g., show an error message
          console.error("Error signing up");
@@ -171,6 +179,7 @@ function CaptainSignup() {
                   Nationality
                </label>
                <select className="flexItem inputItem" type="text" name="nationality" value={nationality} onChange={handleInputChange}>
+                  <option value={""}>Select Nationality</option>
                   {nationalityOptions.map((option, index) => (
                      <option key={index} value={option.nationalityId}>
                         {option.nationality}
@@ -187,7 +196,8 @@ function CaptainSignup() {
                      <label className="flexItem slim labelItem" htmlFor="gender">
                         Gender
                      </label>
-                     <select className="flexItem selectItem" id="gender" name="gender" value={gender} onChange={handleInputChange}>
+                     <select className="flexItem inputItem" id="gender" name="gender" value={gender} onChange={handleInputChange}>
+                        <option value={""}>Select Gender</option>
                         {genderOptions.map((option, index) => (
                            <option key={index} value={option.genderId}>
                               {option.genderName}

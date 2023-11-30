@@ -5,12 +5,11 @@ import SaveButton from "./SaveButton";
 import CancelButton from "./CancelButton";
 
 const CrewSignup = () => {
-  console.log('CrewSignup rendered');
-
   const [formData, setFormData] = useState({
     crewName: '',
-    crewAge: 0,
+    crewAge: "",
     crewPassword: '',
+    crewPasswordRepeat: '',
     crewEmail: '',
     crewGender: '',
     crewNationality: '',
@@ -31,25 +30,24 @@ const CrewSignup = () => {
           fetch('/api/crew/getNationalityOptions.php'),
           fetch('/api/crew/getGenderOptions.php'),
         ]);
-
+        
+  
         if (skillResponse.ok) {
           const skillData = await skillResponse.json();
           setSkillOptions(skillData);
         } else {
           console.error('Error fetching skill options');
         }
-
+  
         if (nationalityResponse.ok) {
           const nationalityData = await nationalityResponse.json();
-          console.log('Nationality Options:', nationalityData);
           setNationalityOptions(nationalityData);
         } else {
           console.error('Error fetching nationality options');
         }
-
+  
         if (genderResponse.ok) {
           const genderData = await genderResponse.json();
-          console.log('Gender Options:', genderData);
           setGenderOptions(genderData);
         } else {
           console.error('Error fetching gender options');
@@ -58,9 +56,12 @@ const CrewSignup = () => {
         console.error('Error:', error);
       }
     };
-
-    fetchData();
-  }, []); // Run this effect only once on component mount
+  
+    if (nationalityOptions.length === 0 && genderOptions.length === 0 && skillOptions.length === 0) {
+      fetchData();
+    }
+  }, [nationalityOptions, genderOptions, skillOptions]); // Run only when these dependencies change
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -71,17 +72,16 @@ const CrewSignup = () => {
       setFormData({ ...formData, [name]: selectedNationalityId });
     } else if (name === 'crewGender') {
       const selectedGenderId = genderOptions.indexOf(value) +1;
-      console.log('Gender Options:', genderOptions);
-      console.log('Selected Value:', value);
-      console.log('Selected Gender ID:', selectedGenderId);
       setFormData({ ...formData, [name]: selectedGenderId });
     } else if (name.startsWith('crewSkill')) {
       const index = parseInt(name.replace('crewSkill', ''), 10);
       const newSkills = [...formData.crewSkill];
       newSkills[index] = value;
       setFormData({ ...formData, crewSkill: newSkills });
+    }  else if (name === 'crewPasswordRepeat') {
+      setFormData({ ...formData, crewPasswordRepeat: value });
     } else {
-      setFormData({ ...formData, [name]: value });
+      setFormData({ ...formData, [name]: value, crewPasswordRepeat: formData.crewPasswordRepeat });
     }
   };
 
@@ -108,6 +108,7 @@ const CrewSignup = () => {
           crewName: formData.crewName,
           crewAge: formData.crewAge,
           crewPassword: formData.crewPassword,
+          crewPasswordRepeat: formData.crewPasswordRepeat, 
           crewEmail: formData.crewEmail,
           crewGender: formData.crewGender,
           crewNationality: formData.crewNationality,
@@ -116,10 +117,17 @@ const CrewSignup = () => {
           crewSkill: formData.crewSkill,
         }),
       });
-
+  
       if (response.ok) {
-        console.log("Response ", response);
-        console.log('User signed up successfully!');
+        const responseData = await response.json();
+        if (responseData.success) {
+          console.log('User signed up successfully!');
+          // Redirect only if the signup was successful
+          window.location.href = "/profile/CrewLogin";
+        } else {
+          console.error('Error signing up user:', responseData.error);
+          // Handle the error (e.g., display an error message to the user)
+        }
       } else {
         console.error('Error signing up user');
       }
@@ -156,7 +164,7 @@ const CrewSignup = () => {
 
         <label className='label'>
           Password Repeat:
-          <input type="password" name="crewPasswordRepeat" value={formData.repeatPassword} onChange={handleChange} className='signupInput' required />
+          <input type="password" name="crewPasswordRepeat" value={formData.crewPasswordRepeat} onChange={handleChange} className='signupInput' required />
         </label>
 
         <label className='label'>

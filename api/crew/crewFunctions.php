@@ -19,6 +19,12 @@ function signUpCrew($conn, $name, $email, $password, $passwordRepeat, $nationali
         return $response;
     }
 
+    // Check if the email already exists in the database
+    if (isEmailExists($conn, $email)) {
+        $response['error'] = "Email already exists.";
+        return $response;
+    }
+
     // You may want to add more validation logic as needed.
 
     // Hash the password before storing it in the database
@@ -52,6 +58,19 @@ function getGenderOptions($conn) {
     }
 
     return $genders;
+}
+
+function isEmailExists($conn, $email) {
+    $sql = "SELECT COUNT(*) as count FROM crew WHERE crewEmail = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $count = $row['count'];
+    $stmt->close();
+
+    return $count > 0;
 }
 
 ?>

@@ -10,8 +10,8 @@ const AddShip = () => {
     shipName: "",
     shipModel: "",
     shipDescription: "",
-    crewSpaces: "",
-    shipAge: "",
+    shipCrew: "",
+    shipYear: "",
   });
 
   // Handle input changes
@@ -109,7 +109,7 @@ const AddShip = () => {
             <input
               type="number"
               name="crewSpaces"
-              value={formData.crewAge}
+              value={formData.shipCrew}
               onChange={handleChange}
               className="smallInputField"
             />
@@ -120,7 +120,7 @@ const AddShip = () => {
             <input
               type="number"
               name="shipAge"
-              value={formData.crewAge}
+              value={formData.crewYear}
               onChange={handleChange}
               className="smallInputField"
             />

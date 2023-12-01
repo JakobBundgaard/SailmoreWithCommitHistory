@@ -1,13 +1,11 @@
 import { useState } from 'react';
-// import { Link } from 'react-router-dom';
-import crewImage from "../assets/images/Asian_sunset.jpg";
-// import CrewSignup from './CrewSignup';
+import captainImage from "../assets/images/Asian_sunset.jpg";
 import "../css/captainLogin.css";
-import SaveButton from "./SaveButton";
+import StandardLoginButton from "./StandardLoginButton";
 import CancelButton from "./CancelButton";
 import BackArrow from "./BackArrow";
 
-const CrewLogin = () => {
+const CaptainLogin = () => {
    // State to hold user input
    const [formData, setFormData] = useState({
       crewEmail: '',
@@ -27,7 +25,7 @@ const CrewLogin = () => {
 
       try {
          // Send the form data to your server for insertion into the database
-         const response = await fetch('/api/login', {
+         const response = await fetch('/api/captain/captainLogin.php', {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
@@ -51,20 +49,27 @@ const CrewLogin = () => {
       <div className="page-wrapper">
          <BackArrow />
          <h2 className='loginTitle'>Captain Login</h2>
-         <img src={crewImage} alt="Beautiful Image" className='crewImage' />
-         <form onSubmit={handleSubmit} className='loginForm'>
+         <img src={captainImage} alt="Beautiful Image" className='crewImage' />
+         <form className='loginForm'>
             <label className='label'>
                Email:
-               <input type="email" name="crewEmail" value={formData.crewEmail} onChange={handleChange} className='loginInput' required />
+               <input type="email" name="captainEmail" value={formData.captainEmail} onChange={handleChange} className='loginInput' required />
             </label>
 
             <label className='label'>
                Password:
-               <input type="password" name="crewPassword" value={formData.crewPassword} onChange={handleChange} className='loginInput' required />
+               <input
+                  type="password"
+                  name="captainPassword"
+                  value={formData.captainPassword}
+                  onChange={handleChange}
+                  className="loginInput"
+                  required
+               />
             </label>
 
             <div className="flexRow">
-               <SaveButton onClick={handleSubmit} />
+               <StandardLoginButton onClick={handleSubmit} />
                <CancelButton />
             </div>
          </form>
@@ -72,4 +77,4 @@ const CrewLogin = () => {
    );
 };
 
-export default CrewLogin;
+export default CaptainLogin;

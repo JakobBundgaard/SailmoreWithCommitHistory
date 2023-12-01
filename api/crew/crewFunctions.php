@@ -48,6 +48,110 @@ function signUpCrew($conn, $name, $email, $password, $passwordRepeat, $nationali
     return $response;
 }
 
+function loginCrew($conn, $email, $password) {
+    $response = array();
+
+    // Check if the email exists in the database
+    if (!isEmailExists($conn, $email)) {
+        $response['error'] = "Email does not exist.";
+        return $response;
+    }
+
+    // Fetch crew data based on the email
+    $crewData = getCrewDataByEmail($conn, $email);
+
+    // Verify the password
+    if (password_verify($password, $crewData['crewPassword'])) {
+        // Start a new session or resume the existing session
+        session_start();
+
+        // Set the user-related information in session variables
+        $_SESSION['crewId'] = $crewData['crewId'];
+        $_SESSION['crewName'] = $crewData['crewName'];
+        // Add more session variables as needed
+
+        $response['success'] = "User logged in successfully.";
+        $response['crewData'] = $crewData;
+    } else {
+        $response['error'] = "Incorrect password.";
+    }
+
+    return $response;
+}
+
+
+function getCrewDataByEmail($conn, $email) {
+    $sql = "SELECT * FROM crew WHERE crewEmail = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $crewData = $result->fetch_assoc();
+    $stmt->close();
+
+    return $crewData;
+}
+
+function getLoggedInCrewInfo($conn, $crewId) {
+    $response = array();
+
+    $sql = "SELECT c.crewId, c.crewName, c.crewAge, c.crewDescription, g.gender, n.nation AS crewNationality, s.skill AS crewSkill
+            FROM crew c
+            LEFT JOIN gender g ON c.crewGender = g.genderId
+            LEFT JOIN nationality n ON c.crewNationality = n.nationalityId
+            LEFT JOIN skills s ON c.crewSkill = s.skillId
+            WHERE c.crewId = ?";
+            
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $crewId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $response['crewId'] = $row['crewId'];
+        $response['crewName'] = $row['crewName'];
+        $response['crewAge'] = $row['crewAge'];
+        $response['crewGender'] = $row['gender'];
+        $response['crewNationality'] = $row['crewNationality'];
+        $response['crewDescription'] = $row['crewDescription'];
+        $response['crewSkill'] = $row['crewSkill'];
+    }
+
+    $stmt->close();
+
+    return $response;
+}
+
+
+
+// function getLoggedInCrewInfo($conn, $crewId) {
+//     $response = array();
+
+//     $sql = "SELECT * FROM crew WHERE crewId = ?";
+//     $stmt = $conn->prepare($sql);
+//     $stmt->bind_param("i", $crewId);
+//     $stmt->execute();
+//     $result = $stmt->get_result();
+
+//     if ($result->num_rows > 0) {
+//         $row = $result->fetch_assoc();
+//         $response['crewId'] = $row['crewId'];
+//         $response['crewName'] = $row['crewName'];
+//         $response['crewAge'] = $row['crewAge'];
+//         $response['crewGender'] = $row['crewGender'];
+//         $response['crewNationality'] = $row['crewNationality'];
+//         $response['crewDescription'] = $row['crewDescription'];
+//         $response['crewExperience'] = $row['crewExperience'];
+//         $response['crewSkill'] = $row['crewSkill'];
+//     }
+
+//     $stmt->close();
+
+//     return $response;
+// }
+
+
 function getGenderOptions($conn) {
     $sql = "SELECT * FROM gender";
     $result = $conn->query($sql);

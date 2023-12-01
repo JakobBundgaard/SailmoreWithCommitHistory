@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../css/AddShip.css";
-import crewImage from "../assets/images/sailing-unsplash.jpg";
+import crewImage from "../assets/images/boat2.jpg";
 import SaveButton from "../components/SaveButton.jsx";
 import CancelButton from "../components/CancelButton.jsx";
 import BackArrow from "../components/BackArrow.jsx";
@@ -53,7 +53,7 @@ const AddShip = () => {
   return (
     <div className="page-wrapper">
     <BackArrow />
-      <h1>Add ship</h1>
+      <h1>Edit ship</h1>
       <img src={crewImage} alt="Beautiful Image" className="crewImage" />
       <form onSubmit={handleSubmit} className="signupform">
         {/* Input fields for user details */}

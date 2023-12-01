@@ -1,12 +1,19 @@
 <?php 
 include_once "../utils/connection.php";
+$clickedTripId = isset($_GET['tripId']) ? $_GET['tripId'] : null;
 
-$body = json_decode(file_get_contents('php://input'), true);
-$preview = isset($body['preview']) ? $body['preview'] : false;
+if ($clickedTripId) {
+    $stmt = $conn->prepare("SELECT * FROM TripsView WHERE tripId = ?");
+    $stmt->bind_param("i", $clickedTripId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+} else {
+    $result = $conn->query("SELECT * FROM TripsView");
+}
 
-
-$sql = "SELECT * FROM TripsView;";
-$result = $conn->query($sql);
+if ($result === false) {
+    die("Error executing query: " . $conn->error);
+}
 
 $data = array();
 
@@ -23,11 +30,14 @@ while($row = $result->fetch_object()) {
         "imagePath" => $row->imagePath
     );
 
-    if (!$preview) {
+    if ($clickedTripId) {
         $trip["totalCrewSpaces"] = $row->totalCrewSpaces;
         $trip["tripDescription"] = $row->tripDescription;
         $trip["shipCrew"] = $row->shipCrew;
         $trip["captainName"] = $row->captainName;
+        $trip["rules"] = $row->rules;
+        $trip["equipment"] = $row->equipment;
+        $trip["price"] = $row->price;
     }
 
     array_push($data, $trip);

@@ -10,9 +10,10 @@ const Home = () => {
             .then(data => {
                 setTrips(data);
                 console.log(data)
+                
             })
             .catch(error => console.error('Error:', error));
-    }, []);
+    }, []);console.log(trips)
 
     return (
         <div className="page-wrapper">

@@ -13,7 +13,7 @@ const PreviewTrip = ({ trip }) => {
     const endDateObj = new Date(trip.endDate);
 
     // Format startDate and endDate
-    const options = { day: 'numeric', month: 'short' };
+    const options = { year: 'numeric', day: 'numeric', month: 'short' };
     const startDateFormatted = startDateObj.toLocaleDateString('en-GB', options);
     const endDateFormatted = endDateObj.toLocaleDateString('en-GB', options);
 

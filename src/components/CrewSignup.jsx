@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import "../css/crewSignup.css";
 import crewImage from "../assets/images/Asian_sunset.jpg";
+import BackArrow from "../components/BackArrow";
 import SaveButton from "./SaveButton";
 import CancelButton from "./CancelButton";
 
@@ -62,50 +63,7 @@ const CrewSignup = () => {
     }
   }, [nationalityOptions, genderOptions, skillOptions]); // Run only when these dependencies change
   
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
   
-  //   if (name === 'crewNationality') {
-  //     const selectedNationality = nationalityOptions.find((option) => option === value);
-  //     const selectedNationalityId = selectedNationality ? nationalityOptions.indexOf(selectedNationality) + 1 : '';
-  //     setFormData({ ...formData, [name]: selectedNationalityId });
-  //   } else if (name === 'crewGender') {
-  //     const selectedGenderId = genderOptions.indexOf(value) + 1;
-  //     setFormData({ ...formData, [name]: selectedGenderId });
-  //   } else if (name.startsWith('crewSkill')) {
-  //     const index = parseInt(name.replace('crewSkill', ''), 10);
-  //     const newSkills = [...formData.crewSkill];
-  //     newSkills[index] = value;
-  //     setFormData({ ...formData, crewSkill: newSkills });
-  //   } else {
-  //     setFormData({ ...formData, [name]: value });
-  //   }
-  // };
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  
-  //   if (name === 'crewNationality') {
-  //     const selectedNationality = nationalityOptions.find((option) => option === value);
-  //     const selectedNationalityId = selectedNationality ? nationalityOptions.indexOf(selectedNationality) + 1 : '';
-  //     setFormData({ ...formData, [name]: selectedNationalityId });
-  //   } else if (name === 'crewGender') {
-  //     const selectedGenderId = genderOptions.indexOf(value) + 1;
-  //     setFormData({ ...formData, [name]: selectedGenderId });
-  //   } else if (name.startsWith('crewSkill')) {
-  //     const index = parseInt(name.replace('crewSkill', ''), 10);
-  //     const newSkills = [...formData.crewSkill];
-  //     newSkills[index] = value;
-  //     setFormData({ ...formData, crewSkill: newSkills });
-  //   } else {
-  //     setFormData((prevData) => ({
-  //       ...prevData,
-  //       [name]: value,
-  //       crewPasswordRepeat: name === 'crewPassword' ? prevData.crewPasswordRepeat : prevData.crewPasswordRepeat,
-  //     }));
-  //   }
-  // };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -192,6 +150,9 @@ const CrewSignup = () => {
 
   return (
     <div className="page-wrapper">
+      <div className="top-panel">
+            <BackArrow />
+      </div>
       <h2 className='signupTitle'>Crew Signup</h2>
       <img src={crewImage} alt="Beautiful Image" className='crewImage' />
       <form onSubmit={handleSave} className='signupform'>

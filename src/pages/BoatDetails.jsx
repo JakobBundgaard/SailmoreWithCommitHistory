@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 // import placeholder from "../assets/images/boat2.jpg";
 import pfboat from "../assets/images/boat2.jpg";
 import pfp from "../assets/images/captain.jpg";
@@ -19,8 +19,10 @@ function handleClick() {
 const BoatDetails = () => {
   const [boatData, setBoatData] = useState(null);
 
+  const {id} = useParams();
+
   useEffect(() => {
-    fetch("../api/ship/getShip.php")
+    fetch("../api/ship/getShip.php?id=" + id)
       .then((response) => response.json())
       .then((data) => {
         console.log(data); // Viser data fra API i konsollen

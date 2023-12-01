@@ -5,8 +5,10 @@ import SaveButton from "../components/SaveButton.jsx";
 import CancelButton from "../components/CancelButton.jsx";
 import BackArrow from "../components/BackArrow.jsx";
 import DeleteButton from "../components/DeleteButton.jsx";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-const AddShip = () => {
+const EditShip = () => {
   const [formData, setFormData] = useState({
     shipName: "",
     shipModel: "",
@@ -14,6 +16,22 @@ const AddShip = () => {
     shipCrew: "",
     shipYear: "",
   });
+
+  const {id} = useParams();
+
+  useEffect(() => {
+    fetch("../api/ship/getShip.php?id=" + id)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data); // Viser data fra API i konsollen
+
+        // Omdanner JSON-data til brugbare objekter og gemmer dem i state
+        setFormData(data);
+      })
+      .catch((error) => {
+        console.error("Fejl ved hentning af data:", error);
+      });
+  }, []);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -27,7 +45,7 @@ const AddShip = () => {
 
     try {
       // Send the form data to your server for insertion into the database
-      const response = await fetch("../api/ship/addShip.php", {
+      const response = await fetch("../api/ship/addShip.php", { // TODO: Change to editShip.php
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,13 +67,13 @@ const AddShip = () => {
 
   function handleClick() {
     console.log("Clicked");
- }
- 
+  }
+
   return (
     <div className="page-wrapper">
-    <BackArrow />
-    <DeleteButton />
-      <h1>Edit ship</h1>
+      <BackArrow />
+      <DeleteButton />
+      <h1>Edit ship:{id}</h1>
       <img src={crewImage} alt="Beautiful Image" className="crewImage" />
       <form onSubmit={handleSubmit} className="signupform">
         {/* Input fields for user details */}
@@ -122,7 +140,7 @@ const AddShip = () => {
             <input
               type="number"
               name="shipAge"
-              value={formData.crewYear}
+              value={formData.shipYear}
               onChange={handleChange}
               className="smallInputField"
             />
@@ -138,4 +156,4 @@ const AddShip = () => {
   );
 };
 
-export default AddShip;
+export default EditShip;

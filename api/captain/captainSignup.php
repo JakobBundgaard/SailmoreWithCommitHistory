@@ -24,7 +24,6 @@
     $gender = $data->gender;
     $nationality = $data->nationality;
     $bio = $data->bio;
-    $experience = null;
     $ship = null;
 
     //checks if all fields are filled out
@@ -50,8 +49,8 @@
         return;
     }
 
-    $capSql = "INSERT INTO captain (captainEmail, captainPassword, captainName, captainAge, captainGender, captainNationality, captainDescription, captainExperience, shipId) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $capSql = "INSERT INTO captain (captainEmail, captainPassword, captainName, captainAge, captainGender, captainNationality, captainDescription, shipId) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($capSql);
 
@@ -67,7 +66,7 @@
 
     // hash password
     $password = password_hash($password, PASSWORD_DEFAULT);
-    $stmt->bind_param("sssiiissi", $email, $password, $name, $age, $gender, $nationality, $bio, $experience, $ship);
+    $stmt->bind_param("sssiiisi", $email, $password, $name, $age, $gender, $nationality, $bio, $ship);
 
     // Execute statement and check if successful
     if ($stmt->execute()) {

@@ -1,16 +1,16 @@
 import "../css/saveButton.css";
 import PropTypes from "prop-types";
 
-function StandardLoginButton({ props }) {
+function StandardLoginButton({ onClick }) {
    return (
-      <button className="saveButton" onClick={props}>
+      <button className="saveButton" onClick={onClick}>
          Log in
       </button>
    );
 }
 
 StandardLoginButton.propTypes = {
-   props: PropTypes.func.isRequired,
+   onClick: PropTypes.func.isRequired,
 };
 
 export default StandardLoginButton;

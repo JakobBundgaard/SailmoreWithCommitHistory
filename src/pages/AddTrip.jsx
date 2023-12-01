@@ -37,6 +37,7 @@ const handleSubmit = async (e) => {
   .then(response => response.text())
   .then(data => {
       console.log(data); // Optional: Log the response data
+      window.location.href = "/trip";
   })
   .catch(error => console.log(error));
   console.log(formData);

@@ -4,6 +4,7 @@ import crewImage from "../assets/images/boat2.jpg";
 import SaveButton from "../components/SaveButton.jsx";
 import CancelButton from "../components/CancelButton.jsx";
 import BackArrow from "../components/BackArrow.jsx";
+import DeleteButton from "../components/DeleteButton.jsx";
 
 const AddShip = () => {
   const [formData, setFormData] = useState({
@@ -53,6 +54,7 @@ const AddShip = () => {
   return (
     <div className="page-wrapper">
     <BackArrow />
+    <DeleteButton />
       <h1>Edit ship</h1>
       <img src={crewImage} alt="Beautiful Image" className="crewImage" />
       <form onSubmit={handleSubmit} className="signupform">

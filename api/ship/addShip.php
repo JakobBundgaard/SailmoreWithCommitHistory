@@ -12,12 +12,12 @@ $data = json_decode($json_data, true);
 $shipName = $data['shipName'];
 $shipModel = $data['shipModel'];
 $shipDescription = $data['shipDescription'];
-$crewSpaces = $data['crewSpaces'];
-$shipAge = $data['shipAge'];
+$shipCrew = $data['shipCrew'];
+$shipAge = $data['shipYear'];
 
 // Forbered SQL-forespørgsel til at indsætte dataene i databasen
 $sql = "INSERT INTO ships (shipName, shipModel, shipDescription, shipCrew, shipYear)
-VALUES ('$shipName', '$shipModel', '$shipDescription', '$crewSpaces', '$shipAge')";
+VALUES ('$shipName', '$shipModel', '$shipDescription', '$shipCrew', '$shipYear')";
 
 if ($conn->query($sql) === TRUE) {
     echo "Data blev indsat succesfuldt i databasen";

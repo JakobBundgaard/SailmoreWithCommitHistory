@@ -19,6 +19,7 @@ import AddTrip from "./pages/AddTrip";
 import BoatDetails from "./pages/BoatDetails";
 import ScrollToTopOnRender from "./components/ScrollToTopOnRender";
 import AddShip from "./pages/AddShip";
+import EditShip from "./pages/EditShip";
 
 function App() {
    return (
@@ -43,6 +44,7 @@ function App() {
                   <Route path="skipper/:id" element={<SkipperProfile />} />
                   <Route path="addtrip" element={<AddTrip />} />
                   <Route path="addship" element={<AddShip />} />
+                  <Route path="editship" element={<EditShip />} />
                   <Route path="boat/:id" element={<BoatDetails />} />
                   <Route path="*" element={<NoPage />} />
             </Route>

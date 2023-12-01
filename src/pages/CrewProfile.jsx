@@ -41,7 +41,6 @@ const CrewProfile = () => {
                                 <h1>{loggedInCrewInfo.crewName}</h1>
                                 <h3>{loggedInCrewInfo.crewAge}</h3>
                             </div>
-                            <h4>{loggedInCrewInfo.crewDescription}</h4>
                             <div className='profile-hashtags'>
                                 <div className="text-bubble profile-hashtag">
                                     <p>{loggedInCrewInfo.crewGender}</p>

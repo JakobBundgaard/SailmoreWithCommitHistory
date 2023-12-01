@@ -3,7 +3,8 @@ import { useState } from 'react';
 import crewImage from "../assets/images/Asian_sunset.jpg";
 // import CrewSignup from './CrewSignup';
 import "../css/crewLogin.css";
-import SaveButton from "./SaveButton";
+import BackArrow from "../components/BackArrow";
+import LoginButton from "./StandardLoginButton";
 import CancelButton from "./CancelButton";
 
 const CrewLogin = () => {
@@ -59,6 +60,9 @@ const CrewLogin = () => {
 
   return (
     <div className="page-wrapper">
+      <div className="top-panel">
+            <BackArrow />
+      </div>
         <h2 className='loginTitle'>Crew Login</h2>
         <img src={crewImage} alt="Beautiful Image" className='crewImage' />
         <form onSubmit={handleSave} className='loginForm'>
@@ -74,7 +78,7 @@ const CrewLogin = () => {
               
             
             <div className="flexRow">
-            <SaveButton onClick={handleSave} />
+              <LoginButton onClick={handleSave} />
               <CancelButton onClick={handleCancel}/>
             </div>
         </form>  

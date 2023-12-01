@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import "../css/crewSignup.css";
 import crewImage from "../assets/images/Asian_sunset.jpg";
+import BackArrow from "../components/BackArrow";
 import SaveButton from "./SaveButton";
 import CancelButton from "./CancelButton";
 
@@ -149,6 +150,9 @@ const CrewSignup = () => {
 
   return (
     <div className="page-wrapper">
+      <div className="top-panel">
+            <BackArrow />
+      </div>
       <h2 className='signupTitle'>Crew Signup</h2>
       <img src={crewImage} alt="Beautiful Image" className='crewImage' />
       <form onSubmit={handleSave} className='signupform'>

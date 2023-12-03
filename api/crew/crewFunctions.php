@@ -95,7 +95,7 @@ function getCrewDataByEmail($conn, $email) {
 function getLoggedInCrewInfo($conn, $crewId) {
     $response = array();
 
-    $sql = "SELECT c.crewId, c.crewName, c.crewAge, c.crewDescription, g.gender, n.nation AS crewNationality, s.skill AS crewSkill
+    $sql = "SELECT c.crewId, c.crewName, c.crewAge, c.crewEmail, c.crewExperience, c.crewDescription, g.gender, n.nation AS crewNationality, s.skill AS crewSkill
             FROM crew c
             LEFT JOIN gender g ON c.crewGender = g.genderId
             LEFT JOIN nationality n ON c.crewNationality = n.nationalityId
@@ -112,45 +112,20 @@ function getLoggedInCrewInfo($conn, $crewId) {
         $response['crewId'] = $row['crewId'];
         $response['crewName'] = $row['crewName'];
         $response['crewAge'] = $row['crewAge'];
+        $response['crewEmail'] = $row['crewEmail'];
+        $response['crewExperience'] = $row['crewExperience'];
         $response['crewGender'] = $row['gender'];
         $response['crewNationality'] = $row['crewNationality'];
         $response['crewDescription'] = $row['crewDescription'];
-        $response['crewSkill'] = $row['crewSkill'];
+        
+        // Convert crewSkill to an array
+        $response['crewSkill'] = explode(',', $row['crewSkill']);
     }
 
     $stmt->close();
 
     return $response;
 }
-
-
-
-// function getLoggedInCrewInfo($conn, $crewId) {
-//     $response = array();
-
-//     $sql = "SELECT * FROM crew WHERE crewId = ?";
-//     $stmt = $conn->prepare($sql);
-//     $stmt->bind_param("i", $crewId);
-//     $stmt->execute();
-//     $result = $stmt->get_result();
-
-//     if ($result->num_rows > 0) {
-//         $row = $result->fetch_assoc();
-//         $response['crewId'] = $row['crewId'];
-//         $response['crewName'] = $row['crewName'];
-//         $response['crewAge'] = $row['crewAge'];
-//         $response['crewGender'] = $row['crewGender'];
-//         $response['crewNationality'] = $row['crewNationality'];
-//         $response['crewDescription'] = $row['crewDescription'];
-//         $response['crewExperience'] = $row['crewExperience'];
-//         $response['crewSkill'] = $row['crewSkill'];
-//     }
-
-//     $stmt->close();
-
-//     return $response;
-// }
-
 
 function getGenderOptions($conn) {
     $sql = "SELECT * FROM gender";

@@ -4,6 +4,7 @@ import '../css/SkipperProfile.css';
 import PreviewTrip from "../components/PreviewTrip";
 import EditButton from '../components/EditButton';
 import BackArrow from "../components/BackArrow";
+import { Link } from "react-router-dom";
 
 const CrewProfile = () => {
     const [loggedInCrewInfo, setLoggedInCrewInfo] = useState(null);
@@ -24,6 +25,10 @@ const CrewProfile = () => {
 
         fetchLoggedInCrewInfo();
     }, []);
+
+    function handleClick() {
+        console.log("Clicked");
+      }
 
     return (
         <div>
@@ -52,7 +57,10 @@ const CrewProfile = () => {
                         </div>
                     )}
                     <div className='edit-profile'>
-                        <EditButton />
+                    <Link to="/EditCrew">
+                        {/* 'to' angiver den sti, du vil navigere til */}
+                        <EditButton onClick={handleClick} />
+                    </Link>
                     </div>
                 </div>
 

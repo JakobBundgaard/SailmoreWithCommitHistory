@@ -23,6 +23,11 @@ const EditCrew = () => {
   const [nationalityOptions, setNationalityOptions] = useState([]);
   const [skillOptions, setSkillOptions] = useState([]);
 
+  const [passwordData, setPasswordData] = useState({
+    crewPassword: '',
+    crewPasswordRepeat: '',
+  });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -118,9 +123,8 @@ const EditCrew = () => {
     e.preventDefault();
   
     // Add password validation
-    if (formData.crewPassword !== formData.crewPasswordRepeat) {
+    if (passwordData.crewPassword !== passwordData.crewPasswordRepeat) {
       console.error('Passwords do not match.');
-      // You can also set an error state to display a message to the user
       return;
     }
 
@@ -138,13 +142,13 @@ const EditCrew = () => {
           crewId: crewId,// Get the crewId from your authentication or wherever it's stored,
           crewName: formData.crewName,
           crewAge: formData.crewAge,
-          crewPassword: formData.crewPassword,
           crewEmail: formData.crewEmail,
           crewGender: formData.crewGender,
           crewNationality: formData.crewNationality,
           crewExperience: formData.crewExperience,
           crewDescription: formData.crewDescription,
           crewSkill: formData.crewSkill,
+          crewPassword: passwordData.crewPassword,
         }),
       });
   
@@ -191,6 +195,28 @@ const EditCrew = () => {
         </label>
 
         <label className='label'>
+            Password:
+            <input
+              type="password"
+              name="crewPassword"
+              value={passwordData.crewPassword}
+              onChange={(e) => setPasswordData({ ...passwordData, crewPassword: e.target.value })}
+              className='signupInput'
+            />
+        </label>
+        
+        <label className='label'>
+            Password Repeat:
+            <input
+              type="password"
+              name="crewPasswordRepeat"
+              value={passwordData.crewPasswordRepeat}
+              onChange={(e) => setPasswordData({ ...passwordData, crewPasswordRepeat: e.target.value })}
+              className='signupInput'
+            />
+        </label>
+
+        {/* <label className='label'>
           Password:
           <input type="password" name="crewPassword" value={formData.crewPassword} onChange={handleChange} className='signupInput' required />
         </label>
@@ -198,7 +224,7 @@ const EditCrew = () => {
         <label className='label'>
           Password Repeat:
           <input type="password" name="crewPasswordRepeat" value={formData.crewPasswordRepeat} onChange={handleChange} className='signupInput' required />
-        </label>
+        </label> */}
 
         <label className='label'>
           Nationality:

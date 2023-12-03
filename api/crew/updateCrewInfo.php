@@ -25,10 +25,13 @@ if (!isset($data['crewId']) || !isCrewIdExists($conn, $data['crewId'])) {
 
 // Validate other data as needed
 
+// Hash the password
+$hashedPassword = password_hash($data['crewPassword'], PASSWORD_DEFAULT);
+
 // Update crew information
 $sql = "UPDATE crew
         SET crewName = ?, crewAge = ?, crewEmail = ?, crewGender = ?, crewNationality = ?,
-            crewExperience = ?, crewDescription = ?
+            crewExperience = ?, crewDescription = ?, crewPassword = ?
         WHERE crewId = ?";
 
 $stmt = $conn->prepare($sql);
@@ -40,8 +43,8 @@ $crewSkill = implode(',', $data['crewSkill']);
 $data['crewNationality'] = convertToNationalityId($conn, $data['crewNationality']);
 $data['crewGender'] = convertToGenderId($conn, $data['crewGender']);
 
-$stmt->bind_param("sisiissi", $data['crewName'], $data['crewAge'], $data['crewEmail'], $data['crewGender'],
-    $data['crewNationality'], $data['crewExperience'], $data['crewDescription'], $data['crewId']);
+$stmt->bind_param("sisiisssi", $data['crewName'], $data['crewAge'], $data['crewEmail'], $data['crewGender'],
+    $data['crewNationality'], $data['crewExperience'], $data['crewDescription'], $hashedPassword, $data['crewId']);
 
 $response = array();
 

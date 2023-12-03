@@ -79,6 +79,19 @@ function loginCrew($conn, $email, $password) {
     return $response;
 }
 
+function isCrewIdExists($conn, $crewId) {
+    $sql = "SELECT COUNT(*) AS count FROM crew WHERE crewId = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $crewId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $count = $row['count'];
+    $stmt->close();
+
+    return $count > 0;
+}
+
 
 function getCrewDataByEmail($conn, $email) {
     $sql = "SELECT * FROM crew WHERE crewEmail = ?";

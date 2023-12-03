@@ -38,7 +38,9 @@ const CrewLogin = () => {
         if (response.ok) {
             const responseData = await response.json();
             if (responseData.success) {
-                console.log('User logged in successfully!');
+              console.log('User logged in successfully!');
+              
+              sessionStorage.setItem('crewId', responseData.crewData.crewId);
               // Redirect or handle success as needed
               window.location.href = "/crewProfile";
             } else {

@@ -116,7 +116,7 @@ const EditCrew = () => {
 
   const handleSave = async (e) => {
     e.preventDefault();
-
+  
     // Add password validation
     if (formData.crewPassword !== formData.crewPasswordRepeat) {
       console.error('Passwords do not match.');
@@ -124,14 +124,18 @@ const EditCrew = () => {
       return;
     }
 
+    const crewId = sessionStorage.getItem('crewId');
+    console.log('Crew ID:', crewId); // Check the crewId in the console
+  
     try {
       console.log('Save button clicked!');
-      const response = await fetch('/api/crew/getLoggedInCrewInfo.php', {
+      const response = await fetch('/api/crew/updateCrewInfo.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          crewId: crewId,// Get the crewId from your authentication or wherever it's stored,
           crewName: formData.crewName,
           crewAge: formData.crewAge,
           crewPassword: formData.crewPassword,
@@ -143,12 +147,13 @@ const EditCrew = () => {
           crewSkill: formData.crewSkill,
         }),
       });
-
+  
       if (response.ok) {
         const responseData = await response.json();
         if (responseData.success) {
           console.log('Profile edited successfully!');
           // Redirect only if the signup was successful
+          window.location.href = "/crewProfile";
         } else {
           console.error('Error editing profile:', responseData.error);
           // Handle the error (e.g., display an error message to the user)

@@ -23,10 +23,19 @@ if (!isset($data['crewId']) || !isCrewIdExists($conn, $data['crewId'])) {
     exit();
 }
 
+// Fetch the existing hashed password from the database
+$sqlPassword = "SELECT crewPassword FROM crew WHERE crewId = ?";
+$stmtPassword = $conn->prepare($sqlPassword);
+$stmtPassword->bind_param("i", $data['crewId']);
+$stmtPassword->execute();
+$stmtPassword->bind_result($existingPassword);
+$stmtPassword->fetch();
+$stmtPassword->close();
+
 // Validate other data as needed
 
-// Hash the password
-$hashedPassword = password_hash($data['crewPassword'], PASSWORD_DEFAULT);
+// Hash the password if provided; otherwise, use the existing hashed password
+$hashedPassword = !empty($data['crewPassword']) ? password_hash($data['crewPassword'], PASSWORD_DEFAULT) : $existingPassword;
 
 // Update crew information
 $sql = "UPDATE crew
@@ -35,7 +44,6 @@ $sql = "UPDATE crew
         WHERE crewId = ?";
 
 $stmt = $conn->prepare($sql);
-
 
 $crewSkill = implode(',', $data['crewSkill']);
 
@@ -66,7 +74,6 @@ function convertToGenderId($conn, $genderValue) {
     $stmt->bind_param("s", $genderValue);
     $stmt->execute();
     $stmt->bind_result($genderId);
-    
 
     if ($stmt->fetch()) {
         return $genderId;
@@ -90,4 +97,4 @@ function convertToNationalityId($conn, $nationalityValue) {
         return $nationalityValue;
     }
 }
-
+?>

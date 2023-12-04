@@ -34,8 +34,22 @@ const CaptainLogin = () => {
          });
 
          if (response.ok) {
-            // Handle success, e.g., redirect or show a success message
-            console.log('User logged in successfully!');
+            console.log("User logged in successfully!");
+            const jsonResponse = await response.json();
+            if (jsonResponse["error"]) {
+               console.log(jsonResponse["error"]);
+            } else if (jsonResponse["success"]) {
+               console.log(jsonResponse["success"]);
+
+               const captainId = jsonResponse["captainId"];
+               const captainName = jsonResponse["captainName"];
+
+               sessionStorage.setItem("captainId", captainId);
+               sessionStorage.setItem("captainName", captainName);
+
+               //navigate to profile page
+               window.location.href = "/captainProfile";
+            }
          } else {
             // Handle errors, e.g., show an error message
             console.error('Error loggin in');

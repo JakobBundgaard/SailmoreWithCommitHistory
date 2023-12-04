@@ -172,6 +172,15 @@ const EditCrew = () => {
   };
 
   const handleDelete = async () => {
+
+    // Display a confirmation dialog
+  const confirmed = window.confirm("Are you sure you want to delete your profile? This action cannot be undone.");
+
+  if (!confirmed) {
+    // If the user clicks "Cancel" in the confirmation dialog, do nothing
+    return;
+  }
+
     const crewId = sessionStorage.getItem('crewId');
 
     try {

@@ -1,7 +1,6 @@
 import { Outlet, NavLink } from "react-router-dom";
 import placeholder from "../assets/images/boat.jpg";
 import "../css/PreviewTrip.css";
-import { useEffect, useState } from 'react';
 
 
 const PreviewTrip = ({ trip }) => {

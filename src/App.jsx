@@ -20,6 +20,7 @@ import BoatDetails from "./pages/BoatDetails";
 import ScrollToTopOnRender from "./components/ScrollToTopOnRender";
 import AddShip from "./pages/AddShip";
 import EditShip from "./pages/EditShip";
+import EditCrew from "./pages/EditCrew";
 
 function App() {
    return (
@@ -45,6 +46,7 @@ function App() {
                   <Route path="addtrip" element={<AddTrip />} />
                   <Route path="addship" element={<AddShip />} />
                   <Route path="editship/:id" element={<EditShip />} />
+                  <Route path="editcrew" element={<EditCrew />} />
                   <Route path="boat/:id" element={<BoatDetails />} />
                   <Route path="*" element={<NoPage />} />
             </Route>

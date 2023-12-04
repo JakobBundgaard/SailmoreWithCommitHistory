@@ -7,13 +7,14 @@ $json_data = file_get_contents('php://input');
 
 // Dekodér JSON-strengen til et associeret PHP-array
 $data = json_decode($json_data, true);
+var_dump($data);
 
 // Modtag data fra POST-anmodning
 $shipName = $data['shipName'];
 $shipModel = $data['shipModel'];
 $shipDescription = $data['shipDescription'];
 $shipCrew = $data['shipCrew'];
-$shipAge = $data['shipYear'];
+$shipYear = $data['shipYear'];
 
 // Forbered og udfør SQL-opdateringsforespørgslen
 $sql = "UPDATE ships SET shipName='$shipName', shipModel='$shipModel', shipDescription='$shipDescription', shipCrew='$shipCrew', shipYear='$shipYear' WHERE shipId='$shipId'";

@@ -74,10 +74,25 @@ const CrewProfile = () => {
                         Booked Trips
                     </summary>
                     <br />
-                    <PreviewTrip />
+                    {/* <PreviewTrip /> */}
                 </details>
-                {/* Add more sections for other types of trips */}
                 <hr />
+                <details className='drop-down'>
+                <summary>
+                    Requested Trips
+                </summary>
+                <br />
+                {/* <PreviewTrip/> */}
+            </details>
+            <hr />
+            <details className='drop-down'>
+                <summary>
+                    Past Trips
+                </summary>
+                <br />
+                {/* <PreviewTrip/> */}
+            </details>
+            <hr />
                 <p>Logout component</p>
             </div>
         </div>

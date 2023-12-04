@@ -13,7 +13,7 @@ const Home = () => {
                 
             })
             .catch(error => console.error('Error:', error));
-    }, []);console.log(trips)
+    }, []);
 
     return (
         <div className="page-wrapper">

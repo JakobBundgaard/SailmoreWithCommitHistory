@@ -12,7 +12,10 @@ const AddTrip = () => {
       endDate: '',
       tripDescription: '',
       shipId: '',
-      totalCrewSpaces: ''
+      totalCrewSpaces: '',
+      price: '',
+      equipment: '',
+      rules: '',
     });
   
     // Handle input changes
@@ -85,6 +88,18 @@ const handleSubmit = async (e) => {
           <label className='label'>
             totalCrewSpaces:
             <input type="number" name="totalCrewSpaces" value={formData.totalCrewSpaces} onChange={handleChange} className='signupInput totalCrewSpaces' required />
+          </label>
+          <label className='label'>
+            Price:
+            <input type="number" name="price" value={formData.price} onChange={handleChange} className='signupInput price' required />
+          </label>
+          <label className='label'>
+            Equipment:
+            <input type="text" name="equipment" value={formData.equipment} onChange={handleChange} className='signupInput equipment' required />
+          </label>
+          <label className='label'>
+            Rules:
+            <input type="text" name="rules" value={formData.rules} onChange={handleChange} className='signupInput rules' required />
           </label>
   
           <div className="flexRow">

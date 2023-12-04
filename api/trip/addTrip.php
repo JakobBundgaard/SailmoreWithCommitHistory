@@ -9,10 +9,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $endLocation = $_POST["endLocation"];
     $totalCrewSpaces = $_POST["totalCrewSpaces"];
     $tripDescription = $_POST["tripDescription"];
+    $price = $_POST["price"];
+    $equipment = $_POST["equipment"];
+    $rules = $_POST["rules"];
 
-    $query = "INSERT INTO trips (shipId, startDate, endDate, startLocation, endLocation, totalCrewSpaces, tripDescription) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO trips (shipId, startDate, endDate, startLocation, endLocation, totalCrewSpaces, tripDescription, price, equipment, rules) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "issssis", $shipId, $startDate, $endDate, $startLocation, $endLocation, $totalCrewSpaces, $tripDescription);
+    mysqli_stmt_bind_param($stmt, "issssisiss", $shipId, $startDate, $endDate, $startLocation, $endLocation, $totalCrewSpaces, $tripDescription, $price, $equipment, $rules);
     $result = mysqli_stmt_execute($stmt);
     if (!$result) {
         http_response_code(500);

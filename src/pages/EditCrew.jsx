@@ -4,6 +4,7 @@ import crewImage from "../assets/images/Asian_sunset.jpg";
 import BackArrow from "../components/BackArrow";
 import SaveButton from "../components/SaveButton";
 import CancelButton from "../components/CancelButton";
+import DeleteButton from "../components/DeleteButton.jsx";
 
 const EditCrew = () => {
   const [formData, setFormData] = useState({
@@ -170,6 +171,47 @@ const EditCrew = () => {
     }
   };
 
+  const handleDelete = async () => {
+
+    // Display a confirmation dialog
+  const confirmed = window.confirm("Are you sure you want to delete your profile? This action cannot be undone.");
+
+  if (!confirmed) {
+    // If the user clicks "Cancel" in the confirmation dialog, do nothing
+    return;
+  }
+
+    const crewId = sessionStorage.getItem('crewId');
+
+    try {
+      const response = await fetch('/api/crew/deleteCrew.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          crewId: crewId,
+        }),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        if (responseData.success) {
+          console.log('Crew deleted successfully!');
+          // Redirect or perform other actions if needed
+          window.location.href = "/profile";
+        } else {
+          console.error('Error deleting crew:', responseData.error);
+          // Handle the error (e.g., display an error message to the user)
+        }
+      } else {
+        console.error('Error deleting crew');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   const handleCancel = () => {
     console.log('Cancel button clicked!');
   };
@@ -177,7 +219,8 @@ const EditCrew = () => {
   return (
     <div className="page-wrapper">
       <div className="top-panel">
-            <BackArrow />
+        <BackArrow />
+        <DeleteButton onClick={handleDelete} />
       </div>
       <h2 className='signupTitle'>Edit Profile</h2>
       <img src={crewImage} alt="Beautiful Image" className='crewImage' />

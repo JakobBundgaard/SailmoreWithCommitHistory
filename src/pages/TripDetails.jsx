@@ -22,7 +22,7 @@ const TripDetails = () => {
             .catch(error => console.error('Error:', error));
     }, [id]);
 // Destructure tripData to individual variables
-const { startLocation, endLocation, shipId, shipName, captainId, imagePath, totalCrewSpaces, tripDescription, shipCrew, captainName, equipment, rules, price } = tripData || {};
+const { startLocation, endLocation, shipId, shipName, captainId, imagePath, totalCrewSpaces, tripDescription, shipCrew, captainName, equipment, rules, price, shipDescription } = tripData || {};
 
 // Convert startDate and endDate to Date objects
 const startDateObj = new Date(tripData?.startDate);
@@ -55,7 +55,7 @@ const endDateFormatted = endDateObj.toLocaleDateString('en-GB', options);
                 </div>
                 <div>
                     <div className="text-bubble">
-                        <p>{price}</p>
+                        <p>€{price}</p>
                         <span>per day</span>
                     </div>
                 </div>
@@ -64,6 +64,7 @@ const endDateFormatted = endDateObj.toLocaleDateString('en-GB', options);
                 <p>{tripDescription}</p>
                 <p>{startLocation} - {endLocation}</p>
                 <p>insert location stops component here</p>
+                <div><div className="circle" /><div className="line" /><div className="circle" /></div>
                 <NavLink to="/skipper/:id">
                     <article className="pfp-wrapper">
                         <img src={pfp} alt="Profile picture of {captainName}" className="pfp" />
@@ -74,7 +75,7 @@ const endDateFormatted = endDateObj.toLocaleDateString('en-GB', options);
                     </article>
                 </NavLink>
                 <Outlet />
-                <p>Den grimme perle is a 53 foot Grand Soleil from 1998. It has an engine, a mast and 6 crew spaces.</p>
+                <p>{shipDescription}</p>
                 <article>
                 <h4>Equipment on board</h4>
                 <ul>

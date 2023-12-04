@@ -27,7 +27,9 @@ while($row = $result->fetch_object()) {
         "shipId" => $row->shipId,
         "shipName" => $row->shipName,
         "captainId" => $row->captainId,
-        "imagePath" => $row->imagePath
+        "imagePath" => $row->imagePath,
+        "price" => $row->price,
+
     );
 
     if ($clickedTripId) {
@@ -37,7 +39,7 @@ while($row = $result->fetch_object()) {
         $trip["captainName"] = $row->captainName;
         $trip["rules"] = $row->rules;
         $trip["equipment"] = $row->equipment;
-        $trip["price"] = $row->price;
+        $trip["shipDescription"] = $row->shipDescription;
     }
 
     array_push($data, $trip);

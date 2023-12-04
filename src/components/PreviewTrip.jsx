@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 const PreviewTrip = ({ trip }) => {
     // Destructure trip to individual variables
-    const { tripId, startLocation, endLocation, shipId, shipName, captainId, imagePath } = trip;
+    const { tripId, startLocation, endLocation, shipId, shipName, captainId, imagePath, price } = trip;
 
     // Convert startDate and endDate to Date objects
     const startDateObj = new Date(trip.startDate);
@@ -42,7 +42,7 @@ const PreviewTrip = ({ trip }) => {
                     </div>
                     <div>
                         <div className="text-bubble">
-                            <p>$40</p>
+                            <p>€{price}</p>
                             <span>per day</span>
                         </div>
                     </div>

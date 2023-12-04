@@ -21,7 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         header('Content-Type: application/json');
         echo json_encode($boat_data);
     } else {
-        echo "Ingen båd fundet med det givne ID.";
+        $response = array("error" => "Ingen båd fundet med det givne ID.");
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
     
     $stmt->close();

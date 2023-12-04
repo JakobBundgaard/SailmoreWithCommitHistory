@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import captainImage from "../assets/images/Asian_sunset.jpg";
 import "../css/captainLogin.css";
 import StandardLoginButton from "./StandardLoginButton";
@@ -8,27 +8,26 @@ import BackArrow from "./BackArrow";
 const CaptainLogin = () => {
    // State to hold user input
    const [formData, setFormData] = useState({
-      crewEmail: '',
-      crewPassword: '',
+      captainEmail: "",
+      captainPassword: "",
    });
 
    // Handle input changes
-   const handleChange = (e) => {
+   const handleChange = e => {
       const { name, value } = e.target;
       setFormData({ ...formData, [name]: value });
    };
 
-
    // Handle form submission
-   const handleSubmit = async (e) => {
+   const handleSubmit = async e => {
       e.preventDefault();
 
       try {
          // Send the form data to your server for insertion into the database
-         const response = await fetch('/api/captain/captainLogin.php', {
-            method: 'POST',
+         const response = await fetch("/api/captain/captainLogin.php", {
+            method: "POST",
             headers: {
-               'Content-Type': 'application/json',
+               "Content-Type": "application/json",
             },
             body: JSON.stringify(formData),
          });
@@ -52,25 +51,25 @@ const CaptainLogin = () => {
             }
          } else {
             // Handle errors, e.g., show an error message
-            console.error('Error loggin in');
+            console.error("Error loggin in");
          }
       } catch (error) {
-         console.error('Error:', error);
+         console.error("Error:", error);
       }
    };
 
    return (
       <div className="page-wrapper">
          <BackArrow />
-         <h2 className='loginTitle'>Captain Login</h2>
-         <img src={captainImage} alt="Beautiful Image" className='crewImage' />
-         <form className='loginForm'>
-            <label className='label'>
+         <h2 className="loginTitle">Captain Login</h2>
+         <img src={captainImage} alt="Beautiful Image" className="crewImage" />
+         <form className="loginForm">
+            <label className="label">
                Email:
-               <input type="email" name="captainEmail" value={formData.captainEmail} onChange={handleChange} className='loginInput' required />
+               <input type="email" name="captainEmail" value={formData.captainEmail} onChange={handleChange} className="loginInput" required />
             </label>
 
-            <label className='label'>
+            <label className="label">
                Password:
                <input
                   type="password"

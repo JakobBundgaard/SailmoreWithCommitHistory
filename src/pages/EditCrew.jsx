@@ -171,6 +171,38 @@ const EditCrew = () => {
     }
   };
 
+  const handleDelete = async () => {
+    const crewId = sessionStorage.getItem('crewId');
+
+    try {
+      const response = await fetch('/api/crew/deleteCrew.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          crewId: crewId,
+        }),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        if (responseData.success) {
+          console.log('Crew deleted successfully!');
+          // Redirect or perform other actions if needed
+          window.location.href = "/profile";
+        } else {
+          console.error('Error deleting crew:', responseData.error);
+          // Handle the error (e.g., display an error message to the user)
+        }
+      } else {
+        console.error('Error deleting crew');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   const handleCancel = () => {
     console.log('Cancel button clicked!');
   };
@@ -179,7 +211,7 @@ const EditCrew = () => {
     <div className="page-wrapper">
       <div className="top-panel">
         <BackArrow />
-        <DeleteButton />
+        <DeleteButton onClick={handleDelete} />
       </div>
       <h2 className='signupTitle'>Edit Profile</h2>
       <img src={crewImage} alt="Beautiful Image" className='crewImage' />

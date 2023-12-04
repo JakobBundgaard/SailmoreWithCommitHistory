@@ -45,7 +45,7 @@ function App() {
                   <Route path="skipper/:id" element={<SkipperProfile />} />
                   <Route path="addtrip" element={<AddTrip />} />
                   <Route path="addship" element={<AddShip />} />
-                  <Route path="editship" element={<EditShip />} />
+                  <Route path="editship/:id" element={<EditShip />} />
                   <Route path="editcrew" element={<EditCrew />} />
                   <Route path="boat/:id" element={<BoatDetails />} />
                   <Route path="*" element={<NoPage />} />

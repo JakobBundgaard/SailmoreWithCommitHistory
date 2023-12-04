@@ -1,14 +1,21 @@
 <?php
-
 include_once "../utils/connection.php";
 
-// API-endepunkt for at hente bådoplysninger
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    // Her kan du ændre query'en til at passe til din databasestruktur og bådoplysninger
-    $sql = "SELECT * FROM ships WHERE shipId = 3"; // Udskift med den ønskede båd-id eller relevant søgekriterie
+    $shipId = $_GET['id'];
 
-    $result = $conn->query($sql);
-
+    // Forbered udsagnet med en parameter (:id)
+    $sql = "SELECT * FROM ships WHERE shipId = ?";
+    
+    // Forbered udsagnet
+    $stmt = $conn->prepare($sql);
+    
+    // Bind parametere og udfør udsagnet
+    $stmt->bind_param("i", $shipId); // "i" indikerer, at det er en integer
+    
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
     if ($result->num_rows > 0) {
         $boat_data = $result->fetch_assoc();
         header('Content-Type: application/json');
@@ -16,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     } else {
         echo "Ingen båd fundet med det givne ID.";
     }
+    
+    $stmt->close();
 }
 
 $conn->close();

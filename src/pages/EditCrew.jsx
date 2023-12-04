@@ -4,6 +4,7 @@ import crewImage from "../assets/images/Asian_sunset.jpg";
 import BackArrow from "../components/BackArrow";
 import SaveButton from "../components/SaveButton";
 import CancelButton from "../components/CancelButton";
+import DeleteButton from "../components/DeleteButton.jsx";
 
 const EditCrew = () => {
   const [formData, setFormData] = useState({
@@ -177,7 +178,8 @@ const EditCrew = () => {
   return (
     <div className="page-wrapper">
       <div className="top-panel">
-            <BackArrow />
+        <BackArrow />
+        <DeleteButton />
       </div>
       <h2 className='signupTitle'>Edit Profile</h2>
       <img src={crewImage} alt="Beautiful Image" className='crewImage' />

@@ -1,11 +1,10 @@
-import { useState } from "react";
 import "../css/AddShip.css";
 import crewImage from "../assets/images/boat2.jpg";
 import SaveButton from "../components/SaveButton.jsx";
 import CancelButton from "../components/CancelButton.jsx";
 import BackArrow from "../components/BackArrow.jsx";
 import DeleteButton from "../components/DeleteButton.jsx";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const EditShip = () => {
@@ -17,21 +16,18 @@ const EditShip = () => {
     shipYear: "",
   });
 
-  const {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
-    fetch("../api/ship/getShip.php?id=" + id)
+    fetch(`../api/ship/getShip.php?id=${id}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data); // Viser data fra API i konsollen
-
-        // Omdanner JSON-data til brugbare objekter og gemmer dem i state
         setFormData(data);
       })
       .catch((error) => {
         console.error("Fejl ved hentning af data:", error);
       });
-  }, []);
+  }, [id]);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -44,24 +40,23 @@ const EditShip = () => {
     e.preventDefault();
 
     try {
+      console.log("Data til backend:", { ...formData, shipId: id });
       // Send the form data to your server for insertion into the database
-      const response = await fetch("../api/ship/addShip.php", { // TODO: Change to editShip.php
+      const response = await fetch("../../api/ship/editShip.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, shipId: id }), // inkluder shipId i dataen
       });
 
       if (response.ok) {
-        // Handle success, e.g., redirect or show a success message
-        console.log("Added trip successfully!");
+        console.log("Opdateret skibsinformation!");
       } else {
-        // Handle errors, e.g., show an error message
-        console.error("Error adding trip");
+        console.error("Fejl ved opdatering af skib");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Fejl:", error);
     }
   };
 
@@ -76,18 +71,6 @@ const EditShip = () => {
       <h1>Edit ship:{id}</h1>
       <img src={crewImage} alt="Beautiful Image" className="crewImage" />
       <form onSubmit={handleSubmit} className="signupform">
-        {/* Input fields for user details */}
-        {/* <label className="label">
-          Upload image of your ship:
-          <input
-            type="file"
-            name="uploadImage"
-            value={formData.uploadImage}
-            onChange={handleChange}
-            className="signupInput"
-            required
-          />
-        </label> */}
 
         <label className="label">
           Ship name:
@@ -128,7 +111,7 @@ const EditShip = () => {
             Crew spaces:
             <input
               type="number"
-              name="crewSpaces"
+              name="shipCrew"
               value={formData.shipCrew}
               onChange={handleChange}
               className="smallInputField"
@@ -139,7 +122,7 @@ const EditShip = () => {
             Year:
             <input
               type="number"
-              name="shipAge"
+              name="shipYear"
               value={formData.shipYear}
               onChange={handleChange}
               className="smallInputField"

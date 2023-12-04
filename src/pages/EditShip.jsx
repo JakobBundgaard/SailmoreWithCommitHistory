@@ -6,6 +6,9 @@ import BackArrow from "../components/BackArrow.jsx";
 import DeleteButton from "../components/DeleteButton.jsx";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+
 
 const EditShip = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +20,7 @@ const EditShip = () => {
   });
 
   const { id } = useParams();
+  const navigate = useNavigate(); // Flyttet useNavigate uden for handleSubmit
 
   useEffect(() => {
     fetch(`../api/ship/getShip.php?id=${id}`)
@@ -41,17 +45,17 @@ const EditShip = () => {
 
     try {
       console.log("Data til backend:", { ...formData, shipId: id });
-      // Send the form data to your server for insertion into the database
       const response = await fetch("../../api/ship/editShip.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...formData, shipId: id }), // inkluder shipId i dataen
+        body: JSON.stringify({ ...formData, shipId: id }),
       });
 
       if (response.ok) {
         console.log("Opdateret skibsinformation!");
+        navigate(`/boat/${id}`);
       } else {
         console.error("Fejl ved opdatering af skib");
       }

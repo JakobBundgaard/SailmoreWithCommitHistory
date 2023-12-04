@@ -21,21 +21,18 @@ if ($data !== null && isset($data['shipName']) && isset($data['shipModel']) && i
     $stmt = $conn->prepare($sql);
 
     // Bind parametere og udfør udsagnet
-    $stmt->bind_param("sssssi", $shipName, $shipModel, $shipDescription, $shipCrew, $shipYear, $shipId);
- 
+    $stmt->bind_param("sssiii", $shipName, $shipModel, $shipDescription, $shipCrew, $shipYear, $shipId);
+    
+    // Udfør det forberedte udsagn
+    if ($stmt->execute()) {
+        echo "Opdateret informationen for skibet: $shipName";
+    } else {
+        echo "Fejl ved opdatering: " . $stmt->error;
+    }
+    
 } else {
     echo "Fejl: Manglende eller ugyldige data sendt til editShip.php";
     exit(); // Stop scriptet her, da der ikke er gyldige data
-}
-
-if (isset($sql) && !empty($sql)) { // Kontroller om $sql er sat og ikke er tom
-    if ($conn->query($sql) === TRUE) {
-        echo "Opdateret informationen for skibet: $shipName";
-    } else {
-        echo "Fejl ved opdatering: " . $conn->error;
-    }
-} else {
-    echo "Fejl: Tom forespørgsel";
 }
 
 $conn->close();

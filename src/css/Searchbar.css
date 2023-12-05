@@ -28,5 +28,6 @@
   .search-button {
     width: 350px; /* Set the width of the button */
     margin-top: 10px; /* Add margin between input fields and button */
+    margin-bottom: 15px;
   }
   

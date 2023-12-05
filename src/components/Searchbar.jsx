@@ -1,8 +1,8 @@
 import "../css/SearchBar.css";
-
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-const SearchBar = () => {
+const SearchBar = ({ updateSearchResults }) => {
   // State to manage input values
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');
@@ -11,32 +11,24 @@ const SearchBar = () => {
   // Function to handle search based on criteria
   const handleSearch = async () => {
     try {
-      // Directly use the relative path of the endpoint
       const endpoint = 'api/search/tripSearch.php';
-
-      // Build URL parameters based on user input
       const params = new URLSearchParams();
       if (date) params.append('date', date);
       if (location) params.append('location', location);
       if (maxPrice) params.append('maxPrice', maxPrice);
 
-      // Use the relative path and append parameters
       const url = `${endpoint}?${params.toString()}`;
-
-      // Fetch data from the API
       const response = await fetch(url);
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      // Parse the JSON response
       const data = await response.json();
       console.log('Search Results:', data);
 
-      // Handle the results (update state, display, etc.)
-      // For example, you might set the search results in state for rendering
-      // setResults(data);
+      // Call the updateSearchResults function with the search results
+      updateSearchResults(data);
     } catch (error) {
       console.error('Error during search:', error);
     }
@@ -80,6 +72,8 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+SearchBar.propTypes = {
+    updateSearchResults: PropTypes.func.isRequired,
+  };
 
- 
+export default SearchBar;

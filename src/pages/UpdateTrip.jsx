@@ -102,7 +102,7 @@ const UpdateTrip = () => {
           <input
             type="text"
             name="startLocation"
-            value={startLocation}
+            defaultValue={startLocation}
             onChange={handleChange}
             className="signupInput"
             required
@@ -114,7 +114,7 @@ const UpdateTrip = () => {
           <input
             type="text"
             name="endLocation"
-            value={endLocation}
+            defaultValue={endLocation}
             onChange={handleChange}
             className="signupInput"
             required
@@ -125,7 +125,7 @@ const UpdateTrip = () => {
           Trip Description:
           <textarea
             name="tripDescription"
-            value={tripDescription}
+            defaultValue={tripDescription}
             onChange={handleChange}
             className="bioField"
           ></textarea>
@@ -136,7 +136,7 @@ const UpdateTrip = () => {
             <input
               type="datetime-local"
               name="startDate"
-              value={startDateFormatted}
+              defaultValue={startDateFormatted}
               onChange={handleChange}
               className="signupInput"
             />
@@ -147,7 +147,7 @@ const UpdateTrip = () => {
             <input
               type="datetime-local"
               name="endDate"
-              value={endDateFormatted}
+              defaultValue={endDateFormatted}
               onChange={handleChange}
               className="signupInput"
             />
@@ -158,7 +158,7 @@ const UpdateTrip = () => {
             <input
               type="number"
               name="price"
-              value={price}
+              defaultValue={price}
               onChange={handleChange}
               className="smallInputField"
             />
@@ -169,7 +169,7 @@ const UpdateTrip = () => {
             <input
               type="text"
               name="equipment"
-              value={equipment}
+              defaultValue={equipment}
               onChange={handleChange}
               className="signupInput"
             />
@@ -180,7 +180,7 @@ const UpdateTrip = () => {
             <input
               type="text"
               name="rules"
-              value={rules}
+              defaultValue={rules}
               onChange={handleChange}
               className="signupInput"
             />

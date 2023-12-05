@@ -8,6 +8,8 @@ import EditButton from '../components/EditButton';
 import BackArrow from "../components/BackArrow";
 import { useEffect, useState } from 'react';
 
+
+
 const TripDetails = () => {
     const [tripData, setTripData] = useState(null);
     const { id } = useParams();
@@ -33,6 +35,10 @@ const options = { year: 'numeric', day: 'numeric', month: 'short', hour: '2-digi
 const startDateFormatted = startDateObj.toLocaleDateString('en-GB', options);
 const endDateFormatted = endDateObj.toLocaleDateString('en-GB', options);
 
+function handleClick() {
+    window.location.href = `/update-trip/${id}`;
+  }
+
     return <div style={{padding: '1em', marginBottom: '80px'}}>
         <div className="preview-wrapper">
             <div className="top-panel">
@@ -46,6 +52,9 @@ const endDateFormatted = endDateObj.toLocaleDateString('en-GB', options);
                 </div>
             </div>
             <div className="description-wrapper">
+            <div className="edit-profile">
+
+          </div>
                 <div>
                     <h3>{shipName}</h3>
                     <p>Departure: {startDateFormatted}</p>
@@ -53,6 +62,7 @@ const endDateFormatted = endDateObj.toLocaleDateString('en-GB', options);
                     <p>0 stops</p>
                     <p>{totalCrewSpaces} / {shipCrew} gaster</p>
                 </div>
+                    <EditButton onClick={handleClick} />
                 <div>
                     <div className="text-bubble">
                         <p>€{price}</p>
@@ -60,6 +70,7 @@ const endDateFormatted = endDateObj.toLocaleDateString('en-GB', options);
                     </div>
                 </div>
             </div>
+            
             <div>
                 <p>{tripDescription}</p>
                 <p>{startLocation} - {endLocation}</p>

@@ -23,6 +23,7 @@ import EditShip from "./pages/EditShip";
 import EditCrew from "./pages/EditCrew";
 import UpdateTrip from "./pages/UpdateTrip";
 
+
 function App() {
    return (
       <>
@@ -53,8 +54,7 @@ function App() {
                   <Route path="*" element={<NoPage />} />
             </Route>
             </Routes>
-         </BrowserRouter>
-         {/* <UserBridge /> */}
+         </BrowserRouter> 
       </>
    );
 }

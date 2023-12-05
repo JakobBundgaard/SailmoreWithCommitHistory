@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.search-bar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+  }
+  
+  .search-label {
+    display: block;
+    text-align: center;
+  }
+  
+  .search-input {
+    width: 100px; /* Adjust the width as needed */
+    height: 20px;
+  }
+  
+  .search-input-container {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .search-button {
+    width: 350px; /* Set the width of the button */
+    margin-top: 10px; /* Add margin between input fields and button */
+  }
+  

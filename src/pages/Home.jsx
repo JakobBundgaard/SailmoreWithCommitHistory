@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import PreviewTrip from "../components/PreviewTrip";
+import SearchBar from "../components/Searchbar";
 
 const Home = () => {
     const [trips, setTrips] = useState([]);
@@ -12,12 +13,15 @@ const Home = () => {
                 console.log(data)
                 
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
     }, []);
 
     return (
         <div className="page-wrapper">
             <h1>Recommended trips</h1>
+            <SearchBar />
             {trips.map((trip, index) => (
                 <PreviewTrip key={index} trip={trip} />
             ))}

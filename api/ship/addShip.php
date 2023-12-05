@@ -9,11 +9,11 @@ $json_data = file_get_contents('php://input');
 $data = json_decode($json_data, true);
 
 // Hent data fra det dekoderede array
-$shipName = $data['shipName'];
-$shipModel = $data['shipModel'];
-$shipDescription = $data['shipDescription'];
-$shipCrew = $data['shipCrew'];
-$shipAge = $data['shipYear'];
+$shipName = isset($data['shipName']) ? $data['shipName'] : '';
+$shipModel = isset($data['shipModel']) ? $data['shipModel'] : '';
+$shipDescription = isset($data['shipDescription']) ? $data['shipDescription'] : '';
+$shipCrew = isset($data['shipCrew']) ? $data['shipCrew'] : '';
+$shipYear = isset($data['shipYear']) ? $data['shipYear'] : '';
 
 // Forbered SQL-forespørgsel til at indsætte dataene i databasen
 $sql = "INSERT INTO ships (shipName, shipModel, shipDescription, shipCrew, shipYear)

@@ -4,6 +4,7 @@ import PreviewTrip from "../components/PreviewTrip";
 import BoatPreview from '../components/BoatPreview';
 import { Outlet, NavLink } from "react-router-dom";
 import EditButton from '../components/EditButton';
+import AddShipButton from '../components/AddShipButton';
 import BackArrow from "../components/BackArrow";
 import { Link } from "react-router-dom";
 
@@ -76,10 +77,17 @@ const SkipperProfile = () => {
                 {/* <PreviewTrip/> */}
             </details>
             <hr />
-            <h2>My Boats</h2>
+            <div className='myShips'>
+                <h2>My Ships</h2>
+                <div className='addShip'>
+                <Link to="/addship">
+                    {/* 'to' angiver den sti, du vil navigere til */}
+                    <AddShipButton onClick={handleClick} />
+                </Link>
+                </div>
+            </div>
             <NavLink to="/boat/:id">
                 <BoatPreview />
-                <Link to="/AddShip" style={{ color: 'pink' }}>ADD BOAT(link)</Link>
             </NavLink>
             <Outlet />
             <hr />

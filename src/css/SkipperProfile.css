@@ -56,3 +56,14 @@ details>summary {
 hr {
     margin: 2vh 0;
 }
+
+.addShip {
+    position: absolute;
+    right: 0;
+}
+.myShips {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+}

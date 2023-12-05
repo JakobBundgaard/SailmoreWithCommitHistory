@@ -19,25 +19,44 @@ const UpdateTrip = () => {
     equipment: "",
     rules: ""
   });
+  const [tripData, setTripData] = useState(null);
+
 
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`../api/trip/readTrip.php?id=${id}`)
+    fetch(`../api/trip/readTrip.php?tripId=${id}`)
       .then((response) => response.json())
       .then((data) => {
         setFormData(data);
+        setTripData(data[0]);
+        console.log(data);
       })
       .catch((error) => {
         console.error("Fejl ved hentning af data:", error);
       });
   }, [id]);
 
+  const { startLocation, endLocation, tripDescription, equipment, rules, price } = tripData || {};
+  const startDateObj = tripData?.startDate ? new Date(tripData.startDate) : new Date();
+  const endDateObj = tripData?.endDate ? new Date(tripData.endDate) : new Date();
+  
+  // Format startDate and endDate
+  const startDateFormatted = `${startDateObj.toISOString().split('.')[0]}`;
+  const endDateFormatted = `${endDateObj.toISOString().split('.')[0]}`;
+
   // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    if (e.target.type === 'datetime-local') {
+        console.log("datetime-local");
+        // Convert the datetime-local value to a Date object
+        setFormData({ ...formData, [name]: new Date(value) });
+    } else {
+        console.log("not datetime-local");
+        setFormData({ ...formData, [name]: value });
+    }
+};
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -55,7 +74,8 @@ const UpdateTrip = () => {
       });
 
       if (response.ok) {
-        console.log("Opdateret trip-information!");
+        console.log("response ok");
+        window.location.href = `/trip/${id}`;
       } else {
         console.error("Fejl ved opdatering af trip");
       }
@@ -66,22 +86,23 @@ const UpdateTrip = () => {
 
   function handleClick() {
     console.log("Clicked");
+
   }
 
   return (
     <div className="page-wrapper">
       <BackArrow />
       <DeleteButton />
-      <h1>Edit trip:{id}</h1>
+      <h1>Edit trip:</h1>
       <img src={crewImage} alt="Beautiful Image" className="crewImage" />
-      <form onSubmit={handleSubmit} className="signupform">
+      <form className="signupform">
 
         <label className="label">
           Start Location:
           <input
             type="text"
             name="startLocation"
-            value={formData.startLocation}
+            value={startLocation}
             onChange={handleChange}
             className="signupInput"
             required
@@ -93,7 +114,7 @@ const UpdateTrip = () => {
           <input
             type="text"
             name="endLocation"
-            value={formData.endLocation}
+            value={endLocation}
             onChange={handleChange}
             className="signupInput"
             required
@@ -104,7 +125,7 @@ const UpdateTrip = () => {
           Trip Description:
           <textarea
             name="tripDescription"
-            value={formData.tripDescription}
+            value={tripDescription}
             onChange={handleChange}
             className="bioField"
           ></textarea>
@@ -115,9 +136,9 @@ const UpdateTrip = () => {
             <input
               type="datetime-local"
               name="startDate"
-              value={formData.startDate}
+              value={startDateFormatted}
               onChange={handleChange}
-              className="smallInputField"
+              className="signupInput"
             />
           </label>
 
@@ -126,9 +147,9 @@ const UpdateTrip = () => {
             <input
               type="datetime-local"
               name="endDate"
-              value={formData.endDate}
+              value={endDateFormatted}
               onChange={handleChange}
-              className="smallInputField"
+              className="signupInput"
             />
           </label>
 
@@ -137,7 +158,7 @@ const UpdateTrip = () => {
             <input
               type="number"
               name="price"
-              value={formData.price}
+              value={price}
               onChange={handleChange}
               className="smallInputField"
             />
@@ -148,9 +169,9 @@ const UpdateTrip = () => {
             <input
               type="text"
               name="equipment"
-              value={formData.equipment}
+              value={equipment}
               onChange={handleChange}
-              className="smallInputField"
+              className="signupInput"
             />
           </label>
 
@@ -159,14 +180,14 @@ const UpdateTrip = () => {
             <input
               type="text"
               name="rules"
-              value={formData.rules}
+              value={rules}
               onChange={handleChange}
-              className="smallInputField"
+              className="signupInput"
             />
           </label>
 
         <div className="flexRow">
-          <SaveButton onClick={handleClick} />
+          <SaveButton onClick={handleSubmit} />
           <CancelButton />
         </div>
       </form>

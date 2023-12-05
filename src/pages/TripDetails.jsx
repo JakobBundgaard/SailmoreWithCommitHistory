@@ -8,9 +8,7 @@ import EditButton from '../components/EditButton';
 import BackArrow from "../components/BackArrow";
 import { useEffect, useState } from 'react';
 
-function handleClick() {
-    window.location.href = "/update-trip";
-  }
+
 
 const TripDetails = () => {
     const [tripData, setTripData] = useState(null);
@@ -36,6 +34,10 @@ const endDateObj = new Date(tripData?.endDate);
 const options = { year: 'numeric', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' };
 const startDateFormatted = startDateObj.toLocaleDateString('en-GB', options);
 const endDateFormatted = endDateObj.toLocaleDateString('en-GB', options);
+
+function handleClick() {
+    window.location.href = `/update-trip/${id}`;
+  }
 
     return <div style={{padding: '1em', marginBottom: '80px'}}>
         <div className="preview-wrapper">

@@ -68,10 +68,32 @@ const EditShip = () => {
     console.log("Clicked");
   }
 
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`../../api/ship/deleteShip.php`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ shipId: id }), // Send shipId som JSON
+      });
+  
+      if (response.ok) {
+        console.log("Båd slettet!");
+        navigate(`/captainProfile`); // Naviger tilbage til en oversigt over både
+      } else {
+        console.error("Fejl ved sletning af båd");
+      }
+    } catch (error) {
+      console.error("Fejl:", error);
+    }
+  };
+
+
   return (
     <div className="page-wrapper">
       <BackArrow />
-      <DeleteButton />
+      <DeleteButton onClick={handleDelete} />
       <h1>Edit ship:{id}</h1>
       <img src={crewImage} alt="Beautiful Image" className="crewImage" />
       <form onSubmit={handleSubmit} className="signupform">

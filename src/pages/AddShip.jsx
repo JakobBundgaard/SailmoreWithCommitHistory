@@ -108,7 +108,7 @@ const AddShip = () => {
             Crew spaces:
             <input
               type="number"
-              name="crewSpaces"
+              name="shipCrew"
               value={formData.shipCrew}
               onChange={handleChange}
               className="smallInputField"

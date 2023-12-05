@@ -1,7 +1,7 @@
 <?php
 include_once "../utils/connection.php";
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     $shipId = $_GET['id'];
 
     // Forbered udsagnet med en parameter (:id)
@@ -27,6 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
     
     $stmt->close();
+} else {
+    $response = array("error" => "ID ikke specificeret i forespørgslen.");
+    header('Content-Type: application/json');
+    echo json_encode($response);
 }
 
 $conn->close();

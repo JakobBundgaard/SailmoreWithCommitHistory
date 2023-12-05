@@ -49,11 +49,9 @@ const UpdateTrip = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (e.target.type === 'datetime-local') {
-        console.log("datetime-local");
         // Convert the datetime-local value to a Date object
         setFormData({ ...formData, [name]: new Date(value) });
     } else {
-        console.log("not datetime-local");
         setFormData({ ...formData, [name]: value });
     }
 };

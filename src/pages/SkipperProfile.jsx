@@ -97,16 +97,16 @@ const SkipperProfile = () => {
             </details>
             <hr />
             <div className='myShips'>
-                <h2>My Ships</h2>
-                <div className='addShip'>
-                <Link to="/addship">
-                    {/* 'to' angiver den sti, du vil navigere til */}
-                    <AddShipButton onClick={handleClick} />
-                </Link>
-                </div>
+               <h2>My Ships</h2>
+               <div className='addShip'>
+                  <Link to="/addship">
+                     {/* 'to' angiver den sti, du vil navigere til */}
+                     <AddShipButton onClick={handleClick} />
+                  </Link>
+               </div>
             </div>
-            <NavLink to="/boat/:id">
-                <BoatPreview />
+            <NavLink to={`/boat?id=${captain?.shipId}`}>
+               <BoatPreview />
             </NavLink>
             <Outlet />
             <hr />

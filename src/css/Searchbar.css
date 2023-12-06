@@ -3,7 +3,7 @@
     padding: 0;
 }
 .search-wrapper {
-  margin: 1em 0;
+  margin-bottom: 1em;
 }
 
 .search-bar-container {
@@ -11,13 +11,12 @@
     flex-direction: column;
     gap: 5px;
     align-items: center;
-    margin: 1em 0;
     position: absolute;
     background-color: white;
     z-index: 1;
-    border-radius: 0 0 1.75rem 1.75rem;
-    padding: 0 0.5em 0.5em 0.5em;
-    width: 80vw;
+    border-radius: 1.75rem;
+    padding: 1em 0.5em;
+    width: 60vw;
   }
   
   .search-label {
@@ -47,18 +46,18 @@ input:focus {
     width: 10em; /* Set the width of the button */
     height: 2em;
     margin-top: 10px; /* Add margin between input fields and button */
-    margin-bottom: 15px;
     border: none;
     border-radius: 1.75rem;
     background-color: #EB8C0F;
     color: white;
   }
   .fake-search {
-    border: 1px solid rgb(154, 154, 158);
+    border: none;
     border-radius: 1.75rem;
     height: 2.5em;
     display: flex;
     align-items: center;
+    background-color: white;
   }
   .fake-search span {
     font-size: 10px;

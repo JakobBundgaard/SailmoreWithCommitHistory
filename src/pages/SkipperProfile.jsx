@@ -23,8 +23,9 @@ const handleLogout = async () => {
             // Logout successful on the server
             // Clear local data or do any additional client-side cleanup
             // Redirect to the Home page
-            // history.push('/Home');
             // setIsCaptain(false);
+            sessionStorage.removeItem('captainId');
+            sessionStorage.removeItem('crewId');
         } else {
             console.error('Logout failed.');
         }

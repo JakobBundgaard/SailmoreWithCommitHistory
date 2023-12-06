@@ -42,6 +42,8 @@ const CrewProfile = () => {
                 // Clear local data or do any additional client-side cleanup
                 // Redirect to the Home page
                 // history.push('/Home');
+                sessionStorage.removeItem('captainId');
+                sessionStorage.removeItem('crewId');
             } else {
                 console.error('Logout failed.');
             }

@@ -69,12 +69,12 @@ const CrewLogin = () => {
         <img src={crewImage} alt="Beautiful Image" className="crewImageLogin" />
         <form onSubmit={handleSave} className='loginForm'>
             <label className='label'>
-            Email:
+            <p>Email:</p>
             <input type="email" name="crewEmail" value={formData.crewEmail} onChange={handleChange} className='loginInput' required />
             </label>
 
             <label className='label'>
-            Password:
+            <p>Password:</p>
             <input type="password" name="crewPassword" value={formData.crewPassword} onChange={handleChange} className='loginInput' required />
             </label>  
               

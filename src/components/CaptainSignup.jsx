@@ -76,20 +76,6 @@ function CaptainSignup() {
          .catch(error => console.log("Fetch or parsing error: ", error));
    }, []);
 
-   //handle cancel button
-   const handleCancel = event => {
-      event.preventDefault();
-      console.log("Form cancelled");
-      setName("");
-      setEmail("");
-      setPassword("");
-      setPasswordRepeat("");
-      setNationality("");
-      setBio("");
-      setGender("");
-      setAge("");
-   };
-
    //Submit handler here
    const handleSubmit = async event => {
       event.preventDefault();
@@ -214,7 +200,7 @@ function CaptainSignup() {
                </div>
                <div className="flexRow">
                   <SaveButton onClick={handleSubmit} />
-                  <CancelButton onClick={handleCancel} />
+                  <CancelButton />
                </div>
             </form>
          </div>

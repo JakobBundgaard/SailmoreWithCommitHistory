@@ -21,6 +21,8 @@ import ScrollToTopOnRender from "./components/ScrollToTopOnRender";
 import AddShip from "./pages/AddShip";
 import EditShip from "./pages/EditShip";
 import EditCrew from "./pages/EditCrew";
+import UpdateTrip from "./pages/UpdateTrip";
+
 
 function App() {
    return (
@@ -47,12 +49,12 @@ function App() {
                   <Route path="addship" element={<AddShip />} />
                   <Route path="editship/:id" element={<EditShip />} />
                   <Route path="editcrew" element={<EditCrew />} />
+                  <Route path="update-trip/:id" element={<UpdateTrip />} />
                   <Route path="boat/:id" element={<BoatDetails />} />
                   <Route path="*" element={<NoPage />} />
             </Route>
             </Routes>
-         </BrowserRouter>
-         {/* <UserBridge /> */}
+         </BrowserRouter> 
       </>
    );
 }

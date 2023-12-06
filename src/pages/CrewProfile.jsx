@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import pfp from '../assets/images/crew-pfp.jpg';
 import '../css/SkipperProfile.css';
-import PreviewTrip from "../components/PreviewTrip";
+// import PreviewTrip from "../components/PreviewTrip";
 import EditButton from '../components/EditButton';
 import BackArrow from "../components/BackArrow";
+import LogoutButton from "../components/LogoutButton";
 import { Link } from "react-router-dom";
 
 const CrewProfile = () => {
@@ -25,6 +26,29 @@ const CrewProfile = () => {
 
         fetchLoggedInCrewInfo();
     }, []);
+
+    const handleLogout = async () => {
+        try {
+            // Send a request to the server to perform logout
+            const response = await fetch('/api/crew/crewLogout.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                // Logout successful on the server
+                // Clear local data or do any additional client-side cleanup
+                // Redirect to the Home page
+                // history.push('/Home');
+            } else {
+                console.error('Logout failed.');
+            }
+        } catch (error) {
+            console.error('Error during logout:', error);
+        }
+    };
 
     function handleClick() {
         console.log("Clicked");
@@ -101,7 +125,9 @@ const CrewProfile = () => {
                 {/* <PreviewTrip/> */}
             </details>
             <hr />
-                <p>Logout component</p>
+            <Link to="/">
+                <LogoutButton onClick={handleLogout} />
+            </Link>
             </div>
         </div>
     );

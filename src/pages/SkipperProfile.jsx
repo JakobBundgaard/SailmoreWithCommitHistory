@@ -1,12 +1,37 @@
 import pfp from '../assets/images/captain.jpg';
 import '../css/SkipperProfile.css';
-import PreviewTrip from "../components/PreviewTrip";
+// import PreviewTrip from "../components/PreviewTrip";
 import BoatPreview from '../components/BoatPreview';
 import { Outlet, NavLink } from "react-router-dom";
 import EditButton from '../components/EditButton';
 import AddShipButton from '../components/AddShipButton';
 import BackArrow from "../components/BackArrow";
+import LogoutButton from "../components/LogoutButton";
 import { Link } from "react-router-dom";
+
+const handleLogout = async () => {
+    try {
+        // Send a request to the server to perform logout
+        const response = await fetch('/api/captain/captainLogout.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            // Logout successful on the server
+            // Clear local data or do any additional client-side cleanup
+            // Redirect to the Home page
+            // history.push('/Home');
+            // setIsCaptain(false);
+        } else {
+            console.error('Logout failed.');
+        }
+    } catch (error) {
+        console.error('Error during logout:', error);
+    }
+};
 
 function handleClick() {
     console.log("Clicked");
@@ -91,7 +116,9 @@ const SkipperProfile = () => {
             </NavLink>
             <Outlet />
             <hr />
-            <p>log out component</p>
+            <Link to="/">
+                <LogoutButton onClick={handleLogout} />
+            </Link>
         </div>
         </div>
         )

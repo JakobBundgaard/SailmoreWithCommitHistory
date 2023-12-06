@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include_once "../utils/connection.php";
 
@@ -26,8 +26,8 @@ if (!empty($maxPrice)) {
 // Construct the WHERE clause
 $whereClause = implode(' AND ', $conditions);
 
-// Construct the full query
-$query = "SELECT * FROM trips";
+// Construct the full query, including the ship name
+$query = "SELECT trips.*, ships.shipName FROM trips LEFT JOIN ships ON trips.shipId = ships.shipId";
 
 // Add WHERE clause if conditions are provided
 if (!empty($whereClause)) {

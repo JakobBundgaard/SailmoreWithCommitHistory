@@ -25,8 +25,9 @@ const Home = () => {
 
   return (
     <div className="page-wrapper">
-      <h1>Recommended trips</h1>
       <SearchBar updateSearchResults={updateSearchResults} />
+      <h1>Recommended trips</h1>
+      <br />
       {/* Display either search results or all trips based on the condition */}
       {(searchResults.length > 0 ? searchResults : trips).map((trip, index) => (
         <PreviewTrip key={index} trip={trip} />

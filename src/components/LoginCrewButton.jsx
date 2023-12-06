@@ -4,7 +4,7 @@ import "../css/loginButton.css";
 function LoginCrewButton({ onClick }) {
    return (
       <button className="loginButton" onClick={onClick}>
-         Login as crew
+         Login as CREW
       </button>
    );
 }

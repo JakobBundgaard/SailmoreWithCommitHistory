@@ -1,5 +1,5 @@
 import { useState } from "react";
-import captainImage from "../assets/images/Asian_sunset.jpg";
+import captainImage from "../assets/images/captain.svg";
 import "../css/captainLogin.css";
 import StandardLoginButton from "./StandardLoginButton";
 import CancelButton from "./CancelButton";
@@ -62,7 +62,7 @@ const CaptainLogin = () => {
       <div className="page-wrapper">
          <BackArrow />
          <h2 className="loginTitle">Captain Login</h2>
-         <img src={captainImage} alt="Beautiful Image" className="crewImage" />
+         <img src={captainImage} alt="Beautiful Image" className="captainImageLogin" />
          <form className="loginForm">
             <label className="label">
                Email:

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 // import { Link } from 'react-router-dom';
-import crewImage from "../assets/images/Asian_sunset.jpg";
+import crewImage from "../assets/images/crew.svg";
 // import CrewSignup from './CrewSignup';
 import "../css/crewLogin.css";
 import BackArrow from "../components/BackArrow";
@@ -66,15 +66,15 @@ const CrewLogin = () => {
             <BackArrow />
       </div>
         <h2 className='loginTitle'>Crew Login</h2>
-        <img src={crewImage} alt="Beautiful Image" className='crewImage' />
+        <img src={crewImage} alt="Beautiful Image" className="crewImageLogin" />
         <form onSubmit={handleSave} className='loginForm'>
             <label className='label'>
-            Email:
+            <p>Email:</p>
             <input type="email" name="crewEmail" value={formData.crewEmail} onChange={handleChange} className='loginInput' required />
             </label>
 
             <label className='label'>
-            Password:
+            <p>Password:</p>
             <input type="password" name="crewPassword" value={formData.crewPassword} onChange={handleChange} className='loginInput' required />
             </label>  
               

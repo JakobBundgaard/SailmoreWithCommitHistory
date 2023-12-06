@@ -1,16 +1,17 @@
-import "../css/addTripShipButton.css";
 import PropTypes from "prop-types";
+import addShip from "../assets/images/add-boat.svg";
+import "../css/AddShipButton.css";
 
-function AddTripButton({ props }) {
+function AddShipButton({ onClick }) {
    return (
-      <button className="addTripShipButton" onClick={props}>
-         Add Ship
+      <button className="addShipButton" onClick={onClick}>
+         <img src={addShip} alt="add ship button" />
       </button>
    );
 }
 
-AddTripButton.propTypes = {
-   props: PropTypes.func.isRequired,
+AddShipButton.propTypes = {
+   onClick: PropTypes.func.isRequired,
 };
 
-export default AddTripButton;
+export default AddShipButton;

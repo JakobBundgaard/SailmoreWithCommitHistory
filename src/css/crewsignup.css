@@ -5,7 +5,7 @@
 }
 
 .crewImage {
-  width: 330px;
+  width: 300px;
   height: 244px;
   border-radius: 28px;
   margin-bottom: 16px;
@@ -41,6 +41,9 @@
   border-radius: 4px;
   border: 1px solid #49454f;
 }
+.bioField {
+  height: 100px;
+}
 
 .skillContainer {
   display: flex;
@@ -75,10 +78,6 @@
   border-radius: 4px;
 }
 
-.bioField {
-  height: 33px;
-}
-
 .gender-age-container {
   display: flex;
   justify-content: space-between;
@@ -86,10 +85,11 @@
 }
 
 .genderSelect {
-  height: 33px;
+  height: 26px;
   border-radius: 4px;
 }
 
-.crewAge {
-  width: 110px;
+.crewAge, .smallInputField {
+  height: 22px;
+  width: 125px;
 }

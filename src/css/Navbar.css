@@ -23,5 +23,9 @@ nav ul li {
     list-style: none;
 }
 nav a.active img{
-    filter: invert(19%) sepia(72%) saturate(3327%) hue-rotate(181deg) brightness(92%) contrast(98%);
+    filter: invert(19%) sepia(72%) saturate(3327%) hue-rotate(181deg) brightness(60%) contrast(98%);
+}
+
+li img{
+    width: 23px;
 }

@@ -4,6 +4,7 @@ a {
 }
 .preview-container {
     padding-bottom: 5vh;
+    max-width: 25em;
 }
 .preview-image-container img {
     border-radius: 1.75rem;

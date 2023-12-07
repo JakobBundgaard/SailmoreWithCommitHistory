@@ -38,9 +38,11 @@ const Home = () => {
         <h2 className='white-text'>Recommended trips</h2>
         <br />
         {/* Display either search results or all trips based on the condition */}
-        {(searchResults.length > 0 ? searchResults : trips).map((trip, index) => (
-          <PreviewTrip key={index} trip={trip} />
-        ))}
+        <div className='previewtrip-container'>
+          {(searchResults.length > 0 ? searchResults : trips).map((trip, index) => (
+            <PreviewTrip key={index} trip={trip} />
+          ))}
+        </div>
       </div>
     </div>
   );

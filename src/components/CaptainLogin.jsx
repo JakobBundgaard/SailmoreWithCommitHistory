@@ -6,11 +6,13 @@ import CancelButton from "./CancelButton";
 import BackArrow from "./BackArrow";
 
 const CaptainLogin = () => {
-   // State to hold user input
    const [formData, setFormData] = useState({
       captainEmail: "",
       captainPassword: "",
    });
+
+   const [error, setError] = useState('');
+   const [passwordError, setPasswordError] = useState('');
 
    // Handle input changes
    const handleChange = e => {
@@ -21,42 +23,45 @@ const CaptainLogin = () => {
    // Handle form submission
    const handleSubmit = async e => {
       e.preventDefault();
-
+    
       try {
-         // Send the form data to your server for insertion into the database
-         const response = await fetch("/api/captain/captainLogin.php", {
-            method: "POST",
-            headers: {
-               "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-         });
-
-         if (response.ok) {
-            console.log("User logged in successfully!");
-            const jsonResponse = await response.json();
-            if (jsonResponse["error"]) {
-               console.log(jsonResponse["error"]);
-            } else if (jsonResponse["success"]) {
-               console.log(jsonResponse["success"]);
-
-               const captainId = jsonResponse["captainId"];
-               const captainName = jsonResponse["captainName"];
-
-               sessionStorage.setItem("captainId", captainId);
-               sessionStorage.setItem("captainName", captainName);
-
-               //navigate to profile page
-               window.location.href = "/captainProfile";
-            }
-         } else {
-            // Handle errors, e.g., show an error message
-            console.error("Error loggin in");
-         }
+        // Send the form data to your server for insertion into the database
+        const response = await fetch("/api/captain/captainLogin.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+    
+        if (response.ok) {
+          console.log("User logged in successfully!");
+          const jsonResponse = await response.json();
+          if (jsonResponse["error"]) {
+            console.log(jsonResponse["error"]);
+            setError('');
+            setPasswordError(jsonResponse["error"]);
+          } else if (jsonResponse["success"]) {
+            console.log(jsonResponse["success"]);
+    
+            const captainId = jsonResponse["captainId"];
+            const captainName = jsonResponse["captainName"];
+    
+            sessionStorage.setItem("captainId", captainId);
+            sessionStorage.setItem("captainName", captainName);
+    
+            //navigate to profile page
+            window.location.href = "/captainProfile";
+          }
+        } else {
+          setError('Error logging in');
+          setPasswordError('');
+        }
       } catch (error) {
-         console.error("Error:", error);
+        setError('Error: ' + error.message);
+        setPasswordError('');
       }
-   };
+    };
 
    return (
       <div className="page-wrapper">
@@ -65,12 +70,12 @@ const CaptainLogin = () => {
          <img src={captainImage} alt="Beautiful Image" className="captainImageLogin" />
          <form className="loginForm">
             <label className="label">
-               Email:
+               <p>Email:</p>
                <input type="email" name="captainEmail" value={formData.captainEmail} onChange={handleChange} className="loginInput" required />
             </label>
 
             <label className="label">
-               Password:
+               <p>Password:</p>
                <input
                   type="password"
                   name="captainPassword"
@@ -80,6 +85,11 @@ const CaptainLogin = () => {
                   required
                />
             </label>
+
+            <div className="error-message">
+               {error && <p>{error}</p>}
+               {passwordError && <p>{passwordError}</p>}
+            </div>
 
             <div className="flexRow">
                <StandardLoginButton onClick={handleSubmit} />

@@ -37,12 +37,20 @@
   .loginInput {
     width: 100%;
     padding: 8px;
-    margin-bottom: 16px;
+
     box-sizing: border-box;
     border-radius: 4px;
     border: 1px solid #49454f;
   }
   
-  
+  .error-message p {
+    color: #EB8C0F;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .label p {
+    font-size: 14px;
+  }
   
     

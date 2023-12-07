@@ -5,7 +5,7 @@ import CancelButton from "../components/CancelButton.jsx";
 import BackArrow from "../components/BackArrow.jsx";
 import DeleteButton from "../components/DeleteButton.jsx";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const UpdateTrip = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +23,7 @@ const UpdateTrip = () => {
 
 
   const { id } = useParams();
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     fetch(`../api/trip/readTrip.php?tripId=${id}`)
@@ -82,15 +83,38 @@ const UpdateTrip = () => {
     }
   };
 
-  function handleClick() {
-    console.log("Clicked");
+  const handleDelete = async () => {
+        // Display a confirmation dialog
+    const confirmed = window.confirm("Delete trip?");
 
-  }
+    if (!confirmed) {
+      // If the user clicks "Cancel" in the confirmation dialog, do nothing
+      return;
+    }
+    try {
+      const response = await fetch(`../../api/trip/deleteTrip.php`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tripId: id }), // Send tripId som JSON
+      });
+  
+      if (response.ok) {
+        console.log("Trip slettet!");
+        navigate(`/trip`); // Naviger tilbage til en oversigt over trips
+      } else {
+        console.error("Fejl ved sletning af trip");
+      }
+    } catch (error) {
+      console.error("Fejl:", error);
+    }
+  };
 
   return (
     <div className="page-wrapper">
       <BackArrow />
-      <DeleteButton />
+      <DeleteButton onClick={handleDelete}/>
       <h1>Edit trip:</h1>
       <img src={crewImage} alt="Beautiful Image" className="crewImage" />
       <form className="signupform">

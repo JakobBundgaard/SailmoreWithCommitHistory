@@ -46,9 +46,11 @@ const CaptainLogin = () => {
     
             const captainId = jsonResponse["captainId"];
             const captainName = jsonResponse["captainName"];
+            const shipId = jsonResponse["shipId"];
     
             sessionStorage.setItem("captainId", captainId);
             sessionStorage.setItem("captainName", captainName);
+            sessionStorage.setItem("shipId", shipId);
     
             //navigate to profile page
             window.location.href = "/captainProfile";

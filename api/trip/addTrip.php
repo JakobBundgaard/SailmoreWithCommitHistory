@@ -1,5 +1,6 @@
 <?php
 include_once "../utils/connection.php";
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $shipId = $_POST["shipId"];

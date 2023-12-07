@@ -7,7 +7,7 @@ import profile from "../assets/images/profile.svg";
 import PlusButton from "../components/PlusButton";
 
 const Layout = () => {
-  const [userType, setUserType] = useState('guest');
+  const [userType, setUserType] = useState((sessionStorage.getItem("captainId") != null) ? "guest" : "captain" );
 
   useEffect(() => {
 
@@ -32,7 +32,7 @@ const Layout = () => {
 
     fetchUserType();
   }, []);
-
+  console.log(userType)
   return (
     <>
       <nav>

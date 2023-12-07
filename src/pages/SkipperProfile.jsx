@@ -20,12 +20,9 @@ const handleLogout = async () => {
         });
 
         if (response.ok) {
-            // Logout successful on the server
-            // Clear local data or do any additional client-side cleanup
-            // Redirect to the Home page
-            // setIsCaptain(false);
             sessionStorage.removeItem('captainId');
             sessionStorage.removeItem('crewId');
+            window.location.reload();
         } else {
             console.error('Logout failed.');
         }

@@ -40,6 +40,7 @@ const CrewProfile = () => {
             if (response.ok) {
                 sessionStorage.removeItem('captainId');
                 sessionStorage.removeItem('crewId');
+                window.location.reload();
             } else {
                 console.error('Logout failed.');
             }

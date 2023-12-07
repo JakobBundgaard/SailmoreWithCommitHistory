@@ -14,9 +14,10 @@
     position: absolute;
     background-color: white;
     z-index: 1;
-    border-radius: 1.75rem;
+    border-radius: 0 0 1.75rem 1.75rem;
     padding: 1em 0.5em;
-    width: 60vw;
+    width: 311px;
+    margin-top: -19px;
   }
   
   .search-label {
@@ -60,7 +61,15 @@ input:focus {
     background-color: white;
     max-width: 25em;
   }
+
   .fake-search span {
-    font-size: 10px;
-    padding-right: 0.5em;
+    font-size: 13px;
+    z-index: 2;
+
   }
+
+
+  .SearchIcon {
+    z-index: 2;
+  }
+  

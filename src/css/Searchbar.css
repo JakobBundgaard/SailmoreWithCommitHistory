@@ -58,6 +58,7 @@ input:focus {
     display: flex;
     align-items: center;
     background-color: white;
+    max-width: 25em;
   }
   .fake-search span {
     font-size: 10px;

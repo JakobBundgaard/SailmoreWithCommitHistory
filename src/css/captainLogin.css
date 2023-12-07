@@ -49,3 +49,8 @@
     padding-bottom: 30px;
   }
     
+  .error-message p {
+    color: #EB8C0F;
+    font-size: 12px;
+    text-align: center;
+  }

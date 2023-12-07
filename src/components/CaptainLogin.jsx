@@ -65,12 +65,12 @@ const CaptainLogin = () => {
          <img src={captainImage} alt="Beautiful Image" className="captainImageLogin" />
          <form className="loginForm">
             <label className="label">
-               Email:
+               <p>Email:</p>
                <input type="email" name="captainEmail" value={formData.captainEmail} onChange={handleChange} className="loginInput" required />
             </label>
 
             <label className="label">
-               Password:
+               <p>Password:</p>
                <input
                   type="password"
                   name="captainPassword"

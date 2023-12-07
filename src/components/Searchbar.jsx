@@ -40,25 +40,29 @@ const SearchBar = ({ updateSearchResults }) => {
         updateSearchResults(data);
         setShowSearchBar(false); // Hide the search bar when the search button is clicked
         // Set individual activators to true when handleSearch is called
-        // Reset search fields after a completed search
-        setDate('');
-        setLocation('');
-        setMaxPrice('');
-        
-        // Reset individual activators
-        setDateActivated(false);
-        setLocationActivated(false);
-        setMaxPriceActivated(false);
-        // date ? setDateActivated(true) : setDateActivated(false);
-        // location ? setLocationActivated(true) : setLocationActivated(false);
-        // maxPrice ? setMaxPriceActivated(true) : setMaxPriceActivated(false);
+        date ? setDateActivated(true) : setDateActivated(false);
+        location ? setLocationActivated(true) : setLocationActivated(false);
+        maxPrice ? setMaxPriceActivated(true) : setMaxPriceActivated(false);
       }
-
+      
 
     } catch (error) {
       console.error('Error during search:', error);
     }
   };
+
+  const handleReset = async () => {
+    // Reset search fields after a completed search
+    setDate('');
+    setLocation('');
+    setMaxPrice('');
+    
+    // Reset individual activators
+    setDateActivated(false);
+    setLocationActivated(false);
+    setMaxPriceActivated(false);
+    console.log("cancel")
+  }
 
   return (
     <div className="search-wrapper">
@@ -105,6 +109,9 @@ const SearchBar = ({ updateSearchResults }) => {
         </div>
         <button onClick={handleSearch} className="search-button">
           Search
+        </button>
+        <button onClick={handleReset} className="cancel-button">
+          Clear
         </button>
       </div>
     )}

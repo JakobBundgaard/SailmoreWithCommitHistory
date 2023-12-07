@@ -65,7 +65,9 @@ const SkipperProfile = () => {
                   </div>
                </div>
                <div className="edit-profile">
-                  <EditButton onClick={handleClick} />
+                  <Link to="/EditSkipper">
+                     <EditButton onClick={handleClick} />
+                  </Link>
                </div>
             </div>
 

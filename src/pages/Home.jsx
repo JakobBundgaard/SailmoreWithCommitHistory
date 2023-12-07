@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import PreviewTrip from "../components/PreviewTrip";
 import SearchBar from "../components/Searchbar";
+import Logo from "../assets/images/sailmore-logo-arc.svg";
+import "../css/Home.css";
 
 const Home = () => {
   const [trips, setTrips] = useState([]);
@@ -24,13 +26,24 @@ const Home = () => {
   };
 
   return (
-    <div className="page-wrapper">
-      <h1>Recommended trips</h1>
-      <SearchBar updateSearchResults={updateSearchResults} />
-      {/* Display either search results or all trips based on the condition */}
-      {(searchResults.length > 0 ? searchResults : trips).map((trip, index) => (
-        <PreviewTrip key={index} trip={trip} />
-      ))}
+    <div>
+      <div className='gradient-wrapper'></div>
+
+      <div className='home-top'>
+        <img src={Logo} alt="Sailmore Logo" className='logo' />
+      </div>
+
+      <div className="page-wrapper">
+        <SearchBar updateSearchResults={updateSearchResults} />
+        <h2 className='white-text'>Recommended trips</h2>
+        <br />
+        {/* Display either search results or all trips based on the condition */}
+        <div className='previewtrip-container'>
+          {(searchResults.length > 0 ? searchResults : trips).map((trip, index) => (
+            <PreviewTrip key={index} trip={trip} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

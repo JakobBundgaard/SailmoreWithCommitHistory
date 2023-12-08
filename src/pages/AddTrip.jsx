@@ -11,8 +11,6 @@ const AddTrip = () => {
       startDate: '',
       endDate: '',
       tripDescription: '',
-      shipId: '',
-      totalCrewSpaces: '',
       price: '',
       equipment: '',
       rules: '',
@@ -43,7 +41,7 @@ const handleSubmit = async (e) => {
       window.location.href = "/trip";
   })
   .catch(error => console.log(error));
-  console.log(formData);
+    console.log(formData);
 };
   
     return (
@@ -80,15 +78,6 @@ const handleSubmit = async (e) => {
             <textarea name="tripDescription" value={formData.tripDescription} onChange={handleChange} className='bioField tripDescription'></textarea>
           </label>
 
-          <label className='label'>
-            ShipId:
-            <input type="number" name="shipId" value={formData.shipId} onChange={handleChange} className='signupInput shipId' required />
-          </label>
-
-          <label className='label'>
-            totalCrewSpaces:
-            <input type="number" name="totalCrewSpaces" value={formData.totalCrewSpaces} onChange={handleChange} className='signupInput totalCrewSpaces' required />
-          </label>
           <label className='label'>
             Price:
             <input type="number" name="price" value={formData.price} onChange={handleChange} className='signupInput price' required />

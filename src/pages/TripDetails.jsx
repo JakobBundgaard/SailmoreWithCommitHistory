@@ -62,7 +62,7 @@ function handleClick() {
                     <p>0 stops</p>
                     <p>{totalCrewSpaces} / {shipCrew} gaster</p>
                 </div>
-                    <EditButton onClick={handleClick} />
+                <EditButton onClick={handleClick} />
                 <div>
                     <div className="text-bubble">
                         <p>€{price}</p>
@@ -74,6 +74,7 @@ function handleClick() {
             <div>
                 <p>{tripDescription}</p>
                 <p>{startLocation} - {endLocation}</p>
+                {/* location stops component here */}
                 <p>insert location stops component here</p>
                 <div><div className="circle" /><div className="line" /><div className="circle" /></div>
                 <NavLink to="/skipper/:id">

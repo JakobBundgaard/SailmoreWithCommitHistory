@@ -5,7 +5,7 @@ import "../css/PreviewTrip.css";
 
 const PreviewTrip = ({ trip }) => {
     // Destructure trip to individual variables
-    const { tripId, startLocation, endLocation, shipId, shipName, captainId, imagePath, price } = trip;
+    const { tripId, startLocation, endLocation, shipId, shipName, captainId, imagePath, price, equipment, rules } = trip;
 
     // Convert startDate and endDate to Date objects
     const startDateObj = new Date(trip.startDate);
@@ -31,10 +31,10 @@ const PreviewTrip = ({ trip }) => {
                         <p>{startDateFormatted} - {endDateFormatted} · 0 stops</p>
                         <div className="hashtag-container">
                             <div className="text-bubble hashtag">
-                                <p>smoke-free</p>
+                                <p>{equipment}</p>
                             </div>
                             <div className="text-bubble hashtag">
-                                <p>ø-hop</p>
+                                <p>{rules}</p>
                             </div>
                         </div>
 

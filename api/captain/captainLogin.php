@@ -19,10 +19,12 @@ if ($result != null && mysqli_num_rows($result) > 0) {
         // Session with captainId and captainName
         $_SESSION['captainId'] = $row['captainId'];
         $_SESSION['captainName'] = $row['captainName'];
+        $_SESSION['shipId'] = $row['shipId'];
         
         $success['success'] = "Password is valid!";
         $success['captainId'] = $row['captainId'];
         $success['captainName'] = $row['captainName'];
+        $success['shipId'] = $row['shipId'];
         echo json_encode($success);
     } else {
         $error['error'] = "Invalid password!";

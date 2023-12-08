@@ -3,12 +3,12 @@ include_once "../utils/connection.php";
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $shipId = $_POST["shipId"];
+    $shipId = $_SESSION["shipId"];
     $startDate = $_POST["startDate"];
     $endDate = $_POST["endDate"];
     $startLocation = $_POST["startLocation"];
     $endLocation = $_POST["endLocation"];
-    $totalCrewSpaces = $_POST["totalCrewSpaces"];
+    $totalCrewSpaces = 0;
     $tripDescription = $_POST["tripDescription"];
     $price = $_POST["price"];
     $equipment = $_POST["equipment"];

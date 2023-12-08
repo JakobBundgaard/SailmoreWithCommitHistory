@@ -10,10 +10,12 @@ if (isset($_SESSION['captainId'])) {
     // User is logged in as a captain
     $response['userType'] = 'captain';
     $response['captainId'] = $_SESSION['captainId'];
+    $response['shipId'] = $_SESSION['shipId'];
 } else if (isset($_SESSION['crewId'])) {
     // User is logged in as a crew member
     $response['userType'] = 'crew';
     $response['crewId'] = $_SESSION['crewId'];
+    
 } else {
     // User is not logged in
     $response['userType'] = 'guest';

@@ -1,5 +1,5 @@
 <?php
-
+session_start(); // Start the session
 include_once "../utils/connection.php";
 
 // Få indholdet af anmodningen som JSON-streng
@@ -20,6 +20,7 @@ $sql = "INSERT INTO ships (shipName, shipModel, shipDescription, shipCrew, shipY
 VALUES ('$shipName', '$shipModel', '$shipDescription', '$shipCrew', '$shipYear')";
 
 if ($conn->query($sql) === TRUE) {
+    $_SESSION['shipId'] = $conn->insert_id; // Add shipId to the session
     echo "Data blev indsat succesfuldt i databasen";
 } else {
     echo "Fejl ved indsættelse af data: " . $conn->error;

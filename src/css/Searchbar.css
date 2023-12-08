@@ -51,6 +51,18 @@ input:focus {
     background-color: #EB8C0F;
     color: white;
   }
+
+  .cancel-button {
+    width: 10em; /* Set the width of the button */
+    height: 2em;
+    margin-top: 10px; /* Add margin between input fields and button */
+    border: none;
+    border-radius: 1.75rem;
+    border: 1px solid var(--m-3-sys-light-outline, #03658C);
+    background: var(--m-3-sys-light-primary, #fff);
+    color: var(--m-3-sys-light-on-primary, #03658C);
+    
+  }
   .fake-search {
     border: none;
     border-radius: 1.75rem;

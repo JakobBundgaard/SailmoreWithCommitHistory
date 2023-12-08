@@ -110,7 +110,7 @@ const SearchBar = ({ updateSearchResults }) => {
         <button onClick={handleSearch} className="search-button">
           Search
         </button>
-        <button onClick={handleReset} className="cancel-button">
+        <button onClick={handleReset} className="clear-button">
           Clear
         </button>
       </div>

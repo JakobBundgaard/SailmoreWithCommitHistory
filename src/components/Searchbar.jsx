@@ -32,23 +32,42 @@ const SearchBar = ({ updateSearchResults }) => {
       const data = await response.json();
       console.log('Search Results:', data);
 
-      // Call the updateSearchResults function with the search results
-      updateSearchResults(data);
-      setShowSearchBar(false); // Hide the search bar when the search button is clicked
-          // Set individual activators to true when handleSearch is called
-      date ? setDateActivated(true) : setDateActivated(false);
-      location ? setLocationActivated(true) : setLocationActivated(false);
-      maxPrice ? setMaxPriceActivated(true) : setMaxPriceActivated(false);
+      if (data.length === 0) {
+        // Show alert if search results are empty
+        alert('No results found. Please refine your search criteria.');
+      } else {
+        // Call the updateSearchResults function with the search results
+        updateSearchResults(data);
+        setShowSearchBar(false); // Hide the search bar when the search button is clicked
+        // Set individual activators to true when handleSearch is called
+        date ? setDateActivated(true) : setDateActivated(false);
+        location ? setLocationActivated(true) : setLocationActivated(false);
+        maxPrice ? setMaxPriceActivated(true) : setMaxPriceActivated(false);
+      }
+      
 
     } catch (error) {
       console.error('Error during search:', error);
     }
   };
 
+  const handleReset = async () => {
+    // Reset search fields after a completed search
+    setDate('');
+    setLocation('');
+    setMaxPrice('');
+    
+    // Reset individual activators
+    setDateActivated(false);
+    setLocationActivated(false);
+    setMaxPriceActivated(false);
+    console.log("cancel")
+  }
+
   return (
     <div className="search-wrapper">
       <div className="fake-search" onClick={() => setShowSearchBar(prevShowSearchBar => !prevShowSearchBar)}>
-        <img src={SearchIcon} alt="search icon" />
+        <img src={SearchIcon} alt="search icon" className="SearchIcon"/>
         {dateActivated && <span>Date: {date} </span>}
         {locationActivated && <span>Location: {location} </span>}
         {maxPriceActivated && <span>Max Price: {maxPrice} </span>}
@@ -90,6 +109,9 @@ const SearchBar = ({ updateSearchResults }) => {
         </div>
         <button onClick={handleSearch} className="search-button">
           Search
+        </button>
+        <button onClick={handleReset} className="cancel-button">
+          Clear
         </button>
       </div>
     )}

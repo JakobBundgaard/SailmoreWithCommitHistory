@@ -20,11 +20,13 @@ $sql = "INSERT INTO ships (shipName, shipModel, shipDescription, shipCrew, shipY
 VALUES ('$shipName', '$shipModel', '$shipDescription', '$shipCrew', '$shipYear')";
 
 if ($conn->query($sql) === TRUE) {
+    $last_id = $conn->insert_id;
     $_SESSION['shipId'] = $conn->insert_id; // Add shipId to the session
-    echo "Data blev indsat succesfuldt i databasen";
+    echo json_encode(array("shipId" => $last_id)); // Return the newly inserted ship's ID
 } else {
     echo "Fejl ved indsættelse af data: " . $conn->error;
 }
 
 // Luk forbindelse til databasen
 $conn->close();
+?>

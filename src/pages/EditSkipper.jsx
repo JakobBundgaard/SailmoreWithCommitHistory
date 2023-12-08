@@ -91,7 +91,16 @@ function EditSkipper() {
 
       fetch("../../api/captain/updateCaptain.php", {
          method: "POST",
-         body: JSON.stringify(captainData),
+         body: JSON.stringify({
+            captainId: captainData.captainId,
+            captainName: captainData.captainName,
+            captainEmail: captainData.captainEmail,
+            captainPassword: passwordData.captainPassword,
+            captainNationality: captainData.captainNationality,
+            captainDescription: captainData.captainDescription,
+            captainGender: captainData.captainGender,
+            captainAge: captainData.captainAge,
+         }),
          headers: {
             "Content-Type": "application/json",
          },
@@ -152,7 +161,6 @@ function EditSkipper() {
                   name="captainPassword"
                   value={passwordData?.captainPassword}
                   onChange={e => setPasswordData({ ...passwordData, captainPassword: e.target.value })}
-                  required
                />
                <label className="flexItem labelItem" htmlFor="passwordRepeat">
                   Repeat password
@@ -163,7 +171,6 @@ function EditSkipper() {
                   name="captainPasswordRepeat"
                   value={passwordData?.captainPasswordRepeat}
                   onChange={e => setPasswordData({ ...passwordData, captainPasswordRepeat: e.target.value })}
-                  required
                />
                <label className="flexItem labelItem" htmlFor="nationality">
                   Nationality

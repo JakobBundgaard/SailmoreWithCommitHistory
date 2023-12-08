@@ -6,6 +6,7 @@ import "../css/PreviewTrip.css";
 import "../css/TripDetails.css";
 import EditButton from '../components/EditButton';
 import BackArrow from "../components/BackArrow";
+import ApplyButton from "../components/ApplyButton";
 import { useEffect, useState } from 'react';
 
 
@@ -13,6 +14,10 @@ import { useEffect, useState } from 'react';
 const TripDetails = () => {
     const [tripData, setTripData] = useState(null);
     const { id } = useParams();
+
+    const isCaptain = sessionStorage.getItem("captainId") !== null;
+    const loggedInCaptainId = sessionStorage.getItem("captainId");
+    const isGuest = !isCaptain;
 
     useEffect(() => {
         fetch(`/api/trip/readTrip.php?tripId=${id}`)
@@ -36,7 +41,18 @@ const startDateFormatted = startDateObj.toLocaleDateString('en-GB', options);
 const endDateFormatted = endDateObj.toLocaleDateString('en-GB', options);
 
 function handleClick() {
-    window.location.href = `/update-trip/${id}`;
+    
+
+    if (isCaptain && String(loggedInCaptainId) === String(captainId)) {
+      // Navigate to the edit page for the logged-in captain
+      window.location.href = `/update-trip/${id}`;
+    } else if (isGuest) {
+      // Handle the apply logic for guests
+      console.log("Apply logic for guests");
+    } else {
+      // Handle the apply logic for crew
+      console.log("Apply logic for crew");
+    }
   }
 
     return <div style={{padding: '1em', marginBottom: '80px'}}>
@@ -62,7 +78,12 @@ function handleClick() {
                     <p>0 stops</p>
                     <p>{totalCrewSpaces} / {shipCrew} gaster</p>
                 </div>
+
+                {isCaptain && String(loggedInCaptainId) === String(captainId) && (
+                    // Render EditButton only if captainId matches loggedInCaptainId
                     <EditButton onClick={handleClick} />
+                )}
+                {(isGuest || !isCaptain) && <ApplyButton onClick={handleClick} />}
                 <div>
                     <div className="text-bubble">
                         <p>€{price}</p>
@@ -74,7 +95,6 @@ function handleClick() {
             <div>
                 <p>{tripDescription}</p>
                 <p>{startLocation} - {endLocation}</p>
-                <p>insert location stops component here</p>
                 <div><div className="circle" /><div className="line" /><div className="circle" /></div>
                 <NavLink to="/skipper/:id">
                     <article className="pfp-wrapper">

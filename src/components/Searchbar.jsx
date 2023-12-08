@@ -67,7 +67,7 @@ const SearchBar = ({ updateSearchResults }) => {
   return (
     <div className="search-wrapper">
       <div className="fake-search" onClick={() => setShowSearchBar(prevShowSearchBar => !prevShowSearchBar)}>
-        <img src={SearchIcon} alt="search icon" />
+        <img src={SearchIcon} alt="search icon" className="SearchIcon"/>
         {dateActivated && <span>Date: {date} </span>}
         {locationActivated && <span>Location: {location} </span>}
         {maxPriceActivated && <span>Max Price: {maxPrice} </span>}

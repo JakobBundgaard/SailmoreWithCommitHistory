@@ -94,7 +94,7 @@ const EditShip = () => {
     <div className="page-wrapper">
       <BackArrow />
       <DeleteButton onClick={handleDelete} />
-      <h1>Edit ship:{id}</h1>
+      <h1>Edit ship</h1>
       <img src={crewImage} alt="Beautiful Image" className="crewImage" />
       <form onSubmit={handleSubmit} className="signupform">
 

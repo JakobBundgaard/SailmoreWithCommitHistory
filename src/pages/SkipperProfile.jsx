@@ -39,7 +39,7 @@ function handleClick() {
 
 const SkipperProfile = () => {
    const [captain, setCaptain] = useState(null);
-
+    console.log(captain);
    useEffect(() => {
       const capId = sessionStorage.getItem("captainId");
 
@@ -128,9 +128,7 @@ const SkipperProfile = () => {
                         </Link>
                     </div>
                 </div>
-                <NavLink to={`/boat?id=${captain?.shipId}`}>
-                    <BoatPreview />
-                </NavLink>
+                    <BoatPreview shipId={captain?.shipId} shipModel={captain?.shipModel} shipName={captain?.shipName} shipDescription={captain?.shipDescription}/>
                 <Outlet />
                 <hr />
                 <Link to="/">

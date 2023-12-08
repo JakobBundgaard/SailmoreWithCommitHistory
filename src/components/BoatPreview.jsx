@@ -2,18 +2,19 @@ import { Outlet, NavLink } from "react-router-dom";
 import placeholder from "../assets/images/boat.jpg";
 import "../css/PreviewTrip.css";
 
-const BoatPreview = () => {
+const BoatPreview = ({shipName, shipModel, shipDescription, shipId}) => {
+
     return <>
-        <NavLink to="/boat/:id">
+        <NavLink to={`/boat/${shipId}`}>
             <div className="preview-wrapper">
                 <div className="preview-image-container">
                     <img src={placeholder} alt="Preview Image" />
                 </div>
                 <div className="description-wrapper">
                     <div>
-                        <h3>Den grimme perle</h3>
-                        <p>Peugot 2004 X263 · 2684 nautical miles</p>
-                        <p>2 trips</p>
+                        <h3>{shipName}</h3>
+                        <p>{shipModel}</p>
+                        <p>{shipDescription}</p>
                     </div>
                 </div>
             </div>

@@ -62,7 +62,7 @@ const BoatDetails = () => {
             )}
           </div>
           <div className="edit-profile">
-            <Link to="/EditShip/${id}">
+            <Link to={`/EditShip/${id}`}>
               {/* 'to' angiver den sti, du vil navigere til */}
               <EditButton onClick={handleClick} />
             </Link>

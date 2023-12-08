@@ -12,15 +12,13 @@ import { useEffect, useState } from 'react';
 
 const TripDetails = () => {
     const [tripData, setTripData] = useState(null);
-    const [sessionCaptainId, setSessionCaptainId] = useState(null);
     const { id } = useParams();
-    
+
     useEffect(() => {
         fetch(`/api/trip/readTrip.php?tripId=${id}`)
             .then(response => response.json())
             .then(data => {
                 setTripData(data[0]);
-                setSessionCaptainId(data.captainId)
                 console.log(data)
             })
             .catch(error => console.error('Error:', error));
@@ -64,7 +62,7 @@ function handleClick() {
                     <p>0 stops</p>
                     <p>{totalCrewSpaces} / {shipCrew} gaster</p>
                 </div>
-                {captainId === Number(sessionCaptainId) && <EditButton onClick={handleClick} />}
+                <EditButton onClick={handleClick} />
                 <div>
                     <div className="text-bubble">
                         <p>€{price}</p>

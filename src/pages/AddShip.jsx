@@ -23,9 +23,8 @@ const AddShip = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-      // Send the form data to your server for insertion into the database
       const response = await fetch("../api/ship/addShip.php", {
         method: "POST",
         headers: {
@@ -33,18 +32,25 @@ const AddShip = () => {
         },
         body: JSON.stringify(formData),
       });
-
+  
       if (response.ok) {
-        // Handle success, e.g., redirect or show a success message
-        console.log("Added trip successfully!");
+        const responseData = await response.json(); // Assuming your PHP returns the new ship's ID
+  
+        // Redirect to the newly created ship's page using its ID
+        if (responseData.shipId) {
+          const newShipId = responseData.shipId;
+          window.location.href = `/boat/${newShipId}`; // Redirect to the specific ship's page
+        } else {
+          console.error("No ship ID returned");
+        }
       } else {
-        // Handle errors, e.g., show an error message
         console.error("Error adding trip");
       }
     } catch (error) {
       console.error("Error:", error);
     }
   };
+  
 
   function handleClick() {
     console.log("Clicked");
@@ -119,7 +125,7 @@ const AddShip = () => {
             Year:
             <input
               type="number"
-              name="shipAge"
+              name="shipYear"
               value={formData.crewYear}
               onChange={handleChange}
               className="smallInputField"

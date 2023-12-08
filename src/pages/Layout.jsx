@@ -49,7 +49,15 @@ const Layout = () => {
             <NavLink to="/inbox"><img src={inbox} alt="Messages and Notifications Icon" /></NavLink>
           </li>
           <li>
-            <NavLink to="/profile"><img src={profile} alt="Profile Icon" /></NavLink>
+            {userType !== 'guest' ? (
+              <NavLink to={userType === 'captain' ? "/captainProfile" : "/crewProfile"}>
+                <img src={profile} alt="Profile Icon" />
+              </NavLink>
+            ) : (
+              <NavLink to="/profile">
+                <img src={profile} alt="Profile Icon" />
+              </NavLink>
+            )}
           </li>
         </ul>
       </nav>

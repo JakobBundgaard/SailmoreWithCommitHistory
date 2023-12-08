@@ -1,5 +1,5 @@
 <?php
-
+session_start(); // Start the session
 include_once "../utils/connection.php";
 
 // Få indholdet af anmodningen som JSON-streng
@@ -21,6 +21,7 @@ VALUES ('$shipName', '$shipModel', '$shipDescription', '$shipCrew', '$shipYear')
 
 if ($conn->query($sql) === TRUE) {
     $last_id = $conn->insert_id;
+    $_SESSION['shipId'] = $conn->insert_id; // Add shipId to the session
     echo json_encode(array("shipId" => $last_id)); // Return the newly inserted ship's ID
 } else {
     echo "Fejl ved indsættelse af data: " . $conn->error;

@@ -12,13 +12,15 @@ import { useEffect, useState } from 'react';
 
 const TripDetails = () => {
     const [tripData, setTripData] = useState(null);
+    const [sessionCaptainId, setSessionCaptainId] = useState(null);
     const { id } = useParams();
-
+    
     useEffect(() => {
         fetch(`/api/trip/readTrip.php?tripId=${id}`)
             .then(response => response.json())
             .then(data => {
                 setTripData(data[0]);
+                setSessionCaptainId(data.captainId)
                 console.log(data)
             })
             .catch(error => console.error('Error:', error));
@@ -62,7 +64,7 @@ function handleClick() {
                     <p>0 stops</p>
                     <p>{totalCrewSpaces} / {shipCrew} gaster</p>
                 </div>
-                    <EditButton onClick={handleClick} />
+                {captainId === Number(sessionCaptainId) && <EditButton onClick={handleClick} />}
                 <div>
                     <div className="text-bubble">
                         <p>€{price}</p>
@@ -74,6 +76,7 @@ function handleClick() {
             <div>
                 <p>{tripDescription}</p>
                 <p>{startLocation} - {endLocation}</p>
+                {/* location stops component here */}
                 <p>insert location stops component here</p>
                 <div><div className="circle" /><div className="line" /><div className="circle" /></div>
                 <NavLink to="/skipper/:id">

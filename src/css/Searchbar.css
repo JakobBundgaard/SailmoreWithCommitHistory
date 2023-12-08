@@ -53,10 +53,10 @@ input:focus {
     color: white;
   }
 
-  .cancel-button {
+  .clear-button {
     width: 10em; /* Set the width of the button */
     height: 2em;
-    margin-top: 10px; /* Add margin between input fields and button */
+    margin: 0 1.5vw 1.5vw 1.5vw;
     border: none;
     border-radius: 1.75rem;
     border: 1px solid var(--m-3-sys-light-outline, #03658C);

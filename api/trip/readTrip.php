@@ -29,6 +29,8 @@ while($row = $result->fetch_object()) {
         "captainId" => $row->captainId,
         "imagePath" => $row->imagePath,
         "price" => $row->price,
+        "rules" => $row->rules,
+        "equipment" => $row->equipment,
 
     );
 
@@ -37,8 +39,6 @@ while($row = $result->fetch_object()) {
         $trip["tripDescription"] = $row->tripDescription;
         $trip["shipCrew"] = $row->shipCrew;
         $trip["captainName"] = $row->captainName;
-        $trip["rules"] = $row->rules;
-        $trip["equipment"] = $row->equipment;
         $trip["shipDescription"] = $row->shipDescription;
     }
 

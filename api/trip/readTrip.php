@@ -1,5 +1,4 @@
 <?php 
-session_start();
 include_once "../utils/connection.php";
 $clickedTripId = isset($_GET['tripId']) ? $_GET['tripId'] : null;
 
@@ -41,10 +40,6 @@ while($row = $result->fetch_object()) {
         $trip["shipCrew"] = $row->shipCrew;
         $trip["captainName"] = $row->captainName;
         $trip["shipDescription"] = $row->shipDescription;
-    }
-
-    if (isset($_SESSION['captainId'])) {
-        $trip["sessionCaptainId"] = $_SESSION['captainId'];
     }
 
     array_push($data, $trip);

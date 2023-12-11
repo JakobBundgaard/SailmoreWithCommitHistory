@@ -55,7 +55,7 @@ const EditShip = () => {
 
       if (response.ok) {
         console.log("Opdateret skibsinformation!");
-        navigate(`/boat/${id}`);
+        navigate(`/captainProfile`);
       } else {
         console.error("Fejl ved opdatering af skib");
       }

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include_once '../utils/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -26,6 +26,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
     
+    //destroy captain session
+    if (isset($_SESSION['captainId'])) {
+        // Unset captain session variables
+        unset($_SESSION['captainId']);
+        unset($_SESSION['captainName']);
+
+        // Destroy the session
+        session_destroy();
+    }
     echo json_encode($response);
 } else {
     $response = array("error" => "Invalid request method, captain not deleted");

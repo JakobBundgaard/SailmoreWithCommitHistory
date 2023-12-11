@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Include your database connection code here
 include_once "../utils/connection.php";
 include_once "./crewFunctions.php"; 
@@ -18,6 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
       $statement->execute();
       $response = ['success' => true];
+
+      // Unset crew session variables and destroy the session
+      if (isset($_SESSION['crewId'])) {
+        unset($_SESSION['crewId']);
+        unset($_SESSION['crewName']);
+
+        session_destroy();
+      }
+
       echo json_encode($response);
     } catch (mysqli_sql_exception $e) {
       $response = ['success' => false, 'error' => $e->getMessage()];

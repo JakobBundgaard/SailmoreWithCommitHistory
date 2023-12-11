@@ -4,6 +4,7 @@ import SaveButton from "../components/SaveButton";
 import CancelButton from "../components/CancelButton";
 import BackArrow from "../components/BackArrow";
 import captainImage from "../assets/images/captain.jpg";
+import DeleteButton from "../components/DeleteButton";
 
 function EditSkipper() {
    const [captainData, setCaptainData] = useState({
@@ -114,6 +115,7 @@ function EditSkipper() {
          .then(data => {
             if (data.success) {
                console.log("Success: ", data.success);
+               window.location.href = "/captainProfile";
             } else if (data.error) {
                console.log("Error: ", data.error);
             }
@@ -123,9 +125,43 @@ function EditSkipper() {
          });
    };
 
+   const handleDelete = async event => {
+      event.preventDefault();
+      if (window.confirm("Are you sure you want to delete your profile?")) {
+         fetch("../../api/captain/captainDelete.php", {
+            method: "POST",
+            body: JSON.stringify({
+               captainId: captainData.captainId,
+            }),
+            headers: {
+               "Content-Type": "application/json",
+            },
+         })
+            .then(response => {
+               if (!response.ok) {
+                  throw new Error("Error deleting profile");
+               }
+               return response.json();
+            })
+            .then(data => {
+               if (data.success) {
+                  console.log("Success: ", data.success);
+                  sessionStorage.removeItem("captainId");
+                  window.location.href = "/profile";
+               } else if (data.error) {
+                  console.log("Error: ", data.error);
+               }
+            })
+            .catch(error => {
+               console.error("Error: ", error);
+            });
+      }
+   };
+
    return (
       <div className="capLoginPage page-wrapper">
          <BackArrow />
+         <DeleteButton onClick={handleDelete} />
          <h1 className="h1Item">Edit Profile</h1>
          <img className="imgItem" src={captainImage} alt="Edit Captain" />
          <div className="flexGrid">

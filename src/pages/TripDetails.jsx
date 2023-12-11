@@ -96,7 +96,7 @@ function handleClick() {
                 <p>{tripDescription}</p>
                 <p>{startLocation} - {endLocation}</p>
                 <div><div className="circle" /><div className="line" /><div className="circle" /></div>
-                <NavLink to="/skipper/:id">
+                <NavLink to={`/skipper/${captainId}`}>
                     <article className="pfp-wrapper">
                         <img src={pfp} alt="Profile picture of {captainName}" className="pfp" />
                         <div>

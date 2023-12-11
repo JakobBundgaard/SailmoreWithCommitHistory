@@ -65,12 +65,6 @@ function handleClick() {
     }
   }
   
-  
-  
-  
-  
-  
-  
 
     return <div style={{padding: '1em', marginBottom: '80px'}}>
         <div className="preview-wrapper">

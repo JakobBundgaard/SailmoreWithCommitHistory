@@ -41,19 +41,36 @@ const startDateFormatted = startDateObj.toLocaleDateString('en-GB', options);
 const endDateFormatted = endDateObj.toLocaleDateString('en-GB', options);
 
 function handleClick() {
-    
-
-    if (isCaptain && String(loggedInCaptainId) === String(captainId)) {
+    const loggedInCaptainId = sessionStorage.getItem("captainId");
+    const loggedInCrewId = sessionStorage.getItem("crewId");
+  
+    console.log("loggedInCaptainId:", loggedInCaptainId);
+    console.log("loggedInCrewId:", loggedInCrewId);
+  
+    if (loggedInCaptainId && String(loggedInCaptainId) === String(captainId)) {
       // Navigate to the edit page for the logged-in captain
       window.location.href = `/update-trip/${id}`;
-    } else if (isGuest) {
-      // Handle the apply logic for guests
+    } else if (!loggedInCaptainId && loggedInCrewId) {
+      const crewApplied = window.confirm("You have applied for the trip.");
+      if (crewApplied) {
+        console.log("Apply logic for crew");
+        // Perform any additional logic here if needed
+      }
+    } else if (!loggedInCaptainId && !loggedInCrewId) {
+      const userConfirmed = window.confirm("You need to log in to apply! Do you want to log in?");
+      if (userConfirmed) {
+        window.location.href = "/profile";
+      }
       console.log("Apply logic for guests");
-    } else {
-      // Handle the apply logic for crew
-      console.log("Apply logic for crew");
     }
   }
+  
+  
+  
+  
+  
+  
+  
 
     return <div style={{padding: '1em', marginBottom: '80px'}}>
         <div className="preview-wrapper">

@@ -199,6 +199,7 @@ const EditCrew = () => {
         if (responseData.success) {
           console.log('Crew deleted successfully!');
           // Redirect or perform other actions if needed
+          sessionStorage.clear();
           window.location.href = "/profile";
         } else {
           console.error('Error deleting crew:', responseData.error);

@@ -21,8 +21,7 @@ const handleLogout = async () => {
       });
 
       if (response.ok) {
-         sessionStorage.removeItem("captainId");
-         sessionStorage.removeItem("crewId");
+         sessionStorage.clear();
          window.location.reload();
       } else {
          console.error("Logout failed.");

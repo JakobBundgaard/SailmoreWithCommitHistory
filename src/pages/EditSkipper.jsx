@@ -146,7 +146,7 @@ function EditSkipper() {
             .then(data => {
                if (data.success) {
                   console.log("Success: ", data.success);
-                  sessionStorage.removeItem("captainId");
+                  sessionStorage.clear();
                   window.location.href = "/profile";
                } else if (data.error) {
                   console.log("Error: ", data.error);

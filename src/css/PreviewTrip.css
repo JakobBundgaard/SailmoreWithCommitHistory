@@ -34,6 +34,7 @@ h3 {
 }
 .text-bubble span {
     font-size: 0.625rem;
+    color: black;
 }
 .preview-image-container {
     position: relative;
@@ -50,4 +51,8 @@ h3 {
 }
 .hashtag {
     margin-right: 2vw;
+}
+
+.orange-ship-name {
+    color: #EB8C0F;
 }

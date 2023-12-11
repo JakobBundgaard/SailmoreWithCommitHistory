@@ -113,15 +113,26 @@ function handleClick() {
                 <p>{tripDescription}</p>
                 <p>{startLocation} - {endLocation}</p>
                 <div><div className="circle" /><div className="line" /><div className="circle" /></div>
-                <NavLink to="/skipper/:id">
+                {loggedInCaptainId == captainId ? (
+                    <NavLink to="/captainProfile">                    
                     <article className="pfp-wrapper">
-                        <img src={pfp} alt="Profile picture of {captainName}" className="pfp" />
-                        <div>
-                            <img src={certified} alt="Certified Badge" />
-                            <h4>{captainName}</h4>
-                        </div>
-                    </article>
-                </NavLink>
+                    <img src={pfp} alt="Profile picture of {captainName}" className="pfp" />
+                    <div>
+                        <img src={certified} alt="Certified Badge" />
+                        <h4>{captainName}</h4>
+                    </div>
+                </article></NavLink>
+                ) : (
+                    <NavLink to={`/skipper/${captainId}`}>                    
+                    <article className="pfp-wrapper">
+                    <img src={pfp} alt="Profile picture of {captainName}" className="pfp" />
+                    <div>
+                        <img src={certified} alt="Certified Badge" />
+                        <h4>{captainName}</h4>
+                    </div>
+                </article></NavLink>
+                )}
+                
                 <Outlet />
                 <p>{shipDescription}</p>
                 <article>

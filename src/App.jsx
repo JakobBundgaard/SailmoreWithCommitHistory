@@ -22,14 +22,13 @@ import AddShip from "./pages/AddShip";
 import EditShip from "./pages/EditShip";
 import EditCrew from "./pages/EditCrew";
 import UpdateTrip from "./pages/UpdateTrip";
-
+import EditSkipper from "./pages/EditSkipper";
 
 function App() {
    return (
       <>
-        
          <BrowserRouter>
-         <ScrollToTopOnRender />
+            <ScrollToTopOnRender />
             <Routes>
                <Route path="/" element={<Layout />}>
                   <Route path="" element={<Home />} />
@@ -49,12 +48,13 @@ function App() {
                   <Route path="addship" element={<AddShip />} />
                   <Route path="editship/:id" element={<EditShip />} />
                   <Route path="editcrew" element={<EditCrew />} />
+                  <Route path="editskipper" element={<EditSkipper />} />
                   <Route path="update-trip/:id" element={<UpdateTrip />} />
                   <Route path="boat/:id" element={<BoatDetails />} />
                   <Route path="*" element={<NoPage />} />
-            </Route>
+               </Route>
             </Routes>
-         </BrowserRouter> 
+         </BrowserRouter>
       </>
    );
 }

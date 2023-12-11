@@ -9,7 +9,7 @@ import LogoutButton from "../components/LogoutButton";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import PreviewTrip from "../components/PreviewTrip";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 const handleLogout = async () => {
     try {
@@ -76,7 +76,36 @@ function SkipperProfile() {
             .catch(error => console.error("Error:", error));
         }, [sessionCaptainId]);
     }
+    const currentTime = new Date();
 
+    const activeTrips = trips.filter(trip => {
+        const startDate = new Date(trip.startDate);
+        const endDate = new Date(trip.endDate);
+        if (id) {
+            return  trip.captainId === id && startDate <= currentTime && currentTime <= endDate;
+        } else if (sessionCaptainId) {
+            return trip.captainId === sessionCaptainId && startDate <= currentTime && currentTime <= endDate;
+        }
+    });
+    
+    const futureTrips = trips.filter(trip => {
+        const startDate = new Date(trip.startDate);
+        if (id) {
+            return trip.captainId === id && startDate > currentTime;
+        } else if (sessionCaptainId) {
+            return trip.captainId === sessionCaptainId && startDate > currentTime;
+        }
+
+    });
+    
+    const pastTrips = trips.filter(trip => {
+        const endDate = new Date(trip.endDate);
+        if (id) {
+            return trip.captainId === id && endDate < currentTime;
+        } else if (sessionCaptainId) {
+        return trip.captainId === id && endDate < currentTime;
+        }
+    });
 
     
    
@@ -87,6 +116,8 @@ function SkipperProfile() {
         .catch(error => console.error('Error:', error));
 }, []);
 
+const location = useLocation();
+const currentUrl = location.pathname;
     return (
         <div>
             <div className="top-panel">
@@ -140,21 +171,25 @@ function SkipperProfile() {
                 <details className="drop-down">
                     <summary>Active Trips</summary>
                     <br />
-                    {trips.filter(trip => trip.captainId === trip.captainId).map(trip => (
-                    <PreviewTrip key={trip.id} trip={trip} />
+                    {activeTrips.map(trip => (
+                        <PreviewTrip key={trip.id} trip={trip} />
                     ))}
                 </details>
                 <hr />
                 <details className="drop-down">
                     <summary>Future Trips</summary>
                     <br />
-                    {/* <PreviewTrip/> */}
+                    {futureTrips.map(trip => (
+                      <PreviewTrip key={trip.id} trip={trip} />
+                    ))}
                 </details>
                 <hr />
                 <details className="drop-down">
                     <summary>Past Trips</summary>
                     <br />
-                    {/* <PreviewTrip/> */}
+                    {pastTrips.map(trip => (
+                        <PreviewTrip key={trip.id} trip={trip} />
+                    ))}
                 </details>
                 <hr />
                 <div className='myShips'>
@@ -172,7 +207,7 @@ function SkipperProfile() {
                 <Outlet />
                 <hr />
                 <Link to="/">
-                    {trips.captainId === sessionCaptainId && <LogoutButton onClick={handleLogout} />}
+                   {sessionCaptainId && currentUrl === "/captainProfile" && <LogoutButton onClick={handleLogout} />}
                 </Link>
             </div>
         </div>

@@ -1,6 +1,5 @@
 import pfp from '../assets/images/captain.jpg';
 import '../css/SkipperProfile.css';
-// import PreviewTrip from "../components/PreviewTrip";
 import BoatPreview from '../components/BoatPreview';
 import { Outlet, NavLink } from "react-router-dom";
 import EditButton from '../components/EditButton';
@@ -9,6 +8,8 @@ import BackArrow from "../components/BackArrow";
 import LogoutButton from "../components/LogoutButton";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import PreviewTrip from "../components/PreviewTrip";
+import { useParams } from "react-router-dom";
 
 const handleLogout = async () => {
     try {
@@ -20,9 +21,8 @@ const handleLogout = async () => {
             },
         });
 
-        if (response.ok) {
+        if (sessionCaptainId) {
             sessionStorage.removeItem('captainId');
-            sessionStorage.removeItem('crewId');
             window.location.reload();
         } else {
             console.error('Logout failed.');
@@ -37,19 +37,55 @@ function handleClick() {
    console.log("Clicked");
 }
 
-const SkipperProfile = () => {
-   const [captain, setCaptain] = useState(null);
+function SkipperProfile() {
+    const [captain, setCaptain] = useState(null);
+    const [trips, setTrips] = useState([]);
+    const sessionCaptainId = sessionStorage.getItem("captainId");
+    const { id } = useParams();
 
+    if (id) {
+        useEffect(() => {
+            fetch(`../../api/captain/readCaptain.php`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ clickedCaptainId: id }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                setCaptain(data);
+                console.log(data);
+            })
+            .catch(error => console.error("Error:", error));
+        }, [id]);
+    } else {
+        useEffect(() => {
+            fetch(`../../api/captain/readCaptain.php`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ sessionCaptainId }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                setCaptain(data);
+                console.log(data);
+            })
+            .catch(error => console.error("Error:", error));
+        }, [sessionCaptainId]);
+    }
+
+
+    
+   
    useEffect(() => {
-      const capId = sessionStorage.getItem("captainId");
-
-      fetch(`../../api/captain/getLoggedInCaptainInfo.php?=${capId}`)
-         .then(Response => Response.json())
-         .then(data => {
-            setCaptain(data);
-         })
-         .catch(error => console.error("Error:", error));
-   }, []);
+    fetch('/api/trip/readTrip.php')
+        .then(response => response.json())
+        .then(data => setTrips(data))
+        .catch(error => console.error('Error:', error));
+}, []);
 
     return (
         <div>
@@ -104,7 +140,9 @@ const SkipperProfile = () => {
                 <details className="drop-down">
                     <summary>Active Trips</summary>
                     <br />
-                    {/* <PreviewTrip/> */}
+                    {trips.filter(trip => trip.captainId === trip.captainId).map(trip => (
+                    <PreviewTrip key={trip.id} trip={trip} />
+                    ))}
                 </details>
                 <hr />
                 <details className="drop-down">
@@ -134,7 +172,7 @@ const SkipperProfile = () => {
                 <Outlet />
                 <hr />
                 <Link to="/">
-                    <LogoutButton onClick={handleLogout} />
+                    {trips.captainId === sessionCaptainId && <LogoutButton onClick={handleLogout} />}
                 </Link>
             </div>
         </div>

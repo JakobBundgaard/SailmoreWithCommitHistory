@@ -1,7 +1,7 @@
 .applyButton {
-    width: 5em; /* Set the width of the button */
+    width: 5em;
     height: 3em;
-    margin-top: 10px; /* Add margin between input fields and button */
+    margin-top: 10px;
     border: none;
     border-radius: 1.75rem;
     font-size: 14px;

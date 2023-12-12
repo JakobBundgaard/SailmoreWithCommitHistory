@@ -44,9 +44,9 @@ input:focus {
   }
   
   .search-button {
-    width: 10em; /* Set the width of the button */
+    width: 10em; 
     height: 2em;
-    margin-top: 10px; /* Add margin between input fields and button */
+    margin-top: 10px; 
     border: none;
     border-radius: 1.75rem;
     background-color: #EB8C0F;
@@ -54,7 +54,7 @@ input:focus {
   }
 
   .clear-button {
-    width: 10em; /* Set the width of the button */
+    width: 10em; 
     height: 2em;
     margin: 0 1.5vw 1.5vw 1.5vw;
     border: none;

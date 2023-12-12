@@ -213,7 +213,7 @@ const currentUrl = location.pathname;
             <Outlet />
             <hr />
             <Link to="/">
-              {sessionCaptainId && currentUrl === "/captainProfile" && <LogoutButton onClick={handleLogout} />}
+              {currentUrl === "/captainProfile" && <LogoutButton onClick={handleLogout} />}
             </Link>
          </div>
       </div>

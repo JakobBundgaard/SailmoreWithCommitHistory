@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
     $shipId = $data['shipId'];
 
     // Delete the captains that reference the ship
-    $sql = "DELETE FROM captain WHERE shipId = ?";
+    $sql = "UPDATE captain SET shipId = NULL WHERE shipId = ?";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {

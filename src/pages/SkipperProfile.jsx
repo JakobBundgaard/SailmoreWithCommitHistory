@@ -6,6 +6,7 @@ import { Outlet } from "react-router-dom";
 import EditButton from "../components/EditButton";
 import AddShipButton from "../components/AddShipButton";
 import BackArrow from "../components/BackArrow";
+import Banner from "../components/Banner";
 import LogoutButton from "../components/LogoutButton";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -120,6 +121,7 @@ function SkipperProfile() {
    const currentUrl = location.pathname;
    return (
       <div>
+         <Banner />
          <div className="top-panel">
             <BackArrow />
          </div>

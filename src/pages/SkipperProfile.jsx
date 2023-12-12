@@ -39,86 +39,85 @@ function handleClick() {
 }
 
 function SkipperProfile() {
-    const [captain, setCaptain] = useState(null);
-    const [trips, setTrips] = useState([]);
-    const sessionCaptainId = sessionStorage.getItem("captainId");
-    const { id } = useParams();
+   const [captain, setCaptain] = useState(null);
+   const [trips, setTrips] = useState([]);
+   const sessionCaptainId = sessionStorage.getItem("captainId");
+   const { id } = useParams();
 
-    if (id) {
-        useEffect(() => {
-            fetch(`../../api/captain/readCaptain.php`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ clickedCaptainId: id }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                setCaptain(data);
-                console.log(data);
-            })
-            .catch(error => console.error("Error:", error));
-        }, [id]);
-    } else {
-        useEffect(() => {
-            fetch(`../../api/captain/readCaptain.php`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ sessionCaptainId }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                setCaptain(data);
-                console.log(data);
-            })
-            .catch(error => console.error("Error:", error));
-        }, [sessionCaptainId]);
-    }
-    const currentTime = new Date();
+   if (sessionCaptainId == null) {
+      window.location.href = "/profile/CaptainLogin";
+   }
 
-    const activeTrips = trips.filter(trip => {
-        const startDate = new Date(trip.startDate);
-        const endDate = new Date(trip.endDate);
-        if (id) {
-            return  trip.captainId === id && startDate <= currentTime && currentTime <= endDate;
-        } else if (sessionCaptainId) {
-            return trip.captainId === sessionCaptainId && startDate <= currentTime && currentTime <= endDate;
-        }
-    });
-    
-    const futureTrips = trips.filter(trip => {
-        const startDate = new Date(trip.startDate);
-        if (id) {
-            return trip.captainId === id && startDate > currentTime;
-        } else if (sessionCaptainId) {
-            return trip.captainId === sessionCaptainId && startDate > currentTime;
-        }
-
-    });
-    
-    const pastTrips = trips.filter(trip => {
-        const endDate = new Date(trip.endDate);
-        if (id) {
-            return trip.captainId === id && endDate < currentTime;
-        } else if (sessionCaptainId) {
-        return trip.captainId === id && endDate < currentTime;
-        }
-    });
-
-    
-   
    useEffect(() => {
-    fetch('/api/trip/readTrip.php')
-        .then(response => response.json())
-        .then(data => setTrips(data))
-        .catch(error => console.error('Error:', error));
-}, []);
+      if (id != null) {
+         fetch(`../../api/captain/readCaptain.php`, {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ clickedCaptainId: id }),
+         })
+            .then(response => response.json())
+            .then(data => {
+               setCaptain(data);
+               console.log(data);
+            })
+            .catch(error => console.error("Error:", error));
+      } else {
+         fetch(`../../api/captain/readCaptain.php`, {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ sessionCaptainId }),
+         })
+            .then(response => response.json())
+            .then(data => {
+               setCaptain(data);
+               console.log(data);
+            })
+            .catch(error => console.error("Error:", error));
+      }
+   }, [id, sessionCaptainId]);
 
-const location = useLocation();
-const currentUrl = location.pathname;
+   const currentTime = new Date();
+   const activeTrips = trips.filter(trip => {
+      const startDate = new Date(trip.startDate);
+      const endDate = new Date(trip.endDate);
+      if (id) {
+         return trip.captainId === id && startDate <= currentTime && currentTime <= endDate;
+      } else if (sessionCaptainId) {
+         return trip.captainId === sessionCaptainId && startDate <= currentTime && currentTime <= endDate;
+      }
+   });
+
+   const futureTrips = trips.filter(trip => {
+      const startDate = new Date(trip.startDate);
+      if (id) {
+         return trip.captainId === id && startDate > currentTime;
+      } else if (sessionCaptainId) {
+         return trip.captainId === sessionCaptainId && startDate > currentTime;
+      }
+   });
+
+   const pastTrips = trips.filter(trip => {
+      const endDate = new Date(trip.endDate);
+      if (id) {
+         return trip.captainId === id && endDate < currentTime;
+      } else if (sessionCaptainId) {
+         return trip.captainId === id && endDate < currentTime;
+      }
+   });
+
+   useEffect(() => {
+      fetch('/api/trip/readTrip.php')
+         .then(response => response.json())
+         .then(data => setTrips(data))
+         .catch(error => console.error('Error:', error));
+   }, []);
+
+   const location = useLocation();
+   const currentUrl = location.pathname;
    return (
       <div>
          <div className="top-panel">
@@ -175,24 +174,24 @@ const currentUrl = location.pathname;
                <summary>Active Trips</summary>
                <br />
                {activeTrips.map(trip => (
-                        <PreviewTrip key={trip.id} trip={trip} />
-                    ))}
+                  <PreviewTrip key={trip.id} trip={trip} />
+               ))}
             </details>
             <hr />
             <details className="drop-down">
                <summary>Future Trips</summary>
                <br />
                {futureTrips.map(trip => (
-                      <PreviewTrip key={trip.id} trip={trip} />
-                    ))}
+                  <PreviewTrip key={trip.id} trip={trip} />
+               ))}
             </details>
             <hr />
             <details className="drop-down">
                <summary>Past Trips</summary>
                <br />
                {pastTrips.map(trip => (
-                        <PreviewTrip key={trip.id} trip={trip} />
-                    ))}
+                  <PreviewTrip key={trip.id} trip={trip} />
+               ))}
             </details>
             <hr />
             <div className="myShips">
@@ -212,11 +211,9 @@ const currentUrl = location.pathname;
             />
             <Outlet />
             <hr />
-            <Link to="/">
-              {sessionCaptainId && currentUrl === "/captainProfile" && <LogoutButton onClick={handleLogout} />}
-            </Link>
+            <Link to="/">{sessionCaptainId && currentUrl === "/captainProfile" && <LogoutButton onClick={handleLogout} />}</Link>
          </div>
       </div>
    );
-};
+}
 export default SkipperProfile;

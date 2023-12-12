@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import PreviewTrip from "../components/PreviewTrip";
+import Banner from "../components/Banner";
 import SearchBar from "../components/Searchbar";
 import Logo from "../assets/images/sailmore-logo-arc.svg";
 import "../css/Home.css";
@@ -27,6 +28,7 @@ const Home = () => {
 
   return (
     <div>
+      <Banner />
       <div className='gradient-wrapper'></div>
 
       <div className='home-top'>

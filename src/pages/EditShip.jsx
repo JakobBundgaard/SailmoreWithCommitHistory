@@ -67,7 +67,7 @@ const EditShip = () => {
   function handleClick() {
     console.log("Clicked");
   }
-
+  
   const handleDelete = async () => {
     try {
       const response = await fetch(`../../api/ship/deleteShip.php`, {
@@ -75,12 +75,14 @@ const EditShip = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ shipId: id }), // Send shipId som JSON
+        body: JSON.stringify({ shipId: id }), // Send shipId as JSON
       });
   
       if (response.ok) {
+        const data = await response.text();
+        console.log(data);
         console.log("Båd slettet!");
-        navigate(`/captainProfile`); // Naviger tilbage til en oversigt over både
+        navigate(`/captainProfile`); // Navigate back to an overview of boats
       } else {
         console.error("Fejl ved sletning af båd");
       }

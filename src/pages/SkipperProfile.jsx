@@ -213,7 +213,9 @@ function SkipperProfile() {
             />
             <Outlet />
             <hr />
-            <Link to="/">{sessionCaptainId && currentUrl === "/captainProfile" && <LogoutButton onClick={handleLogout} />}</Link>
+            <Link to="/">
+              {currentUrl === "/captainProfile" && <LogoutButton onClick={handleLogout} />}
+            </Link>
          </div>
       </div>
    );

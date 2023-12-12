@@ -34,7 +34,7 @@ const AddShip = () => {
       });
   
       if (response.ok) {
-        const responseData = await response.json(); // Assuming your PHP returns the new ship's ID
+        const responseData = await response.text(); // Assuming your PHP returns the new ship's ID
   
         // Redirect to the newly created ship's page using its ID
         if (responseData.shipId) {

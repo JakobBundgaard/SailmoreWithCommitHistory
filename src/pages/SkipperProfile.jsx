@@ -46,7 +46,7 @@ function SkipperProfile() {
    const { id } = useParams();
 
    if (sessionCaptainId == null) {
-      window.location.href = "/profile/CaptainLogin";
+      //window.location.href = "/profile/CaptainLogin";
    }
 
    useEffect(() => {

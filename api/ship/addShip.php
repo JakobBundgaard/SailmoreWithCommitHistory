@@ -1,8 +1,7 @@
 <?php
 session_start(); // Start the session
 include_once "../utils/connection.php";
-
-
+$response = array();
 // Få indholdet af anmodningen som JSON-streng
 $json_data = file_get_contents('php://input');
 
@@ -10,7 +9,6 @@ $json_data = file_get_contents('php://input');
 $data = json_decode($json_data, true);
 
 // Hent data fra det dekoderede array
-$shipId = $_SESSION["shipId"];
 $captainId = $_SESSION["captainId"];
 $shipName = isset($data['shipName']) ? $data['shipName'] : '';
 $shipModel = isset($data['shipModel']) ? $data['shipModel'] : '';
@@ -19,59 +17,25 @@ $shipCrew = isset($data['shipCrew']) ? $data['shipCrew'] : '';
 $shipYear = isset($data['shipYear']) ? $data['shipYear'] : '';
 $shipImage = "shipimage.jpg"; // Default ship image
 
-// Prepare SQL query to insert data into the database
-$sql = "INSERT INTO ships (shipName, shipModel, shipDescription, shipCrew, shipYear) VALUES (?, ?, ?, ?, ?)";
-$stmt = $conn->prepare($sql);
+$stmt = $conn->prepare("CALL AddShip(?, ?, ?, ?, ?, ?, ?, @shipId)");
+$stmt->bind_param("sssisii", $shipName, $shipModel, $shipDescription, $shipCrew, $shipYear, $shipImage, $captainId);
+$stmt->execute();
 
-if ($stmt) {
-    $stmt->bind_param("sssis", $shipName, $shipModel, $shipDescription, $shipCrew, $shipYear);
+$result = $conn->query("SELECT @shipId");
+$row = $result->fetch_assoc();
+$shipId = $row["@shipId"];
 
-    if ($stmt->execute()) {
-        $last_id = $conn->insert_id;
-        $_SESSION['shipId'] = $last_id; // Add shipId to the session
-        echo json_encode(array("shipId" => $last_id)); // Return the newly inserted ship's ID
-    } else {
-        echo "Fejl ved indsættelse af data: " . $stmt->error;
-    }
+$_SESSION["shipId"] = $shipId; // Store shipId in session for later use
+// Add new data to the response
+$response["shipId"] = $shipId;
+$response["shipName"] = $shipName;
+$response["shipModel"] = $shipModel;
+$response["shipDescription"] = $shipDescription;
+$response["shipCrew"] = $shipCrew;
+$response["shipYear"] = $shipYear;
+$response["shipImage"] = $shipImage;
 
-    $stmt->close();
-} else {
-    echo "Fejl ved forberedelse af SQL: " . $conn->error;
-}
-
-$sql = "INSERT INTO images (shipId, imagePath) VALUES (?, ?)";
-$stmt = $conn->prepare($sql);
-
-if ($stmt) {
-    $stmt->bind_param("is", $shipId, $shipImage);
-
-    if ($stmt->execute()) {
-        echo "Bådens billede blev tilføjet til databasen.";
-    } else {
-        echo "Fejl ved indsættelse af billede: " . $stmt->error;
-    }
-
-    $stmt->close();
-} else {
-    echo "Fejl ved forberedelse af SQL: " . $conn->error;
-}
-
-$sql = "UPDATE captain SET shipId = ? WHERE captainId = ?";
-$stmt = $conn->prepare($sql);
-
-if ($stmt) {
-    $stmt->bind_param("ii", $shipId, $captainId);
-
-    if ($stmt->execute()) {
-        echo "Bådens kaptajn blev tilføjet til databasen.";
-    } else {
-        echo "Fejl ved opdatering af kaptajn: " . $stmt->error;
-    }
-
-    $stmt->close();
-} else {
-    echo "Fejl ved forberedelse af SQL: " . $conn->error;
-}
+echo json_encode($response); // Send the response
 
 // Luk forbindelse til databasen
 $conn->close();

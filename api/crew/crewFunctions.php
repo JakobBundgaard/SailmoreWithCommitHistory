@@ -25,7 +25,6 @@ function signUpCrew($conn, $name, $email, $password, $passwordRepeat, $nationali
         return $response;
     }
 
-    // You may want to add more validation logic as needed.
 
     // Hash the password before storing it in the database
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);

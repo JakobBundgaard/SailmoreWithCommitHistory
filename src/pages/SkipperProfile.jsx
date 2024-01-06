@@ -118,7 +118,9 @@ function SkipperProfile() {
    }, []);
 
    const location = useLocation();
-   const currentUrl = location.pathname;
+    const currentUrl = location.pathname;
+    
+    const isCaptainLoggedIn = sessionStorage.getItem("captainId") !== null;
    return (
       <div>
          <Banner />
@@ -157,9 +159,11 @@ function SkipperProfile() {
                   </div>
                </div>
                <div className="edit-profile">
-                  <Link to="/EditSkipper">
-                     <EditButton onClick={handleClick} />
-                  </Link>
+               {isCaptainLoggedIn && (
+               <Link to="/EditSkipper">
+                  <EditButton onClick={handleClick} />
+               </Link>
+            )}
                </div>
             </div>
 
